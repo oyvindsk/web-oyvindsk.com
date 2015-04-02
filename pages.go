@@ -121,12 +121,12 @@ func parseAndExecuteTemplatesPages(page *Page, cont *bytes.Buffer) error {
 	page.Content = template.HTML(buf.String()) // copied? is this necessary..?
 
 	// debug stuff:
-	log.Println(buf)
-	ts := tmpl.Templates()
-	os.Stdout.WriteString("\n\n")
-	for _, t := range ts {
-		log.Println(t.Name())
-	}
+	// log.Println(buf)
+	// ts := tmpl.Templates()
+	// os.Stdout.WriteString("\n\n")
+	// for _, t := range ts {
+	// 	log.Println(t.Name())
+	// }
 
 	return nil
 
