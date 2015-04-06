@@ -51,17 +51,6 @@ func main() {
 
 }
 
-// Blog functions
-//func getBlogPost(title string) (*Post, error) {
-//    file := path.Join("/writing", title + ".html")
-//	body, err := ioutil.ReadFile(filename)
-//	if err != nil {
-//		return nil, err
-//	}
-//	return &Post{Title: title, Body: body}, nil
-//
-//}
-
 // Error handling functions
 
 func checkAndDie(m string, e error) {
