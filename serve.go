@@ -20,7 +20,12 @@ func servePagesFromMem(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveBlogPostFromMem(w http.ResponseWriter, r *http.Request) {
-	post := Posts[path.Base(r.URL.Path)]
+	post, exists := Posts[path.Base(r.URL.Path)]
+	if !exists {
+		http.NotFound(w, r)
+		log.Printf("! 404: Path: %s, Title: %s", path.Base(r.URL.Path), post.Title)
+		return
+	}
 	log.Printf("Serving blogpost: Path: %s, Title: %s", path.Base(r.URL.Path), post.Title)
 	w.Write([]byte(post.Content))
 }
