@@ -43,7 +43,7 @@ func serveStaticFilestFromMem(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("Serving static file: Path: %s, StaticFile.Path %s", path.Base(r.URL.Path), staticFile.Path)
 
-	http.ServeContent(w, r, "css.jpg", staticFile.PubTime, reader) // FIXME
+	http.ServeContent(w, r, path.Base(r.URL.Path), staticFile.PubTime, reader) // FIXME
 }
 
 

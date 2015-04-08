@@ -31,7 +31,7 @@ var files map[string]StaticFile
 
 func readFile(p string, f os.FileInfo, err error) error {
     base := path.Base(p)
-	log.Printf("Visited: %s, shortpath: %s\n", p, base)
+	log.Println("\t", p)
 
     // stat the file to skip directories etc
     info, err := os.Stat(p)
@@ -68,6 +68,7 @@ func readStaticFiles(dir string) (map[string]StaticFile, error) {
     files = make(map[string]StaticFile)
 
     // walk all the files recursivly
+    log.Println("Reading files from: ", dir)
 	err := filepath.Walk("static", readFile)
     checkAndDie("file walk in dir: " + dir, err)
 
