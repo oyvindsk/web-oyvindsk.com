@@ -1,47 +1,13 @@
 package main
 
 import (
-	"bytes"
-	"flag"
-	"fmt"
+	"io/ioutil"
 	"log"
-	"net/http"
 	"os"
 	"path/filepath"
+	"path"
 	"time"
 )
-
-//  Was:
-//
-//      ab -n 5000 -c 5 localhost:84/static/css.css
-//
-//      Time taken for tests:   0.888 seconds
-//      Complete requests:      5000
-//      Failed requests:        0
-//      Requests per second:    5632.20 [#/sec] (mean)
-//      Time per request:       0.888 [ms] (mean)
-//      Time per request:       0.178 [ms] (mean, across all concurrent requests)
-//      Transfer rate:          6578.24 [Kbytes/sec] received
-//
-//      Connection Times (ms)
-//                    min  mean[+/-sd] median   max
-//      Connect:        0    0   0.0      0       1
-//      Processing:     0    1   0.3      1       4
-//      Waiting:        0    1   0.3      1       4
-//      Total:          0    1   0.3      1       4
-//
-//      Percentage of the requests served within a certain time (ms)
-//        50%      1
-//        66%      1
-//        75%      1
-//        80%      1
-//        90%      1
-//        95%      1
-//        98%      2
-//        99%      2
-//       100%      4 (longest request)
-
-
 
 // read all files in static/
 // store in mem as string => []byte map ?
@@ -49,97 +15,61 @@ import (
 // serve with ServeContent
 // detect changes :)
 
-type StatucFile struct {
-	ContentRaw bytes.Buffer
+
+// Normal implementation - FileServer 
+
+
+
+
+type StaticFile struct {
+	PubTime time.Time
+	ContentRaw []byte
 	Path       string
 }
 
-func visit(path string, f os.FileInfo, err error) error {
-	fmt.Printf("Visited: %s\n", path)
+var files map[string]StaticFile
 
-	// open the file
-	//  file, err := os.Open(dir + "/" + f.Name()) // fixme?
-	//  defer file.Close()
-	//  if err != nil {
-	//  	checkAndWarn("Open file", err)
-	//  	continue
-	//  }
+func readFile(p string, f os.FileInfo, err error) error {
+    base := path.Base(p)
+	log.Printf("Visited: %s, shortpath: %s\n", p, base)
 
-	//  // Use a scanner to read the page file line-by-line
-	//  scanner := bufio.NewScanner(file)
+    // stat the file to skip directories etc
+    info, err := os.Stat(p)
+    if err != nil {
+        checkAndWarn("readFile stat", err)
+        return err
+    }
 
-	//  // parse the front matter
-	//  frontMatter, err := parseFrontmatter(scanner)
-	//  if err != nil {
-	//  	checkAndWarn("Frontmatter for file: "+f.Name(), err)
-	//  	continue
-	//  }
+    // skip non-regular files
+    if info.Mode().IsRegular() == false {
+	    log.Println("    ignored non-regular file: ", p)
+        return nil
+    }
 
-	//  // Create a page
-	//  page := Page{
-	//  	Title:   frontMatter["Title"],
-	//  	Path:    frontMatter["Path"],
-	//  	PubTime: time.Now(), //FIXME
-	//  }
+    // slurp the whole file
+    fileCont, err := ioutil.ReadFile(p)
+    if err != nil {
+        checkAndWarn("readFile ReadFile", err)
+        return err
+    }
+
+    // store it
+    files[base] = StaticFile{
+        PubTime: time.Now(), // FIXME
+        Path: p,
+        ContentRaw: fileCont,
+    }
 
 	return nil
-
 }
 
-type InMemoryFile struct {
-	at   int64
-	Name string
-	data []byte
-	//fs   InMemoryFS
-}
+func readStaticFiles(dir string) (map[string]StaticFile, error) {
 
-type ReadSeeker interface {
-	Reader
-	Seeker
-}
-type Reader interface {
-	Read(p []byte) (n int, err error)
-}
-type Seeker interface {
-	Seek(offset int64, whence int) (int64, error)
-}
+    files = make(map[string]StaticFile)
 
-func (f *InMemoryFile) Seek(offset int64, whence int) (int64, error) {
-    log.Println("Seek")
-    return 0, nil
-}
+    // walk all the files recursivly
+	err := filepath.Walk("static", readFile)
+    checkAndDie("file walk in dir: " + dir, err)
 
-func (f *InMemoryFile) Read(p []byte) (n int, err error) {
-    log.Println("Read")
-    p = []byte("Hello2")
-    return 6, nil
-}
-
-func main() {
-	flag.Parse()
-	root := flag.Arg(0)
-	err := filepath.Walk(root, visit)
-	fmt.Printf("filepath.Walk() returned %v\n", err)
-
-        b := []byte("Hello Wordl!")
-        reader := bytes.NewReader(b)
-
-	http.HandleFunc("/bar", func(w http.ResponseWriter, r *http.Request) {
-		//file, err := os.Open("static/css.css")
-		//if err != nil {
-		//	log.Fatal("open() : ", err)
-		//}
-
-		_ = &InMemoryFile{
-			at:   0,
-			Name: "test",
-			data: []byte("Hello Wordl!"),
-		}
-
-
-		http.ServeContent(w, r, "css.css", time.Now(), reader)
-	})
-
-	log.Println("Listening...")
-	log.Fatal(http.ListenAndServe(":84", nil))
+    return files, err
 }

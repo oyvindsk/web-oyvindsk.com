@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+    "bytes"
 )
 
 func servePagesFromMem(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +30,23 @@ func serveBlogPostFromMem(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Serving blogpost: Path: %s, Title: %s", path.Base(r.URL.Path), post.Title)
 	w.Write([]byte(post.Content))
 }
+
+func serveStaticFilestFromMem(w http.ResponseWriter, r *http.Request) {
+	staticFile, exists := StaticFiles[path.Base(r.URL.Path)]
+    if !exists {
+        http.NotFound(w, r)
+        log.Printf("! 404: Path: %s", path.Base(r.URL.Path))
+        return
+    }
+
+    reader := bytes.NewReader(staticFile.ContentRaw)
+
+	log.Printf("Serving static file: Path: %s, StaticFile.Path %s", path.Base(r.URL.Path), staticFile.Path)
+
+	http.ServeContent(w, r, "css.jpg", staticFile.PubTime, reader) // FIXME
+}
+
+
 
 func servePages(w http.ResponseWriter, r *http.Request) {
 

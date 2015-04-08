@@ -15,8 +15,9 @@ import (
 
 // Gobal variables
 var (
-	Posts map[string]Post
-	Pages map[string]Page
+	Posts       map[string]Post
+	Pages       map[string]Page
+	StaticFiles map[string]StaticFile
 )
 
 func main() {
@@ -36,9 +37,14 @@ func main() {
 	Pages, err = readPages(PagesDir)
 	checkAndDie("Reading Pages", err)
 
+    // and static files (maybe not a good idea..)
+    StaticFiles, err = readStaticFiles(StaticDir)
+	checkAndDie("Reading Static files", err)
+
 	// Serve static files
 	fs := http.FileServer(http.Dir(StaticDir))
-	http.Handle("/static/", http.StripPrefix("/static/", fs))
+	http.Handle("/static2/", http.StripPrefix("/static2/", fs))
+	http.HandleFunc("/static/", serveStaticFilestFromMem)
 
 	// Serve blogposts
 	http.HandleFunc("/writing/", serveBlogPostFromMem)
@@ -49,33 +55,4 @@ func main() {
 	log.Println("Listening...")
 	log.Fatal(http.ListenAndServe(":84", nil))
 
-}
-
-// Error handling functions
-
-func checkAndDie(m string, e error) {
-	if e != nil {
-		log.Fatal("!! ", m, " : ", e)
-	}
-}
-
-func checkAndWarn(m string, e error) {
-	if e != nil {
-		log.Print("! ", m, " : ", e)
-	}
-}
-
-func checkErr(m string, e error) {
-	if e != nil {
-		log.Fatal("!! ", m, " : ", e)
-	}
-}
-
-func checkErrHttp(err error, w http.ResponseWriter) bool {
-	if err != nil {
-		log.Println("!! ", err)
-		http.Error(w, http.StatusText(500), 500)
-		return true
-	}
-	return false
 }
