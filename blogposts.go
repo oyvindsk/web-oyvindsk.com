@@ -148,7 +148,7 @@ func parseFrontmatter(s *bufio.Scanner) (m map[string]string, err error) {
 }
 
 // Parse the rest of the blogpost, the stuff after front-matter
-// basically just ready evrything left into a buffer
+// basically just read evrything left into a buffer
 
 func parsePost(s *bufio.Scanner) (buf *bytes.Buffer, err error) {
 
