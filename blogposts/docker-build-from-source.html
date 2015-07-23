@@ -1,6 +1,6 @@
 
 ---
-Title: Building Docker from source
+Title: How-to build Docker from source
 Author: Me
 Description: Whatever
 Date: 2015-07-23 20h
@@ -10,53 +10,54 @@ Path: docker-build-from-source
     <article>
 
         <header>
-            <h1>Building Docker from source</h1>
+            <h1>How-to build Docker from source</h1>
             <span>July 2015</span>
         </header>
 
+        <img src="/static/blogpost-files/docker/small_v-trans.png" >
 
         <p>
-            Index:
-            What?
-            Why?
-            How?
-        </p>
-
-        <p>
-            https://www.digitalocean.com/?refcode=b099d6f54603
         </p> 
 
 
-        <h2>What and Why</h2>
+        <h2>Intro</h2>
         <p>
-            Checking out the docker source code from github.com and compiling the daemon and client. Docker is primarely written in Go (golang).
-            
-            Docker is pretty easy to intall from binaries. They release binaries and an install script and many linux X have packages ready to install. 
-
-            So why would you want to build it from source? Don't know, but I have to reasons: 1) I'm currently tinkering with Docker Plugins, and beeing something new even the experimental build is lagging behind the latest developments.  2) Beeing able to modify the source and run the reuslt can be very helpful when trying to understand how Docker works.
+            <em>Docker is an open-source project that automates the deployment of applications inside software containers</em>. 
+            <br>
+            Lately Docker has grown to include many different projects, but the core is still the docker server and client. The client and server is contained in the same binary and written in Go (golang). This is the binary we'll compile from source.
+        </p>
+        <p>
+            Docker is pretty easy to install from binaries. They release pre-compiled binaries, an install script and many linux distros have packages ready to install. 
+            <br>
+            So why would you want to build it from source? Well, I personally have two reasons: 1) I'm currently tinkering with Docker Plugins, a feature under development, 
+            and even the experimental build is lagging behind the latest developments. 
+            2) Being able to modify the source and run the result can be very helpful when trying to understand how Docker works.
         </p>
 
         
         <h2>How</h2>
         <p>
-            It turns out there are bascally 2 ways of building docker from source: The hard way and the easy way. The hard way is to install all the dependencies and build evetything from scratch. Although this is not *that* hard, docker has more dependencies, and this process is more involved, than expected. Beeing lazy, I'm going to go with the easy way, but if you want to this this Dockerfile is a good starting point: 
-https://github.com/docker/docker/blob/master/Dockerfile. From this you can extract all the dependencies and steps neccessary.
+        It turns out there are basically two ways of building docker from source: The hard way and the easy way. The hard way is to install all the dependencies and build everything from scratch. Although this is not <em>that</em> hard, docker has more dependencies than expected. The easy way is to use their build scripts to automate everything. This saves you all the trouble of finding and installing the right dependencies. The scripts builds and runs a docker image to compile the binary. So you need to have docker installed already to build docker in this way, which is the drawback. 
         </p>
+
         <p>
-            The easy way is to use a docker image they provide to compile docker. This saves you all the trouble of finding and installing the right dependencies. The only drawback is that you need docker installed already.
-            The process is roughly:
+        Being lazy, I'm going to go with the easy way, but if you want to this the hard way (without using docker) <a href="https://github.com/docker/docker/blob/master/Dockerfile" target="gh1">this Dockerfile</a> is a good starting point. From that you can extract all the dependencies and steps necessary.
+        </p>
+
+        <p>
+            <strong>The easy way is roughly:</strong>
             <ul>
                 <li>Install docker</li>
                 <li>Get the docker source</li>
-                <li>Create the docker image from the included Dockerfile
-                <li>Compile everything</li>
-                <li>Copy the binaries to whereever you want to have them.</li>
+                <li>Run the included scripts to create the docker image and compile everything</li>
+                <li>Test the binaries</li>
+                <li>Copy the binaries to wherever you want to have them.</li>
             </ul>
         </p>
 
         <h3>Installing Docker</h3>
         <p>
-            If you don't have docker already, install it. You can find instructions <a href="https://docs.docker.com/installation/">on docs.docker.com</a>.
+            If you don't have docker already, install it. You can find instructions on <a href="https://docs.docker.com/installation/" target="docs.docker.com">docs.docker.com</a>.
             <br>
             For ubuntu this is basically:
             <figure class="file"><figcaption></figcaption><code><pre>
@@ -74,7 +75,7 @@ apt-get install make git
         <aside>
         <h3>Aside: On Digital Ocean? Create some swap space</h3>
         <p>
-            I've had some issues with docker on the smallest Digital Ocean plan. 
+            I've had some issues with compiling docker on the smallest Digital Ocean plan. 
             I think it's because it runs out of ram and does not have any swap space to fall back to. You can fix this, I think, by creating and enabling some swap space:
             <figure class="file"><figcaption></figcaption><code><pre>
 # as root (or prepend with sudo)
@@ -88,27 +89,34 @@ swapon -s
 free -h
             </pre></code></figure>
 
-            Read more <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04">in this Digital Ocean tuturial</a> and <a href="http://askubuntu.com/questions/566745/allocate-swap-after-ubuntu-14-04-lts-installation">this AskUbuntu question</a>
-
+            Read more <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04" target="do">in this Digital Ocean tutorial</a> and <a href="http://askubuntu.com/questions/566745/allocate-swap-after-ubuntu-14-04-lts-installation" target="aubuntu">this AskUbuntu question</a>
+            <br>
+            (If you're not using Digital Ocean but would like to be, you should use my <a href="https://www.digitalocean.com/?refcode=b099d6f54603" target="do2">affiliate link</a>. Perks for you, perks for me :)
         </p>
         </aside>
 
+        <h3>Get the docker source</h3>
+        <p>
+            This should be as easy as fetching the code from Github. Install git if you don't have it already and run:
+            <figure class="file"><figcaption></figcaption><code><pre>
+git clone https://github.com/docker/docker.git
+cd docker
+            </pre></code></figure>
+        </p>
 
         <h3>Compile docker in a docker container</h3>
         <p>
             The Dockerfile and supporting scripts make it pretty easy to compile a new docker from source, they do all the heavy lifting for you. 
             This works by first building a new docker image from <a hrep="https://github.com/docker/docker/blob/master/Dockerfile">the Dockerfile</a>,
-            running this images and compiling a new docker binary inside the running container.
+            running this image and compiling a new docker binary.
             
-            Since it's building a new docker image, docker daemon (docker -d) must be running. Hence the need for installing docker first.
+            Since it's building a new docker image, the docker server (docker -d) must be running. Hence the need for installing docker first.
 
-            This docker image then has all the dependencies neccessary to build docker from source. The docker binary is build inside this container and copied out afterwards.
+            This docker image then has all the dependencies necessary to build docker from source. The docker binary is build inside this container and copied out afterwards.
 
             Ideally the included Makefile and scrips do all of this for us, and produce a binary ready to use:
 
             <figure class="file"><figcaption></figcaption><code><pre>
-git clone https://github.com/docker/docker.git
-cd docker
 # as root (or prepend with sudo)
 make build 
 # this takes a while and prints the output from "Docker build ." 
@@ -119,19 +127,14 @@ make binary
 
 # This runs the image we created with "make build". 
 # Ends with "Created binary: bundles/1.8.0-dev/binary/docker-1.8.0-dev",
-# where 1.8.0-dev is the version you'r building.
+# where "1.8.0-dev" is the version I'm building, 
+# the next unreleased version at the time of writing.
             </pre></code></figure>
 
         </p>
 
 
         <h3>Test the new binary</h3>
-
-        <h4></h4>
-        <p>
-            <figure class="file"><figcaption></figcaption><code><pre>
-            </pre></code></figure>
-        </p>
 
         <h4>Stop the old docker daemon</h4>
         <p>
@@ -144,7 +147,7 @@ service docker stop
 
         <h4>Start a daemon using our new binary</h4>
         <p>
-            Start a daemon with the new binary
+            Start a daemon with the new binary:
             <figure class="file"><figcaption></figcaption><code><pre>
 # in the docker/ directory where we ran make build and make binary
 ./bundles/1.8.0-dev/binary/docker -d  # the version, "1.8.0-dev", will vary according to the version your building
@@ -179,7 +182,7 @@ OS/Arch (server): linux/amd64
 
         <h4>Run the new binary as a client and connect to our new daemon</h4>
         <p>
-            You can test the new binary as a client as well. Inside the docker 
+            You can test the new binary as a client as well: 
             <figure class="file"><figcaption></figcaption><code><pre>
 # in the docker/ directory where we ran make build and make binary
 ./bundles/1.8.0-dev/binary/docker version
@@ -200,7 +203,7 @@ Server:
  Built:        Thu Jul 23 15:03:21 UTC 2015
  OS/Arch:      linux/amd64
             </pre></code></figure>
-            As you can see the Client and Server version is now the same. Both the server and client is running the same binary (file); the one we just built. Also, it looks like the output of <em>docker version</em> changed. 
+            As you can see the Client and Server version is now the same. Both the server and client is running the same binary file; the one we just built. Also, it looks like the output of <em>docker version</em> changed between version 1.6 and 1.8.
         </p>
 
         <h4>Last test: Run a docker container</h4>
@@ -221,10 +224,23 @@ Server:
 # Where is our old binary?
 which docker
 
-# Mine is in /usr/bin/docker, so let's move it (as root or prepend with sudo):
+# Mine is in /usr/bin/docker, so let's move it
+# as root (or prepend with sudo)
+mv /usr/bin/docker /usr/bin/docker-old 
 
-# and copy our new binary in:
+# and copy our new binary in
+cp ./bundles/1.8.0-dev/binary/docker /usr/bin/
+
+# run the server with "docker -d" or :
+service docker start
+
             </pre></code></figure>
+        </p>
+
+        <p>
+            Questions? Comments? Found something wrong or confusing?
+            <br>
+            Hit me up <a href="https://twitter.com/oyvindsk" target="twitter-os">on twitter</a> or <a href="mailto:hello@skaars%6F%6Cutions.no">hello @ skaarsolutions.no</a>
         </p>
 
 
