@@ -1,9 +1,10 @@
+
 ---
-Title: Tinkering with the Docker source code - Disabling docker exec
+Title: Tinkering with the Docker source code - Callgraph
 Author: Me
 Description: Whatever
-Date: 2013-08-06 17h
-Path: docker
+Date: 2015-06-03 17h
+Path: docker-callgraph
 ---
 
     <article>
@@ -21,44 +22,29 @@ Path: docker
             Step 3 - Re-compile and check that it works
         </p>
 
-https://www.digitalocean.com/?refcode=b099d6f54603
-
-<h1>why?</h1>
-You might want to disable "exec" to enforce good beahaviour, e.g. no one-off fixes in running containers that really should be put into the Dockerfiles or similar. Will this mean it's imosible to get into a running container? Probably not, but it will  be harder, hopefully harder than just fixing things the right way.
-A seemingly simple exercise in modifying the docker code to se if it's easy as I think it will be.
+        <p>
+            https://www.digitalocean.com/?refcode=b099d6f54603
+        </p> 
 
 
-<h1>Step 1</h1>
-
-<h2>Build "manually" from source</h2>
-To build docker from source you need: 1) The source, 2) The Go lanuage environment, which is pretty much just the Go binary itself, and 3) a lot of dependencies
-
-So, it turns out actually building docker from source requires a lot of dependencies and is more work than I expected. 
-
-But, they made a Dockerfile to make it easier. Their preffered method is building docker within a docker container, and there's a Dockerfile in the repository which makes this pretty simple. So, I'm going to with this method instead of installing all dependencies "locally". 
-
-If you want to build it from source outside without using docker, the Dockerfile is still very usefull since it lists all the commands and dependencies neccessary to build it:
-https://github.com/docker/docker/blob/master/Dockerfile
-
-<h2>Building docker with docker</h2>
-
-After your done you can take the binaries from the docker containers "out" to the host system and replace the installed docker binaies. You can also, of course, copy these binaries to other systems. 
-
-
-To build docker with docker you need: 1) Docker, 2) git  3) make
-
-<h3>Installing Docker</h3>
-Follow the instructions at <a href="https://docs.docker.com/installation/">https://docs.docker.com/installation/</a>. For ubuntu this is basically:
-
+        <h2>Installing Docker</h2>
+        <p>
+            Follow the instructions at <a href="https://docs.docker.com/installation/">https://docs.docker.com/installation/</a> for the long version. 
+        </p>
+        <p>
+            For ubuntu this is basically:
+            <figure class="file"><figcaption></figcaption><code><pre>
 # as root (or prepend with sudo)
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 
 sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
 apt-get update
 apt-get install lxc-docker
 
-<h3>Installing dependencies</h3>
-# as root (or prepend with sudo)
+# Get some dependencies
 apt-get install make git
+            </pre></code></figure>
+        </p> 
+
 
 <h3>On Digital Ocean? Create some swap space</h3>
 I've had some issues with docker on the smallest Digital Ocean plan. I think it's because it runs out of ram and does not have any swap space to fall back to. You can fix this, I think, by creating and enabling some swap space:

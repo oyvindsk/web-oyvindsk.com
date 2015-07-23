@@ -1,0 +1,232 @@
+
+---
+Title: Building Docker from source
+Author: Me
+Description: Whatever
+Date: 2015-07-23 20h
+Path: docker-build-from-source
+---
+
+    <article>
+
+        <header>
+            <h1>Building Docker from source</h1>
+            <span>July 2015</span>
+        </header>
+
+
+        <p>
+            Index:
+            What?
+            Why?
+            How?
+        </p>
+
+        <p>
+            https://www.digitalocean.com/?refcode=b099d6f54603
+        </p> 
+
+
+        <h2>What and Why</h2>
+        <p>
+            Checking out the docker source code from github.com and compiling the daemon and client. Docker is primarely written in Go (golang).
+            
+            Docker is pretty easy to intall from binaries. They release binaries and an install script and many linux X have packages ready to install. 
+
+            So why would you want to build it from source? Don't know, but I have to reasons: 1) I'm currently tinkering with Docker Plugins, and beeing something new even the experimental build is lagging behind the latest developments.  2) Beeing able to modify the source and run the reuslt can be very helpful when trying to understand how Docker works.
+        </p>
+
+        
+        <h2>How</h2>
+        <p>
+            It turns out there are bascally 2 ways of building docker from source: The hard way and the easy way. The hard way is to install all the dependencies and build evetything from scratch. Although this is not *that* hard, docker has more dependencies, and this process is more involved, than expected. Beeing lazy, I'm going to go with the easy way, but if you want to this this Dockerfile is a good starting point: 
+https://github.com/docker/docker/blob/master/Dockerfile. From this you can extract all the dependencies and steps neccessary.
+        </p>
+        <p>
+            The easy way is to use a docker image they provide to compile docker. This saves you all the trouble of finding and installing the right dependencies. The only drawback is that you need docker installed already.
+            The process is roughly:
+            <ul>
+                <li>Install docker</li>
+                <li>Get the docker source</li>
+                <li>Create the docker image from the included Dockerfile
+                <li>Compile everything</li>
+                <li>Copy the binaries to whereever you want to have them.</li>
+            </ul>
+        </p>
+
+        <h3>Installing Docker</h3>
+        <p>
+            If you don't have docker already, install it. You can find instructions <a href="https://docs.docker.com/installation/">on docs.docker.com</a>.
+            <br>
+            For ubuntu this is basically:
+            <figure class="file"><figcaption></figcaption><code><pre>
+# as root (or prepend with sudo)
+apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 
+sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+apt-get update
+apt-get install lxc-docker
+
+# Get some dependencies
+apt-get install make git
+            </pre></code></figure>
+        </p> 
+
+        <aside>
+        <h3>Aside: On Digital Ocean? Create some swap space</h3>
+        <p>
+            I've had some issues with docker on the smallest Digital Ocean plan. 
+            I think it's because it runs out of ram and does not have any swap space to fall back to. You can fix this, I think, by creating and enabling some swap space:
+            <figure class="file"><figcaption></figcaption><code><pre>
+# as root (or prepend with sudo)
+dd if=/dev/zero of=/swapfile bs=1M count=1000
+chmod 600 /swapfile 
+mkswap /swapfile 
+swapon /swapfile 
+swapon -s
+
+# Test that it worked:
+free -h
+            </pre></code></figure>
+
+            Read more <a href="https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04">in this Digital Ocean tuturial</a> and <a href="http://askubuntu.com/questions/566745/allocate-swap-after-ubuntu-14-04-lts-installation">this AskUbuntu question</a>
+
+        </p>
+        </aside>
+
+
+        <h3>Compile docker in a docker container</h3>
+        <p>
+            The Dockerfile and supporting scripts make it pretty easy to compile a new docker from source, they do all the heavy lifting for you. 
+            This works by first building a new docker image from <a hrep="https://github.com/docker/docker/blob/master/Dockerfile">the Dockerfile</a>,
+            running this images and compiling a new docker binary inside the running container.
+            
+            Since it's building a new docker image, docker daemon (docker -d) must be running. Hence the need for installing docker first.
+
+            This docker image then has all the dependencies neccessary to build docker from source. The docker binary is build inside this container and copied out afterwards.
+
+            Ideally the included Makefile and scrips do all of this for us, and produce a binary ready to use:
+
+            <figure class="file"><figcaption></figcaption><code><pre>
+git clone https://github.com/docker/docker.git
+cd docker
+# as root (or prepend with sudo)
+make build 
+# this takes a while and prints the output from "Docker build ." 
+# It ends with: "Successfully built ..".
+
+# as root (or prepend with sudo)
+make binary
+
+# This runs the image we created with "make build". 
+# Ends with "Created binary: bundles/1.8.0-dev/binary/docker-1.8.0-dev",
+# where 1.8.0-dev is the version you'r building.
+            </pre></code></figure>
+
+        </p>
+
+
+        <h3>Test the new binary</h3>
+
+        <h4></h4>
+        <p>
+            <figure class="file"><figcaption></figcaption><code><pre>
+            </pre></code></figure>
+        </p>
+
+        <h4>Stop the old docker daemon</h4>
+        <p>
+            Stop the docker daemon so w can run our new one. On Ubuntu / debian this is: 
+            <figure class="file"><figcaption></figcaption><code><pre>
+service docker stop
+            </pre></code></figure>
+            On other systems it might be.. something else. You can try <em>"killall docker"</em> or <em>"pkill docker"</em>
+        </p>
+
+        <h4>Start a daemon using our new binary</h4>
+        <p>
+            Start a daemon with the new binary
+            <figure class="file"><figcaption></figcaption><code><pre>
+# in the docker/ directory where we ran make build and make binary
+./bundles/1.8.0-dev/binary/docker -d  # the version, "1.8.0-dev", will vary according to the version your building
+            </pre></code></figure>
+        </p>
+
+
+        <h4>Run the old binary as a client and connect to our new daemon</h4>
+        <p>
+            With the docker server (docker -d) still running, open a new console / terminal and run: <em>docker version</em>. 
+            This will use the original docker as a client and it should be able to contact our new docker binary. You should see the difference in server version and client version, like so:
+
+            <figure class="file"><figcaption></figcaption><code><pre>
+docker version
+
+Client version: 1.6.0
+Client API version: 1.18
+Go version (client): go1.4.2
+Git commit (client): 4749651
+OS/Arch (client): linux/amd64
+Server version: 1.8.0-dev
+Server API version: 1.20
+Go version (server): go1.4.2
+Git commit (server): c2346f6
+OS/Arch (server): linux/amd64
+            </pre></code></figure>
+
+            As you can see "Client version" and "Server version" are different. This is expected since the server is the new binary we just started as a daemon (./bundles...docker -d). 
+            The client, however, is the docker installed on the system. Run <em>"which docker"</em> to see where this binary is located.
+        </p>
+
+
+        <h4>Run the new binary as a client and connect to our new daemon</h4>
+        <p>
+            You can test the new binary as a client as well. Inside the docker 
+            <figure class="file"><figcaption></figcaption><code><pre>
+# in the docker/ directory where we ran make build and make binary
+./bundles/1.8.0-dev/binary/docker version
+
+Client:
+ Version:      1.8.0-dev
+ API version:  1.20
+ Go version:   go1.4.2
+ Git commit:   c2346f6
+ Built:        Thu Jul 23 15:03:21 UTC 2015
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      1.8.0-dev
+ API version:  1.20
+ Go version:   go1.4.2
+ Git commit:   c2346f6
+ Built:        Thu Jul 23 15:03:21 UTC 2015
+ OS/Arch:      linux/amd64
+            </pre></code></figure>
+            As you can see the Client and Server version is now the same. Both the server and client is running the same binary (file); the one we just built. Also, it looks like the output of <em>docker version</em> changed. 
+        </p>
+
+        <h4>Last test: Run a docker container</h4>
+        <p>
+            A basic test that everything works is to run the official hello-world image using our new binary. Make sure the server is still running and run:
+            <figure class="file"><figcaption></figcaption><code><pre>
+./bundles/1.8.0-dev/binary/docker run -t -i --rm hello-world
+            </pre></code></figure>
+        </p>
+
+
+        <h3>Installing our new binary system-wide</h3>
+        <p>
+            As far as I know, installing the new binary is as simple as copying it into place, overwriting the old one. 
+            (I'm sure there's cases where this is not enough, or could break things, so, you know.. )
+
+            <figure class="file"><figcaption></figcaption><code><pre>
+# Where is our old binary?
+which docker
+
+# Mine is in /usr/bin/docker, so let's move it (as root or prepend with sudo):
+
+# and copy our new binary in:
+            </pre></code></figure>
+        </p>
+
+
+
+    </article>
