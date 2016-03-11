@@ -53,6 +53,6 @@ func main() {
 	http.HandleFunc("/", servePagesFromMem)
 
 	log.Println("Listening...")
-	log.Fatal(http.ListenAndServe(":84", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 
 }
