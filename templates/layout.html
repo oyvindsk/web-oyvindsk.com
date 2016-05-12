@@ -54,7 +54,6 @@
           $(document).ready(function() {
             $('figure.file code, figure.plain code').each(function(i, e) {hljs.highlightBlock(e)});
 
-            /*
             $('a.expandable').click(function(e) {
               e.preventDefault();
               source = $(this);
@@ -63,7 +62,39 @@
                 source.blur();
               });
             });
-            */
+
+
+            // Post the contact form but give a nice message back to the user
+            // adapted from fastprisapps.no
+            // Uses go-post2mail on the server
+            var url = "http://oyvindsk.com:1235/post";
+
+            // SHow response in a div .. hide it now
+            $('#messages').hide();
+
+            $('form#contactForm button.btn-primary').click( function(e) {
+                    //console.log('click');
+                    e.preventDefault();
+                    $.post( 
+                        url, 
+                        $('form#contactForm').serialize(), 
+                        function(data) {
+                            // this never runs, cross-origin ??
+                            console.log("Server returned:");
+                            console.log(data);
+                        }
+                       // 'html' // I expect a html response
+                    );
+
+                    // show a "nice" response to the user
+                    $('#contactForm').fadeOut(1000).delay(800).slideUp(2000);
+                    $('#messages').html("<h3>Thank you!</h3><h3>I will read and respond to your message promptly</h3>")
+                    $('#messages').delay(1000).fadeIn(3000);                    
+            });
+
+    });
+
+</script>
 
           });
 
