@@ -1,7 +1,7 @@
 scripts/
 was.id.ly-goblog
-goblog
 *.log
+run_post2mail_docker.sh
 
 # Compiled Object files, Static and Dynamic libs (Shared Objects)
 *.o
