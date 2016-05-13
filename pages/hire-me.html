@@ -59,35 +59,27 @@ Path: hire-me
 </h1>
 
 <!-- <h1>Contact me or have me contact you</h1> -->
-<h1>Contact me</h1>
+<h1 id="contact">Contact me</h1>
 
 
  <form method="post" action="http://oyvindsk.com:1235/post" class="contact-form" id="contactForm" novalidate=""><!-- Also set the url in the js in template/layout.html -->
-                    <div class="controls controls-row">
-                        <div class="control-group span6">
-                            <input class="span12" name="name" placeholder="Name" type="text">
-                        </div>
-                        <div class="control-group span6">
-                            <input class="span12" name="from" placeholder="Your email address or, if you prefer, your phone number" type="email">
-                        </div>
+                    <div>
+                        <input name="name" placeholder="Your name" type="text">
                     </div>
-                    <div class="controls controls-row">
-                        <div class="control-group span12">
-                            <input class="span12" name="subject" placeholder="Subject" type="text">
-                        </div>
-                    </div>
-                    <div class="controls controls-row">
-                        <div class="control-group span12">
-                            <textarea class="span12" name="text" placeholder="I want to have a friendly chat about.." rows="5"></textarea>
-                        </div>
+                    <div>
+                        <input name="from" placeholder="Your email / phone number" type="email">
                     </div>
 
-                    <div class="controls controls-row">
-                        <div class="control-group span12">
-                            <div class="get-it">
-                                <button class="btn btn-large btn-primary" name="submitButton" type="submit">Send</button>
-                            </div>
-                        </div>
+                    <div>
+                        <input name="subject" placeholder="Subject" type="text">
+                    </div>
+
+                    <div>
+                        <textarea name="text" placeholder="Hi. I would like to have a friendly chat about.." rows="7"></textarea>
+                    </div>
+
+                    <div class="get-it">
+                        <button name="submitButton" type="submit">Send</button>
                     </div>
                 </form>
                 <div id="messages">msg</div>
