@@ -13,7 +13,7 @@
         </title>
 
         <meta name="author" content="Øyvind Skaar">
-        <meta name="copyright" content="Copyright Øyvind Skaar 2014.">
+        <meta name="copyright" content="Copyright Øyvind Skaar 2016.">
 
         <link rel="icon" href="/static/images/favicon.ico">
         <link rel="stylesheet" href="/static/css.css">
@@ -26,6 +26,9 @@
             <nav>
                 <a href="/">Øyvind Skaar</a>
                 <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/hire-me">Hire me</a></li>
+                    <li><a href="/hire-me#contact">Contact</a></li>
                     <!-- FIXME
                     <li><a href="/writing">Blog</a></li>
                     <li><a href="/static/feed.rss">RSS</a></li>
@@ -40,11 +43,25 @@
 
             <footer>
                 <p class="break">&nbsp;</p>
+
+
                 <p>
                 Website written in Go, <a href="https://github.com/oyvindsk/web-was.id.ly" target="blogsource">source on Github</a>. Style pretty much stolen from <a href="http://www.alexedwards.net/" target="alexanet">alexedwards.net</a>
                 </p>
             </footer>
         </div>
+
+
+        <script type="text/javascript">
+            mixpanel.track_links("footer p a", "click footer link", {
+                "referrer": document.referrer
+            });
+
+            mixpanel.track_links("#blog-links ul li a", "click blog link", {
+                "referrer": document.referrer
+            });
+        </script>
+
 
         <script src="/static/jquery.js"></script>
         <script src="/static/highlight.js"></script>
