@@ -37,8 +37,8 @@ func main() {
 	Pages, err = readPages(PagesDir)
 	checkAndDie("Reading Pages", err)
 
-    // and static files (maybe not a good idea..)
-    StaticFiles, err = readStaticFiles(StaticDir)
+	// and static files (maybe not a good idea..)
+	StaticFiles, err = readStaticFiles(StaticDir)
 	checkAndDie("Reading Static files", err)
 
 	// Serve static files
@@ -53,6 +53,6 @@ func main() {
 	http.HandleFunc("/", servePagesFromMem)
 
 	log.Println("Listening...")
-	log.Fatal(http.ListenAndServe(":80", nil))
+	log.Fatal(http.ListenAndServe(":3001", nil))
 
 }

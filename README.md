@@ -1,4 +1,4 @@
-# web-was.id.ly
+# web-oyvindsk.com
 
 ## About
 Simple go blog that serves http://was.id.ly, and its aliases: http://oyvindsk.com and http://odots.org
