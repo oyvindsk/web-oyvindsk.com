@@ -138,59 +138,86 @@ Path: hire-me
 
 <h2>A distributed email address checker</h2>
 <p>
-    Like most of these projects it's partly for the usefulness, partly for learning and partly for the fun of it. This project chats with an SMTP server to find out if an email address is actually in use (works surprisingly well).  Now, I'm planning to run a few million addresses through this, so even with go's concurrency, it's going to need more than 1 server. This is not going to be used for spam, I promise :). It has a REST API for submitting email addresses. It works, but it's not finished.
+    <a href="#go-email-checker" class="expandable"  >Read More</a>
 </p>
 
+<div class="expandable" id="go-email-checker">
+    <p>
+        Like most of these projects it's partly for the usefulness, partly for learning and partly for the fun of it. This project chats with an SMTP server to find out if an email address is actually in use (works surprisingly well).  Now, I'm planning to run a few million addresses through this, so even with go's concurrency, it's going to need more than 1 server. This is not going to be used for spam, I promise :). It has a REST API for submitting email addresses. It works, but it's not finished.
+    </p>
+
+    <p>
+
+        <strong>Challenges:</strong>
+        <ul>
+            <li>
+                Avoid getting blocked by smtp servers. Solution: Smart throttle and fan out to multiple machines (ip's)
+            </li>
+
+            <li>
+                Distributing the work and gathering the results. I chose to use NSQ to communicate between the processes and machines. It's a distributed message bus made by bit.ly. In terms of learning, it's been great, I've learned a lot. But in retrospect, NSQ might be a little too "low level" for this project. Something like Resque/Sidekiq, Gearmand or one of the Go alternatives would have been *much* easier to work with. With a 1-way message bus like NSQ you are responsible for matching replies to requests, and other things a job system gives you for free. On the other hand NSQ does not have any single point of failures, it's fast and you can just hook up new parts to the stream to get messages on the fly.
+            </li>
+
+            <li>
+                How should the throttling work? Per source IP? Per email domain (@gmail.com)? Can we save time by not re-connecting to the same smtp server all the time? How much traffic can you send to a server before you create problems for them? Or before they block you?    Solution: Start simple and "slow". Gradually crank it up and incorporate what you learn.
+            </li>
+
+            <li>
+                Running it in containers (Docker) changes things a little bit. The biggest reason to run it on multiple machines is to get many source ip's. But with containers it could place all the workers on the same machine. It was tested in something called Rancher, which "fixes" this, but has a bug that complicates the NSQ deployment.
+            </li>
+        </ul>
+    </p>
+
+    <p>
+
+        Github (with code and even more text): 
+        <a href="https://github.com/oyvindsk/go-email-address-check/">https://github.com/oyvindsk/go-email-address-check/</a>
+        <br>
+        NSQ: <a href="http://nsq.io/">http://nsq.io/</a>
+    </p>
+</div>
+
+
+<h2>Prototype "Social E-comerce platform"<br> App Engine</h2>
 <p>
-
-    <strong>Challenges:</strong>
-    <ul>
-        <li>
-            Avoid getting blocked by smtp servers. Solution: Smart throttle and fan out to multiple machines (ip's)
-        </li>
-
-        <li>
-            Distributing the work and gathering the results. I chose to use NSQ to communicate between the processes and machines. It's a distributed message bus made by bit.ly. In terms of learning, it's been great, I've learned a lot. But in retrospect, NSQ might be a little too "low level" for this project. Something like Resque/Sidekiq, Gearmand or one of the Go alternatives would have been *much* easier to work with. With a 1-way message bus like NSQ you are responsible for matching replies to requests, and other things a job system gives you for free. On the other hand NSQ does not have any single point of failures, it's fast and you can just hook up new parts to the stream to get messages on the fly.
-        </li>
-
-        <li>
-            How should the throttling work? Per source IP? Per email domain (@gmail.com)? Can we save time by not re-connecting to the same smtp server all the time? How much traffic can you send to a server before you create problems for them? Or before they block you?    Solution: Start simple and "slow". Gradually crank it up and incorporate what you learn.
-        </li>
-
-        <li>
-            Running it in containers (Docker) changes things a little bit. The biggest reason to run it on multiple machines is to get many source ip's. But with containers it could place all the workers on the same machine. It was tested in something called Rancher, which "fixes" this, but has a bug that complicates the NSQ deployment.
-        </li>
-    </ul>
+    <a href="#go-SOR" class="expandable">Read More</a>
 </p>
 
-<p>
+<div class="expandable" id="go-SOR">
 
-    Github (with code and even more text): 
-    <a href="https://github.com/oyvindsk/go-email-address-check/">https://github.com/oyvindsk/go-email-address-check/</a>
-    <br>
-    NSQ: <a href="http://nsq.io/">http://nsq.io/</a>
-</p>
+    <p>
+        Prototype made for Shout Out Referral. (A less technical project description follows later). It connects to social media like Facebook and Twitter. The full version would run in, and integrate with, a webshop. 
+        I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
 
+    </p>
+    <p>
+        I really like the idea of PaaS, especially for projects that are going to grow big. I did feel the pain on working with App Engine though:
+        <ul>
+            <li>Code must be written for especially for App Engine</li>
+            <li>This, coupled with all the custom infrastructure really lock you in to App Engine, you can't easily quit</li>
+            <li>Steep learning curve</li>
+            <li>Many 3rd party packages does not work on the App Engine. It took me days, not minutes,  to get Facebook and Twitter integration to work</li>
+            <li>Can be expensive</li>
+        </ul>
+    </p>
 
-<h2>Prototype "Social E-comerce platform",  App Engine</h2>
+    <p>
+        But let's not forget the positives:
+        <ul>
+            <li>
+                Scales totally automatically and indefinitely (If you use it correctly). This is how people often think all clouds work, but that's almost never the case. Especially for the database / nosql / datastore.
+            </li>
+            <li>
+                The cost scales linearly with what you use (if I'm reading the pricing correctly). Unlike Heroku, for example. This makes a lot of business sense in many cases. Start out free or very cheap and pay more as the usage grows. Often the growing usage and expenses means more paying customers.
+            </li>
+            <li>
+                Google cloud has so many cool tools to play with. Some of them gives you the power of thousands of servers and can thus take a heavy task form 10 minutes to 10 seconds.
+            </li>
+        </ul>
 
-<p>
-    I'll keep this one short. Before Christmas I was making a prototype of a new platform for a client. It connects to social media like Facebook and Instagram, and would run in a webshop. I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
-
-    I really like the idea of PaaS, especially for projects that are going to grow big. I did feel the pain on working with App Engine though:
-    - Code must be written for especially for App Engine.
-    - This, coupled with all the custom infrastructure really lock you in to App Engine, you can't easily quit.
-    - Steep learning curve
-    - Many 3rd party packages does not work on the App Engine. It took me days, not minutes,  to get Facebook and Twitter integration to work.
-    - Can be expensive.
-
-    But let's not forget the positives:
-    - Scales totally automatically and indefinitely (If you use it correctly). This is how people often think all clouds work, but that's almost never the case. Especially for the database / nosql / datastore.
-    - The cost scales linearly with what you use (if I'm reading the pricing correctly). Unlike Heroku, for example. This makes a lot of business sense in many cases. Start out free or very cheap and pay more as the usage grows. Often the growing usage and expenses means more paying customers.
-    - Google cloud has so many cool tools to play with. Some of them gives you the power of thousands of servers and can thus take a heavy task form 10 minutes to 10 seconds.
-
-    No code to show as this was payed work for a client.
-</p>
+        No code to show as this was payed work for a client.
+    </p>
+</div>
 
 <h2>This blog</h2>
 <p>
