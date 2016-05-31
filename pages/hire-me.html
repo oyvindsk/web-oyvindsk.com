@@ -25,15 +25,12 @@ Path: hire-me
     what I can't do
     ? who are my clients
 
+    WHY you should hire me! (implicit, explicit?)
+
 -->
 <article>
 <h1>Need aditional Golang resources?</h1>
 <!-- 
-<p>
-    Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than neccessary because you have to few programmers?
-    It's hard to estimate how much money is lost by not having enough programmers. Long standing bug are not fixed, which annoys customers. And those new features you know you need get's delayd.
-
-</p>
 
 <h1>I'm here to help</h1>
 <p>
@@ -60,33 +57,161 @@ Path: hire-me
 </h1>
 
 -->
+
+
+
+<h2>What I can help you with</h2>
+<p>
+    Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than neccessary because you have to few programmers?
+    Money is lost when those bugs that annoy your customers are not fixed. Or when new features are not implemented.
+    <br>
+    <br>
+    Or maybe things are slow and you're looking to speed it up with newer technologies and smarter solutions?
+</p>
+
+<p>
+    I build distributed, scalable and fast back-end systems. I strongly preffer simplicity and strive for it whenever possible. My current language of choice is Golang.
+</p>
+
+<h2>Background</h2>
+
+<p>
+    I have experience with many different technologies and programming languages, especially on the back-end. But now I'm focusing on just Go. For the last months I've spent most of my time on really getting to know Golang, and I'm starting to feel ready for Go client work.
+</p>
+
+<p>
+    After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014.
+</p>
+
+<p>
+    I currently work remotely with companies arround the world.
+</p>
+
+
+
+
 <h1 id="contact">Contact me</h1>
+<form method="post" action="http://oyvindsk.com:1235/post" class="contact-form" id="contactForm" novalidate=""><!-- Also set the url in the js in template/layout.html -->
+    <div>
+        <input style="width:500px;" name="name" placeholder="Your name" type="text">
+    </div>
+    <div>
+        <input style="width:500px;" name="from" placeholder="Your email / phone number" type="email">
+    </div>
+
+    <div>
+        <input style="width:500px;" name="subject" placeholder="Subject" type="text">
+    </div>
+
+    <div>
+        <textarea style="width:500px;" name="text" placeholder="Hi. I would like to have a friendly chat about.." rows="7"></textarea>
+    </div>
+
+    <div class="get-it">
+        <button name="submitButton" type="submit">Send</button>
+    </div>
+</form>
+
+<div id="messages">msg</div>
 
 
- <form method="post" action="http://oyvindsk.com:1235/post" class="contact-form" id="contactForm" novalidate=""><!-- Also set the url in the js in template/layout.html -->
-                    <div>
-                        <input name="name" placeholder="Your name" type="text">
-                    </div>
-                    <div>
-                        <input name="from" placeholder="Your email / phone number" type="email">
-                    </div>
-
-                    <div>
-                        <input name="subject" placeholder="Subject" type="text">
-                    </div>
-
-                    <div>
-                        <textarea name="text" placeholder="Hi. I would like to have a friendly chat about.." rows="7"></textarea>
-                    </div>
-
-                    <div class="get-it">
-                        <button name="submitButton" type="submit">Send</button>
-                    </div>
-                </form>
-                <div id="messages">msg</div>
+<h1>Go Projects</h1>
+<p>
+    Lately I've been working on a few different things:
+</p>
 
 
-<h1>Previous Projects and Clients</h1>
+<h2>A distributed email address checker</h2>
+<p>
+    Like most of these projects it's partly for the usefulness, partly for learning and partly for the fun of it. This project chats with an SMTP server to find out if an email address is actually in use (works surprisingly well).  Now, I'm planning to run a few million addresses through this, so even with go's concurrency, it's going to need more than 1 server. This is not going to be used for spam, I promise :). It has a REST API for submitting email addresses. It works, but it's not finished.
+</p>
+
+<p>
+
+    <strong>Challenges:</strong>
+    <ul>
+        <li>
+            Avoid getting blocked by smtp servers. Solution: Smart throttle and fan out to multiple machines (ip's)
+        </li>
+
+        <li>
+            Distributing the work and gathering the results. I chose to use NSQ to communicate between the processes and machines. It's a distributed message bus made by bit.ly. In terms of learning, it's been great, I've learned a lot. But in retrospect, NSQ might be a little too "low level" for this project. Something like Resque/Sidekiq, Gearmand or one of the Go alternatives would have been *much* easier to work with. With a 1-way message bus like NSQ you are responsible for matching replies to requests, and other things a job system gives you for free. On the other hand NSQ does not have any single point of failures, it's fast and you can just hook up new parts to the stream to get messages on the fly.
+        </li>
+
+        <li>
+            How should the throttling work? Per source IP? Per email domain (@gmail.com)? Can we save time by not re-connecting to the same smtp server all the time? How much traffic can you send to a server before you create problems for them? Or before they block you?    Solution: Start simple and "slow". Gradually crank it up and incorporate what you learn.
+        </li>
+
+        <li>
+            Running it in containers (Docker) changes things a little bit. The biggest reason to run it on multiple machines is to get many source ip's. But with containers it could place all the workers on the same machine. It was tested in something called Rancher, which "fixes" this, but has a bug that complicates the NSQ deployment.
+        </li>
+    </ul>
+</p>
+
+<p>
+
+    Github (with code and even more text): 
+    <a href="https://github.com/oyvindsk/go-email-address-check/">https://github.com/oyvindsk/go-email-address-check/</a>
+    <br>
+    NSQ: <a href="http://nsq.io/">http://nsq.io/</a>
+</p>
+
+
+<h2>Prototype "Social E-comerce platform",  App Engine</h2>
+
+<p>
+    I'll keep this one short. Before Christmas I was making a prototype of a new platform for a client. It connects to social media like Facebook and Instagram, and would run in a webshop. I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
+
+    I really like the idea of PaaS, especially for projects that are going to grow big. I did feel the pain on working with App Engine though:
+    - Code must be written for especially for App Engine.
+    - This, coupled with all the custom infrastructure really lock you in to App Engine, you can't easily quit.
+    - Steep learning curve
+    - Many 3rd party packages does not work on the App Engine. It took me days, not minutes,  to get Facebook and Twitter integration to work.
+    - Can be expensive.
+
+    But let's not forget the positives:
+    - Scales totally automatically and indefinitely (If you use it correctly). This is how people often think all clouds work, but that's almost never the case. Especially for the database / nosql / datastore.
+    - The cost scales linearly with what you use (if I'm reading the pricing correctly). Unlike Heroku, for example. This makes a lot of business sense in many cases. Start out free or very cheap and pay more as the usage grows. Often the growing usage and expenses means more paying customers.
+    - Google cloud has so many cool tools to play with. Some of them gives you the power of thousands of servers and can thus take a heavy task form 10 minutes to 10 seconds.
+
+    No code to show as this was payed work for a client.
+</p>
+
+<h2>This blog</h2>
+<p>
+    I wrote my blog engine in Go. Started writing this code before I knew much Go, so I'm sure it's not idiomatic :)
+    <br>
+    <a href="https://github.com/oyvindsk/web-oyvindsk.com">https://github.com/oyvindsk/web-oyvindsk.com</a>
+</p>
+
+
+<h2>Websockets chat server</h2>
+<p>
+    I'm working on a chat system using Websockets and Go:
+    https://github.com/oyvindsk/go-websockets-test1 (Unfinished, it's changing back to a more distributed nature, with nsqlookupd)
+</p>
+
+
+<h1>Links</h1>
+<p>
+    Aside for my github links, these are relevant:
+    http://oyvindsk.com/
+    http://www.linkedin.com/in/oskaar
+
+    CV: (MSc in Informatics, 6 years of experience)
+    http://oyvindsk.com/static/cv-%C3%B8yvind_skaar-2014-en.pdf
+
+    Some of the projects I have worked on while self-employed:
+    http://www.skaarsolutions.com/projects-and-customers/
+</p>
+
+
+
+
+
+
+
+<h1>Other Projects and Clients</h1>
 
                 <div style="padding-top: 50px;" ></div>
             <!-- 
