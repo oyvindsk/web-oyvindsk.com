@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -20,7 +19,7 @@ var (
 	StaticFiles map[string]StaticFile
 )
 
-func main() {
+func init() {
 
 	// Initialize directories
 	pwd, err := os.Getwd()
@@ -52,7 +51,7 @@ func main() {
 	// Serve other pages, index etc.
 	http.HandleFunc("/", servePagesFromMem)
 
-	log.Println("Listening...")
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	//log.Println("Listening...")
+	//log.Fatal(http.ListenAndServe(":3001", nil))
 
 }
