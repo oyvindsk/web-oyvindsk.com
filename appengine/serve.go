@@ -1,4 +1,4 @@
-package main
+package blog
 
 import (
 	"html/template"
@@ -6,13 +6,30 @@ import (
 	"net/http"
 	"os"
 	"path"
-    "bytes"
+
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
 )
 
 //    if err != nil {
 //        http.Error(w, err.Error(), http.StatusInternalServerError)
 //    }
 
+func servePageFromDS(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	key := datastore.NewKey(c, "Page", path.Base(r.URL.Path), 0, nil)
+	var page Page
+	err := datastore.Get(c, key, &page)
+	if err != nil {
+		http.NotFound(w, r)
+		log.Printf("! 404?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), page.Title, err)
+		return
+	}
+	log.Printf("Serving page: Path: %s, Title: %s", path.Base(r.URL.Path), page.Title)
+	w.Write([]byte(page.Content))
+}
+
+/*
 func servePagesFromMem(w http.ResponseWriter, r *http.Request) {
 	page, exists := Pages[path.Base(r.URL.Path)]
 	if !exists {
@@ -37,21 +54,19 @@ func serveBlogPostFromMem(w http.ResponseWriter, r *http.Request) {
 
 func serveStaticFilestFromMem(w http.ResponseWriter, r *http.Request) {
 	staticFile, exists := StaticFiles[path.Base(r.URL.Path)]
-    if !exists {
-        http.NotFound(w, r)
-        log.Printf("! 404: Path: %s", path.Base(r.URL.Path))
-        return
-    }
+	if !exists {
+		http.NotFound(w, r)
+		log.Printf("! 404: Path: %s", path.Base(r.URL.Path))
+		return
+	}
 
-    reader := bytes.NewReader(staticFile.ContentRaw)
+	reader := bytes.NewReader(staticFile.ContentRaw)
 
 	log.Printf("Serving static file: Path: %s, StaticFile.Path %s", path.Base(r.URL.Path), staticFile.Path)
 
 	http.ServeContent(w, r, path.Base(r.URL.Path), staticFile.PubTime, reader) // FIXME
 }
-
-
-
+*/
 func servePages(w http.ResponseWriter, r *http.Request) {
 
 	lp := path.Join("templates", "layout.html")

@@ -1,21 +1,25 @@
 package blog
 
 import (
-	"log"
 	"net/http"
 
 	"google.golang.org/appengine"
 )
 
+const (
+	storageBucketPath = "http://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
+)
+
 // Gobal variables
 var (
-	//Posts       map[string]Post
-	Pages map[string]Page
-	//StaticFiles map[string]StaticFile
+//Posts       map[string]Post
+// Pages map[string]Page
+//StaticFiles map[string]StaticFile
 )
 
 func init() {
 	http.HandleFunc("/init", handleFileLoads)
+	http.HandleFunc("/", servePageFromDS)
 	//log.Fatal("I'm done!")
 }
 
@@ -24,7 +28,6 @@ func handleFileLoads(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	err := loadPagesIntoDS(c, "pages")
 	checkAndDie("Reading Pages", err)
-	log.Printf("%+v", Pages)
 }
 
 /*
