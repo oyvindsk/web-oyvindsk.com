@@ -1,26 +1,33 @@
-package main
+package blog
 
 import (
+	"log"
 	"net/http"
-	"os"
-	"path/filepath"
-)
 
-// start
-// compile templates
-// read posts
-// server
-//      reload     ------ /\
+	"google.golang.org/appengine"
+)
 
 // Gobal variables
 var (
-	Posts       map[string]Post
-	Pages       map[string]Page
-	StaticFiles map[string]StaticFile
+	//Posts       map[string]Post
+	Pages map[string]Page
+	//StaticFiles map[string]StaticFile
 )
 
 func init() {
+	http.HandleFunc("/init", handleFileLoads)
+	//log.Fatal("I'm done!")
+}
 
+func handleFileLoads(w http.ResponseWriter, r *http.Request) {
+	// Read pages and blogpost from file to update the Datastore
+	c := appengine.NewContext(r)
+	err := loadPagesIntoDS(c, "pages")
+	checkAndDie("Reading Pages", err)
+	log.Printf("%+v", Pages)
+}
+
+/*
 	// Initialize directories
 	pwd, err := os.Getwd()
 	checkAndDie("Getting working dir", err)
@@ -54,4 +61,4 @@ func init() {
 	//log.Println("Listening...")
 	//log.Fatal(http.ListenAndServe(":3001", nil))
 
-}
+*/
