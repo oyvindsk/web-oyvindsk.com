@@ -18,15 +18,27 @@ import (
 	"golang.org/x/net/context"
 )
 
-// The Page structure defines all the data for a page, including metadata / front-matter and resulting HTML
-type Page struct {
+type fileBasedContent interface {
+	loadFrontMatter(s *bufio.Scanner) (err error)
+	loadContent(s *bufio.Scanner) error
+	parseAndExecuteTemplates() error
+}
+
+type common struct {
+	fileBasedContent
+
 	Title   string
 	PubTime time.Time
 	Content []byte // the result of parsing and executing the templates, for easy serving
 	Path    string // the path - last part of the url - that is the address of this page. Might want to make this an [] ?
 }
 
-// Read all pages and its front-matter into memory - Few pages, shouldn't be a problem
+// The Page structure defines all the data for a page, including metadata / front-matter and resulting HTML
+type Page struct {
+	common
+}
+
+// Read all pages and its front-matter into Datastore
 func loadPagesIntoDS(c context.Context, dir string) error {
 
 	// Read the page from file
@@ -71,7 +83,7 @@ func loadPagesIntoDS(c context.Context, dir string) error {
 	return nil
 }
 
-func newPage(filepath string) (*Page, error) {
+func newPage(filepath string) (*common, error) {
 
 	// open the file
 	file, err := os.Open(filepath)

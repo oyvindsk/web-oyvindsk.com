@@ -28,6 +28,8 @@ func handleFileLoads(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	err := loadPagesIntoDS(c, "pages")
 	checkAndDie("Reading Pages", err)
+	err = loadPagesIntoDS(c, "blogposts")
+	checkAndDie("Reading BlogPosts", err)
 }
 
 /*
