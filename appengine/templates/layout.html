@@ -15,10 +15,10 @@
         <meta name="author" content="Øyvind Skaar">
         <meta name="copyright" content="Copyright Øyvind Skaar 2016.">
 
-        <link rel="icon" href="/static/images/favicon.ico">
-        <link rel="stylesheet" href="/static/css.css">
-        <link rel="stylesheet" href="/static/main.css">
-        <link rel="alternate" href="/static/feed.rss" type="application/rss+xml">
+        <link rel="icon" href="{{ .StorageBucketPath }}/images/favicon.ico">
+        <link rel="stylesheet" href="{{ .StorageBucketPath }}/css.css">
+        <link rel="stylesheet" href="{{ .StorageBucketPath }}/main.css">
+        <link rel="alternate" href="{{ .StorageBucketPath }}/feed.rss" type="application/rss+xml">
     </head>
 
     <body>
@@ -31,7 +31,7 @@
                     <li><a href="/hire-me#contact">Contact</a></li>
                     <!-- FIXME
                     <li><a href="/writing">Blog</a></li>
-                    <li><a href="/static/feed.rss">RSS</a></li>
+                    <li><a href="{{ .StorageBucketPath }}/feed.rss">RSS</a></li>
                     -->
                 </ul>
             </nav>
@@ -70,8 +70,8 @@
         </script>
 
 
-        <script src="/static/jquery.js"></script>
-        <script src="/static/highlight.js"></script>
+        <script src="{{ .StorageBucketPath }}/jquery.js"></script>
+        <script src="{{ .StorageBucketPath }}/highlight.js"></script>
 
         <script type="text/javascript">
 

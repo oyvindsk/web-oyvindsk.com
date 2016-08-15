@@ -16,7 +16,7 @@ Path: common-golang-mistakes-1
             <span>Last updated 13th of May 2016</span>
         </header>
 
-        <img src="/static/blogpost-files/gopher-fail.jpg">
+        <img src="{{ .StorageBucketPath }}/blogpost-files/gopher-fail.jpg">
         <h2></h2>
 
         <p>
@@ -103,7 +103,7 @@ b is: 3
             This does not happen here. The function we have in Example B, 'func(){..}',  is not a normal function: it's in the middle of another one and it lacks a name. These types of functions are often call <i>function literals</i> or <i>anonymous functions</i>. I like "anonymous functions". An anonymous function can "see" variables from the function it's inside (enclosed in). That means that in our example it can access variable 'b'. 
         </p>
 
-        <p><img src="/static/blogpost-files/gopher-fail-1-example-b.png"></p>
+        <p><img src="{{ .StorageBucketPath }}/blogpost-files/gopher-fail-1-example-b.png"></p>
 
         <p>This is not a bug in Go, by the way. It's intended behavior that can be used to do some pretty advanced stuff. See the "function closures"  links at the end.</p>
 

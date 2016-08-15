@@ -29,7 +29,7 @@ Path: hire-me
 -->
 <article>
             <div class="splash">
-                <img src="/static/øyvind.jpg" alt="Øyvind Skaar" height="120" width="120">
+                <img src="{{ .StorageBucketPath }}/øyvind.jpg" alt="Øyvind Skaar" height="120" width="120">
                 <p>
                     Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
                     I'm currently looking for remote Golang work, either project based (preferred) or something  more permanent.
@@ -241,7 +241,7 @@ Path: hire-me
     http://www.linkedin.com/in/oskaar
 
     CV: (MSc in Informatics, 6 years of experience)
-    http://oyvindsk.com/static/cv-%C3%B8yvind_skaar-2014-en.pdf
+    http://oyvindsk.com{{ .StorageBucketPath }}/cv-%C3%B8yvind_skaar-2014-en.pdf
 
     Some of the projects I have worked on while self-employed:
     http://www.skaarsolutions.com/projects-and-customers/
@@ -261,7 +261,7 @@ Path: hire-me
                 Also makes it exandable
             -->
                 <a href="#intolife1" class="expandable">
-                    <img class="img" src="/static/client-logos/intolife.png" alt="">
+                    <img class="img" src="{{ .StorageBucketPath }}/client-logos/intolife.png" alt="">
                 </a>
                 <h2>Intolife: Substainable food managment system</h2>
                 <h4>2014 - 2016</h4>
@@ -328,7 +328,7 @@ The software also laid the groundwork for future expansions. <a href="#intolife2
 
                 <div style="padding-top: 50px;" ></div>
                 <a href="#sor1" class="expandable">
-                    <img class="img" src="/static/client-logos/shoutoutreferral.png" alt="">
+                    <img class="img" src="{{ .StorageBucketPath }}/client-logos/shoutoutreferral.png" alt="">
                 </a>
                 <h2>Shout Out Referral: Prototype design and implementation</h2>
                 <h4>2015</h4>
@@ -394,7 +394,7 @@ The software also laid the groundwork for future expansions. <a href="#intolife2
 
                 <div style="padding-top: 50px;" ></div>
                 <a href="#intolife2" class="expandable">
-                    <img class="img" src="/static/client-logos/intolife.png" alt="">
+                    <img class="img" src="{{ .StorageBucketPath }}/client-logos/intolife.png" alt="">
                 </a>
                 <h2>Intolife: Backend REST API</h2>
                 <h4>2015, 2016</h4>
@@ -455,7 +455,7 @@ The software also laid the groundwork for future expansions. <a href="#intolife2
 
                 <div style="padding-top: 50px;" ></div>
                 <a href="#picterus" class="expandable">
-                    <img class="img" src="/static/client-logos/picterus.png" alt="">
+                    <img class="img" src="{{ .StorageBucketPath }}/client-logos/picterus.png" alt="">
                 </a>
                 <h2>Picterus: Backend API for mobile app (Subcontractor)</h2>
                 <h4>2015</h4>
@@ -502,7 +502,7 @@ The software also laid the groundwork for future expansions. <a href="#intolife2
 
                 <div style="padding-top: 50px;" ></div>
                 <a href="#villoid" class="expandable">
-                    <img class="img" src="/static/client-logos/villoid.png" alt="">
+                    <img class="img" src="{{ .StorageBucketPath }}/client-logos/villoid.png" alt="">
                 </a>
                 <h2>Villoid: Backend Servers and API</h2>
                 <h4>2015</h4>
