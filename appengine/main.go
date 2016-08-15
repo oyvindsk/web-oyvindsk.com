@@ -1,5 +1,5 @@
-// only builds on AE  - Is this correct?
-// +build appengine
+// Buildtag to only build on AE?
+// PLUS build appengine
 
 package blog
 
@@ -13,14 +13,7 @@ import (
 )
 
 const (
-	storageBucketPath = "http://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
-)
-
-// Gobal variables
-var (
-//Posts       map[string]Post
-// Pages map[string]Page
-//StaticFiles map[string]StaticFile
+	GCSPath = "http://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
 )
 
 func init() {

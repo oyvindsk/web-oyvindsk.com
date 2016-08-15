@@ -96,7 +96,8 @@ func newPost(filepath string) (*Post, error) {
 	if !ok {
 		return nil, fmt.Errorf("No Path for page: %s", filepath)
 	}
-	// todo - copy inn data
+	post.StorageBucketPath = GCSPath // global const, but still needs to be passed to the template (?)
+
 	post.Content = content
 
 	log.Printf("\tloaded blogpost with content size: %d", len(post.Content))
@@ -136,7 +137,6 @@ func (p *Post) parseAndExecuteTemplates() error {
 	return nil
 
 	// debug stuff:
-	// log.Println(buf)
 	// ts := tmpl.Templates()
 	// os.Stdout.WriteString("\n\n")
 	// for _, t := range ts {

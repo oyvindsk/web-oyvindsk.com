@@ -88,7 +88,7 @@ func newPage(filepath string) (*Page, error) {
 	if !ok {
 		return nil, fmt.Errorf("No Path for page: %s", filepath)
 	}
-	// todo - copy inn data
+	page.StorageBucketPath = GCSPath // global const, but still needs to be passed to the template (?)
 	page.Content = content
 
 	log.Printf("\tloaded page with content size: %d", len(page.Content))
