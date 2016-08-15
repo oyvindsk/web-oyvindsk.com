@@ -6,28 +6,11 @@ import (
 	"net/http"
 	"os"
 	"path"
-
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/datastore"
 )
 
 //    if err != nil {
 //        http.Error(w, err.Error(), http.StatusInternalServerError)
 //    }
-
-func servePageFromDS(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	key := datastore.NewKey(c, "Page", path.Base(r.URL.Path), 0, nil)
-	var page Page
-	err := datastore.Get(c, key, &page)
-	if err != nil {
-		http.NotFound(w, r)
-		log.Printf("! 404?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), page.Title, err)
-		return
-	}
-	log.Printf("Serving page: Path: %s, Title: %s", path.Base(r.URL.Path), page.Title)
-	w.Write([]byte(page.Content))
-}
 
 /*
 func servePagesFromMem(w http.ResponseWriter, r *http.Request) {

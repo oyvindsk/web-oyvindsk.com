@@ -22,6 +22,13 @@ type Page struct {
 	StorageBucketPath string
 }
 
+// PageDS holds the data we store in DS for this page.
+// Since already have "compiled" the template into html, we only realy need the path (key) and the content (html)
+type PageDS struct {
+	Title   string
+	Content []byte // the result of parsing and executing the templates, for easy serving
+}
+
 // Read all pages and its front-matter into Datastore for later serving
 func loadPagesIntoDS(c context.Context, dir string) error {
 
@@ -52,9 +59,10 @@ func loadPagesIntoDS(c context.Context, dir string) error {
 		}
 
 		// yeay, store the html w/ the path we want to reach it by
+		data := &PageDS{Title: page.Title, Content: page.Content}
 		key := datastore.NewKey(c, "Page", page.Path, 0, nil)
-		if _, err := datastore.Put(c, key, page); err != nil {
-			log.Printf("Failed to import Page: %s, : %s", f.Name(), err)
+		if _, err := datastore.Put(c, key, data); err != nil {
+			log.Printf("Failed to store Page: %s, : %s", f.Name(), err)
 		}
 	}
 

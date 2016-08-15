@@ -30,6 +30,13 @@ type Post struct {
 	//ModTime time.Time
 }
 
+// PostDS holds the data we store in DS for this post.
+// Since already have "compiled" the template into html, we only realy need the path (key) and the content (html)
+type PostDS struct {
+	Title   string
+	Content []byte // the result of parsing and executing the templates, for easy serving
+}
+
 // Read all blogposts and its front-matter into Datastore for later serving
 func loadPostsIntoDS(c context.Context, dir string) error {
 
@@ -60,8 +67,9 @@ func loadPostsIntoDS(c context.Context, dir string) error {
 		}
 
 		// yeay, store the html w/ the path we want to reach it by
+		data := &PostDS{Title: post.Title, Content: post.Content}
 		key := datastore.NewKey(c, "Post", post.Path, 0, nil)
-		if _, err := datastore.Put(c, key, post); err != nil {
+		if _, err := datastore.Put(c, key, data); err != nil {
 			log.Printf("Failed to import Post: %s, : %s", f.Name(), err)
 		}
 	}
