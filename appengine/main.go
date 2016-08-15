@@ -1,9 +1,15 @@
+// only builds on AE  - Is this correct?
+// +build appengine
+
 package blog
 
 import (
+	"log"
 	"net/http"
+	"path"
 
 	"google.golang.org/appengine"
+	"google.golang.org/appengine/datastore"
 )
 
 const (
@@ -18,9 +24,10 @@ var (
 )
 
 func init() {
-	http.HandleFunc("/init", handleFileLoads)
 	http.HandleFunc("/", servePageFromDS)
-	//log.Fatal("I'm done!")
+	http.HandleFunc("/init", handleFileLoads)
+	http.HandleFunc("/writing/", servePostFromDS)
+	// static files are served directly from Google Cloud Storage
 }
 
 func handleFileLoads(w http.ResponseWriter, r *http.Request) {
@@ -28,8 +35,37 @@ func handleFileLoads(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
 	err := loadPagesIntoDS(c, "pages")
 	checkAndDie("Reading Pages", err)
-	err = loadPagesIntoDS(c, "blogposts")
+
+	err = loadPostsIntoDS(c, "blogposts")
 	checkAndDie("Reading BlogPosts", err)
+}
+
+func servePageFromDS(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	key := datastore.NewKey(c, "Page", path.Base(r.URL.Path), 0, nil)
+	var page Page
+	err := datastore.Get(c, key, &page)
+	if err != nil {
+		http.NotFound(w, r)
+		log.Printf("! 404 for Page?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), page.Title, err)
+		return
+	}
+	log.Printf("Serving page: Path: %s, Title: %s", path.Base(r.URL.Path), page.Title)
+	w.Write([]byte(page.Content))
+}
+
+func servePostFromDS(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	key := datastore.NewKey(c, "Post", path.Base(r.URL.Path), 0, nil)
+	var post Post
+	err := datastore.Get(c, key, &post)
+	if err != nil {
+		http.NotFound(w, r)
+		log.Printf("! 404 for Post?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), post.Title, err)
+		return
+	}
+	log.Printf("Serving post: Path: %s, Title: %s", path.Base(r.URL.Path), post.Title)
+	w.Write([]byte(post.Content))
 }
 
 /*
