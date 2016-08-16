@@ -3,12 +3,13 @@
 ## About
 Simple go blog that serves http://oyvindsk.com and its alias http://odots.org/
 
+It's currently in limbo between the old file-based version and an App Engine version. (compare branches) 
+
 It reads posts and pages on startup, executes the templates and stores the resulting html in memory.
 The blogposts are also go templates, to have a little more freedome. Might be a bad idea.
 
 The static files are alos read into ram and served from there. Might also be a bad idea.
 
-I'm still learning and this code is still a mess ..
 
 ## Todo
 Too much to list =/
