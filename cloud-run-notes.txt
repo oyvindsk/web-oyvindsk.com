@@ -8,10 +8,25 @@ Diff fra AE:
 
 Other:
 
-
+Datastore works (but is it slower than AE?)
 
 
 Build docker images locally or with Cloud Build?
+Have a layered approch so we don't fetch modules evry time (build goes from ~30 sec to >2 min)
 Put docker images in gcr? Or some other place?
 Does it have to be a docker image or must it simply comply to whatever standard?
 Is vendor/ faster than go modules?  
+
+
+
+Converting:
+
+check that all needed things are availible
+ - memcache
+ - memorystore
+ - legacy yae stuff like tasks etc etc etc
+
+package names
+init() -> main()
+
+switch appengine packages to cloud.google.com/go/..

@@ -1,43 +1,70 @@
 // Buildtag to only build on AE?
 // PLUS build appengine
 
-package blog
+package main
 
 import (
+	"context"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"path"
 
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/datastore"
+	"cloud.google.com/go/datastore"
 )
 
 const (
-	GCSPath = "http://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
+	GCSPath = "https://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
 )
 
-func init() {
+var (
+	dsClient *datastore.Client
+	ctx      context.Context // TODO is there one in the http request we can use instead? but then.. hmm..
+)
+
+func main() {
+
+	// Init an empty context
+	// TODO is there one in the http request we can use instead? but then.. hmm..
+	ctx = context.Background()
+
+	// Create a datastore client. In a typical application, you would create
+	// a single client which is reused for every datastore operation.
+	var err error
+	dsClient, err = datastore.NewClient(ctx, "stunning-symbol-139515")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	http.HandleFunc("/", servePageFromDS)
 	http.HandleFunc("/init", handleFileLoads)
 	http.HandleFunc("/writing/", servePostFromDS)
+
 	// static files are served directly from Google Cloud Storage
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" 
+	}
+
+	log.Printf("Getting ready to listen on port: %s", port)
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
 func handleFileLoads(w http.ResponseWriter, r *http.Request) {
 	// Read pages and blogpost from file to update the Datastore
-	c := appengine.NewContext(r)
-	err := loadPagesIntoDS(c, "pages")
+	err := loadPagesIntoDS(ctx, "pages")
 	checkAndDie("Reading Pages", err)
 
-	err = loadPostsIntoDS(c, "blogposts")
+	err = loadPostsIntoDS(ctx, "blogposts")
 	checkAndDie("Reading BlogPosts", err)
 }
 
 func servePageFromDS(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	key := datastore.NewKey(c, "Page", path.Base(r.URL.Path), 0, nil)
+	key := datastore.NameKey("Page", path.Base(r.URL.Path), nil)
 	var page Page
-	err := datastore.Get(c, key, &page)
+	err := dsClient.Get(ctx, key, &page)
 	if err != nil {
 		http.NotFound(w, r)
 		log.Printf("! 404 for Page?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), page.Title, err)
@@ -48,10 +75,9 @@ func servePageFromDS(w http.ResponseWriter, r *http.Request) {
 }
 
 func servePostFromDS(w http.ResponseWriter, r *http.Request) {
-	c := appengine.NewContext(r)
-	key := datastore.NewKey(c, "Post", path.Base(r.URL.Path), 0, nil)
+	key := datastore.NameKey("Post", path.Base(r.URL.Path), nil)
 	var post Post
-	err := datastore.Get(c, key, &post)
+	err := dsClient.Get(ctx, key, &post)
 	if err != nil {
 		http.NotFound(w, r)
 		log.Printf("! 404 for Post?: Path: %s, Title: %s, err: %s", path.Base(r.URL.Path), post.Title, err)

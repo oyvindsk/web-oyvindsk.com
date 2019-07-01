@@ -1,4 +1,4 @@
-package blog
+package main
 
 import (
 	"html/template"
@@ -12,7 +12,7 @@ import (
 //        http.Error(w, err.Error(), http.StatusInternalServerError)
 //    }
 
-/*
+/* 
 func servePagesFromMem(w http.ResponseWriter, r *http.Request) {
 	page, exists := Pages[path.Base(r.URL.Path)]
 	if !exists {

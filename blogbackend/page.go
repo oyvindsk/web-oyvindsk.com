@@ -1,15 +1,15 @@
-package blog
+package main
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"time"
 
-	"golang.org/x/net/context"
-	"google.golang.org/appengine/datastore"
+	"cloud.google.com/go/datastore"
 )
 
 // The Page structure defines all the data for a page, including metadata / front-matter and resulting HTML
@@ -17,16 +17,18 @@ import (
 type Page struct {
 	Title             string
 	PubTime           time.Time
-	Content           []byte // the result of parsing and executing the templates, for easy serving
-	Path              string // the path - last part of the url - that is the address of this page. Might want to make this an [] ?
-	StorageBucketPath string
+	Content           []byte  // the result of parsing and executing the templates, for easy serving
+	Path              string  // the path - last part of the url - that is the address of this page. Might want to make this an [] ?
+	StorageBucketPath string   
 }
 
 // PageDS holds the data we store in DS for this page.
 // Since already have "compiled" the template into html, we only realy need the path (key) and the content (html)
+// Indexing is the default now (when?), so we have to tell ds not to index the fields that are too long (or just uneccessary)
+// TODO no need for two types, ds can ignore fields.. also.. why? :D
 type PageDS struct {
 	Title   string
-	Content []byte // the result of parsing and executing the templates, for easy serving
+	Content []byte `datastore:",noindex"` // the result of parsing and executing the templates, for easy serving
 }
 
 // Read all pages and its front-matter into Datastore for later serving
@@ -60,8 +62,8 @@ func loadPagesIntoDS(c context.Context, dir string) error {
 
 		// yeay, store the html w/ the path we want to reach it by
 		data := &PageDS{Title: page.Title, Content: page.Content}
-		key := datastore.NewKey(c, "Page", page.Path, 0, nil)
-		if _, err := datastore.Put(c, key, data); err != nil {
+		key := datastore.NameKey("Page", page.Path, nil)
+		if _, err := dsClient.Put(c, key, data); err != nil {
 			log.Printf("Failed to store Page: %s, : %s", f.Name(), err)
 		}
 	}
