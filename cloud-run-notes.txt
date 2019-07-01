@@ -1,0 +1,17 @@
+
+Diff fra AE:
+
+++
+
+--
+ - No traffic split
+
+Other:
+
+
+
+
+Build docker images locally or with Cloud Build?
+Put docker images in gcr? Or some other place?
+Does it have to be a docker image or must it simply comply to whatever standard?
+Is vendor/ faster than go modules?  
