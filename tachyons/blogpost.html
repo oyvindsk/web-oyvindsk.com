@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title> </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+
+    <body>
+
+        <nav class="db dt-l w-100 border-box pa3 ph5-l">
+            <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
+                <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name">
+            </a>
+            <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+                <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
+                <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="How it Works">How it Works</a>
+                <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Blog">Blog</a>
+                <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Press">Press</a>
+                <a class="link dim dark-gray f6 f5-l dib" href="#" title="Contact">Contact</a>
+            </div>
+        </nav>
+
+
+        <article>
+            <header class="bg-gold sans-serif">
+                <div class="mw9 center pa4 pt5-ns ph7-l">
+                  <time class="f6 mb2 dib ttu tracked"><small>27 July, 2015</small></time>
+                  <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                    <span class="bg-black-90 lh-copy white pa1 tracked-tight">
+                      Header
+                    </span>
+                  </h3>
+                  <h4 class="f3 fw1 georgia i">Index</h4>
+                  <h5 class="f6 ttu tracked black-80">By ..</h5>
+                </div>
+            </header>
+
+            <div class="pa4 ph7-l georgia mw9-l center">
+                <p class="f5 f3-ns lh-copy measure georgia">
+                    Intro
+                </p>
+                <p class="f5 f3-ns lh-copy measure georgia">
+                    Intro 2
+                </p>
+                <p class="f6 f5-ns lh-copy measure i pl4 bl bw1 b--gold mb4">
+                    Quote 
+                </p>
+                <p class="f5 f4-ns lh-copy measure mb4">
+                    P1
+                </p>
+
+                <p class="f5 f4-ns lh-copy measure">
+                    P2
+                </p>
+            </div>
+
+
+
+
+
+
+        <!-- FIXME -->
+
+
+            <div class="pa4 ph7-l georgia mw9-l center">
+        <img src="https://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static/blogpost-files/gopher-fail.jpg">
+        <h2></h2>
+
+        <p>
+            This post is about a mistake that's common and easy to make in Golang. I show a few examples, explain why it happens and how you can avoid it. This is explained in many places already (see links at the end). My goal is to be more thorough than the others.
+
+            <br>
+            <br>
+            There might be many of these blogposts. There's at least one more topic I want to write about. We'll see.
+        </p>
+
+        <h1>Closing over a loop variable</h1>
+        <p>
+            This mistake is very easy to make in some situations. If you please, take a look at the code below and try to figure out why Example B fails. 
+            <br>
+            (Most code snipet has a link in the header to the Go Playground where you can run and play with the code. All links open in this window).
+        </p>
+
+        <p>
+            Print out the numbers from 0 to 2:
+        </p>
+
+
+        <figure class="file"><figcaption><a href="https://play.golang.org/p/NJhdSw-sSC">https://play.golang.org/p/NJhdSw-sSC</a></figcaption><code><pre>
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// A
+	fmt.Println("Example A - Count to 2, This works :) ")
+	for a := 0; a &lt; 3; a++ {
+		fmt.Println("a is:", a)
+	}
+
+	// B
+	fmt.Println("\n\nExample B - Count to 2, concurrently.")
+	fmt.Println("This does not work :( ")
+	for b := 0; b &lt; 3; b++ {
+		// Run fmt.Println(..) in the background
+		go func() {
+			fmt.Println("b is:", b)
+		}()
+	}
+
+	// we sleep to let the go functions finish before the program quits
+	time.Sleep(2 * time.Second) 
+}
+        </pre></code></figure>
+
+        <p>
+            Running the above code prints:
+        </p>
+
+
+        <figure class="shell"><code><pre>
+Example A - Count to 2, This works :) 
+a is: 0
+a is: 1
+a is: 2
+
+
+Example B - Count to 2, concurrently.
+This does not work :( 
+b is: 3
+b is: 3
+b is: 3
+        </pre></code></figure>
+
+        <p>
+            Huh? 3, 3, 3? Where's zero and one? And wasn't it suppose to stop at two? 
+            Bah! We can't even count to 2, what's going on? Two things:
+        </p>
+        <h2>Closures</h2>
+        <p>
+            Firstly, when we print variable 'b' in Example B what are we even referring to? It's inside of a function, and there's no variable 'b' inside this function body. If you did this in a normal function you would get a nice little error from the compiler complaining that there's no 'b'.
+
+        </p>
+        <p>
+            This does not happen here. The function we have in Example B, 'func(){..}',  is not a normal function: it's in the middle of another one and it lacks a name. These types of functions are often call <i>function literals</i> or <i>anonymous functions</i>. I like "anonymous functions". An anonymous function can "see" variables from the function it's inside (enclosed in). That means that in our example it can access variable 'b'. 
+        </p>
+
+        <p><img src="https://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static/blogpost-files/gopher-fail-1-example-b.png"></p>
+
+        <p>This is not a bug in Go, by the way. It's intended behavior that can be used to do some pretty advanced stuff. See the "function closures"  links at the end.</p>
+
+        <h2>Variable reuse</h2>
+        <p>
+            Our anonymous function can access variable 'b'. But it's the same variable 'b', accessed 3 time in the loop. It's declared once before the loop starts to run. It then changes value from 0 to 1, then to 2 and finally to 3.
+            Then the loop stops since 3 is not less than 3.
+        </p>
+
+        <h2>Goroutines runs out of order</h2>
+        <p>
+            With our 'go func()..' statement we start a new goroutine. They run concurrently, which they do not run one after the other in an orderly fashion. 
+            They could in theory run one after the other, or they could all run at the same time (in parallel). Or maybe the "last one" runs first and then the "first one" and the "second one" runs last, or maybe.. think you get the point; it's unpredictable.
+            Well this is kind of the point of using Goroutines in the first place. We want to be able to run many things at once. In this example it does not make a lot of sense, but imagine, if you will, that the printing took 10 seconds. Or we did something else that took 10 seconds. In that case Example A would take 30 seconds to complete and Example B would only take 10 seconds. Great! 
+        </p>
+        <p>
+            We can think of the go statement as "run this code in the background at some point". It could run right away, or it could run later. Thinking like this it becomes more clear why Example B fails. 
+            It's possible, likely even, that the loop finishes before the first 'fmt.Println("b is:", b)' ever runs. So the loops runs, increasing 'b' to 3 and then stopping. <em>Then</em> the goroutines run and print variable b. They all look at the same variable b, the one declared at the start of the loop. They never got their own copy. At this point 'b' is 3, so they all print 3.
+        </p>
+
+
+
+
+
+
+
+        <h1>Fixing it</h1>
+        <p>
+            There are several ways to change our code and fix this bug. I've listed the 3 I could come up with at this time, with the last one possibly being the most "idiomatic" go.
+        </p>
+
+        <p>
+            Each of these examples should print something like this if you run them. Note that the numbers can be out of order, since the goroutines can run in any possible order, or all at once.
+        </p>
+        <figure class="shell"><code><pre>
+Fix 2 for Example B
+dd is: 1
+dd is: 0
+dd is: 2
+        </pre></code></figure>
+
+
+        <h2>Alternative 1</h2>
+        <p>One easy way of fixing this is to change the anonymous function to a normal function call. Normal functions can not refer to variables "outside" itself. This forces us to pass the variable we want to use as an argument to the function (print() in our example).
+            When you call a normal function the arguments are copied, every time you call it. That is, the value of 'c' (0, 1 or 2) is copied and given to the invoked function. Therefore this works as you would expect:</p>
+        <figure class="file"><figcaption><a href="https://play.golang.org/p/RuUUVeH1ZG">https://play.golang.org/p/RuUUVeH1ZG</a></figcaption><code><pre>
+
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 1
+	fmt.Println("\n\nFix 1 for Example B")
+	for c := 0; c &lt; 3; c++ {
+		// same code as earlier,
+		// but no longer in an anonymous function:
+		go print(c)
+
+		// The value of c is copied when we call print()
+		//   so it's no longer reffering to the same variable.
+
+		// This copying happens before the code
+		//   in print() actually runs
+	}
+
+	time.Sleep(2 * time.Second)
+}
+
+func print(c int) {
+	// The value of c was copied.
+	// So 'c' here is not the same as 'c' in the for loop above.
+	// It's a "coincidence" that they are both named c
+	// (it's irrelevant).
+	fmt.Println("c is:", c)
+}
+
+
+        </pre></code></figure>
+
+
+
+        <h2>Alternative 2</h2>
+        <p>
+            But let's say you wanted to keep the anonymous function? They can certainly be useful, creating a named function that is only used in one place is kind of ugly.
+            This code fixes this by explicitly copying the variable before using it in the anonymous function. This works because each run (iteration) through the loop now gets its own variable, with its own value.
+            So it does not matter when the goroutine actually runs. It will refer to its own variable 'dd' that never changes.
+        </p>
+
+
+        <figure class="file"><figcaption><a href="https://play.golang.org/p/MDg7Pl0-E4">https://play.golang.org/p/MDg7Pl0-E4</a></figcaption><code><pre>
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 2
+	fmt.Println("Fix 2 for Example B")
+	for d := 0; d &lt; 3; d++ {
+		// The value of d is copied into its own variable. 
+		// This happens for every iteration in the loop.
+		dd := d
+		go func() {
+			fmt.Println("dd is:", dd)
+		}()
+	}
+
+	time.Sleep(2 * time.Second)
+
+}
+        </pre></code></figure>
+
+        <h2>Alternative 3</h2>
+        <p>
+            Finally this fix is similar to the first one (well, actually they're all pretty similar). Here we also copy the variable for every iteration of the <em>for </em> loop. 
+            Our anonymous function still sees the variable 'e' but ignores it. Instead we send in the variable we want to access when we call the anonymous function. 
+        </p>
+        <p>
+            Having both 'e' and 'ee' inside the function body can be a little confusing. We could for example use variable 'e' by mistake and the compiler would not complain. Therefore some people prefer to 
+            name the second variable the same as the first one ('e' instead of 'ee' in our example). This has the effect of hiding (shadowing) the first one and thus making it inaccessible.
+        </p>
+
+
+
+        <figure class="file"><figcaption><a href="https://play.golang.org/p/QO506H3qTz">https://play.golang.org/p/QO506H3qTz</a></figcaption><code><pre>
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 3
+	fmt.Println("Fix 3 for Example B")
+	for e := 0; e &lt; 3; e++ {
+		go func(ee int) {
+			// The value of e is copied into its own variable ee
+			// (We could also call this new variable e)
+			fmt.Println("ee is:", ee)
+		}(e) // e becomes ee inside the function
+	}
+
+	time.Sleep(2 * time.Second)
+
+}
+        </pre></code></figure>
+
+
+
+        <h1>That's it</h1>
+        <p>
+            Ok, that's it =) Hit me up on twitter (<a href="http://twitter.com/oyvindsk">@oyvindsk</a>) if you have any questions or corrections. All honest feedback is welcome. You can also enter your email underneath to get future articles.
+        </p>
+
+        <h1>Links</h1>
+        <h2>Closures in Go</h2>
+        <p>
+            <ul style="padding-left: 20px;"> 
+                <li><a href="https://gobyexample.com/closures">https://gobyexample.com/closures</a></li>
+                <li><a href="https://tour.golang.org/moretypes/25">https://tour.golang.org/moretypes/25</a></li>
+            </ul>
+        </p>
+
+        <h2>Other</h2>
+        <p>
+            <ul style="padding-left: 20px;"> 
+                <li><a href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#closure_for_it_vars">Entry at the 50 shades of Go for this gotcha</a></li>
+            </ul>
+        </p>
+
+
+        </div> 
+
+
+
+
+
+
+        <!-- /FIXME -->
+
+        </article>
+
+
+
+    <footer class="ph3 ph4-ns pv6 bt light-green bg-black">
+
+         <section class="cf mb5">
+    <div class="mb4 mb0-ns w-100 w-70-l" >
+      <p class="f4 fw6 mb2 f6 mt0">
+        Sign up for our newsletter.
+      </p>
+
+      <p class="f4 fw4 mb2 f6 mt0">
+        This is a technical blog about Golang, Cloud Computing and other Backend related topics. Enter your email address to receive updates. At most 2 mails per month. Unsubscribe anytime. 
+      </p>
+
+      <input placeholder="Email Address" class="mw-100 w-100 w5-ns f5 input-reset ba b--black-20 pv3 ph4 border-box">
+      <input type="submit" class="input-reset w-100 w-auto-ns bg-light-green black f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray">
+    </div>
+  </section>
+
+
+        <a href="mailto:" class="link b f3 f2-ns dim light-green lh-solid">hello@email.com</a>
+        <p class="f6 db b ttu lh-solid">© 2016 COMPANY Inc.</p>
+        <div class="mt5">
+            <a href="/language/" title="Language" class="f6 dib mid-gray pr2 dim">Language</a>
+            <a href="/terms/"    title="Terms"    class="f6 dib mid-gray ph2 dim">Terms of Use</a>
+            <a href="/privacy/"  title="Privacy"  class="f6 dib mid-gray pl2 dim">Privacy</a>
+        </div>
+    </footer>
+
+    </body>
+</html>

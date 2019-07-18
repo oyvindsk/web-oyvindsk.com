@@ -30,3 +30,7 @@ package names
 init() -> main()
 
 switch appengine packages to cloud.google.com/go/..
+
+Datastore:
+Indexing is the default now (when?), so we have to tell ds not to index the fields that are too long (or just uneccessary)
+	Foo []byte `datastore:",noindex"` 
