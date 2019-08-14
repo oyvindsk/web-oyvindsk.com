@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 )
 
-// Page is it's own template, 1 of 2, and has its own type
+// Page is it's own template, 2 of 2, and has its own type
 
 type pageContent struct {
 	Author      string
