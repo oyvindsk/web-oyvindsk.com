@@ -12,11 +12,12 @@ Datastore works (but is it slower than AE?)
 
 
 Build docker images locally or with Cloud Build?
-Have a layered approch so we don't fetch modules evry time (build goes from ~30 sec to >2 min)
+Have a layered approch so we don't fetch modules every time (build goes from ~30 sec to >2 min)
 Put docker images in gcr? Or some other place?
 Does it have to be a docker image or must it simply comply to whatever standard?
 Is vendor/ faster than go modules?  
 
+Build Docker image locally (or with a CI server) vs using Google Cloud Build  
 
 
 Converting:

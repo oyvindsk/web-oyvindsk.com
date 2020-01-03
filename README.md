@@ -3,12 +3,14 @@
 ## About
 Simple go blog that serves http://oyvindsk.com and its alias http://odots.org/
 
-It's currently in limbo between the old file-based version and an App Engine version. (compare branches) 
+I'm curentltly using it to test Google Cloud Run. It used to run on App Engine Standard, and I might convert it back in the future.
+Both are container based PaaS solutions. Run is newer, is Docker based and offers more flexibility. It does lack some App Engine's features though (such as traffic splitting).
+Both a re fully managed (yay!) and can scale up "infinitely" and down to zero when there's no traffic.
 
-It reads posts and pages on startup, executes the templates and stores the resulting html in memory.
+This blog "engine" reads posts and pages on startup, executes the templates and stores the resulting html in memory.
 The blogposts are also go templates, to have a little more freedome. Might be a bad idea.
 
-The static files are alos read into ram and served from there. Might also be a bad idea.
+The static files are served directly from Google Cloud Storage (GCS).
 
 
 ## Todo
