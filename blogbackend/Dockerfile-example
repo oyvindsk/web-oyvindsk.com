@@ -20,5 +20,9 @@ RUN apk add --no-cache ca-certificates
 # Copy the binary to the production image from the builder stage.
 COPY --from=builder /app /
 
+# Set a few environment variables
+# could be secret if we don't have any "real" handling of secrets
+ENV EMAIL_TO="foobar@asd.com" SMTP_SERVER="" SMTP_USER="" SMTP_PASS=""
+
 # Run the web service on container startup.
 CMD ["/app"]
