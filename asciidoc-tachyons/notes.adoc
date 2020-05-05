@@ -1,0 +1,40 @@
+ 
+= Generating html the hard way
+
+== Goal
+Generate blog posts from AsciiDoc, styled using teh Tachyons "framework"
+
+== AsciiDoc
+
+doctor handles footnotes in short ..
+
+== Tachyons
+
+== Problem
+Asciidoctor generates html you don't reallu have any control over. This is usually true for markdown processors as well.
+I guess you would usually, you take the html they generate and create custom css for it.
+
+But Tachyons does not work this way. It expects you to style by putting put the classe you want directly in the html code.
+
+== Sollution?
+The html coming out of AsciiDoctor does not "work" with Tachyons. Therefore we want to change that, remove the stuff we don't want (unneeded classes etc) and add Tachyones clases we want. 
+
+Processing html is actually not that hard using the .. go lib.
+
++
+Seperation of content (the Asciidoc) from the presentation (go code + Tachyons).
+The asciidoc can we converted into pdfs, ebooks or alternative html+css with one of the two main  AsciiDoc implementations.
+
+AsciiDoc is really nice to write in, hopefully ssaves me from having to go back and edit old blogposts evry time I change my layout and design. 
+
+-
+Uncommon and ridiciously complicated 
+No complete AsciiDoc implementation for go yet. There's just one: . It didn't work when I tried, it repeated the content, but it's beeing activly worked on. Will try it again later.
+The go code is tied to the AsciiDoc implementation since they generate different html output.
+
+
+
+    AsciiDoc (asciidoc python or asciidoctor)
+     => HTML PostProcess: cut out blogpost metadata (front matter)
+     => HTML PostProcess: remove classes and add Tachyons
+     => Go Templates: Put together a complete page from blog-html, blog-metadata and html template
