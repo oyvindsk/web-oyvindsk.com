@@ -17,7 +17,6 @@ type pageContent struct {
 	Path        string
 	Title       string // exported for the template lib
 	// PubTime           time.Time // TODO ?
-	StorageBucketPath string // ..
 
 	template *template.Template
 }
@@ -31,7 +30,7 @@ func (pm pageContent) String() string {
 	`, pm.Path, pm.Title, pm.Author, pm.Description)
 }
 
-func slurpAndParseAllPages(gcsPath, dirPath string) (map[string]pageContent, error) {
+func slurpAndParseAllPages(dirPath string) (map[string]pageContent, error) {
 
 	// Read the pages from files
 	log.Println("Reading pages from:", dirPath)
@@ -70,8 +69,6 @@ func slurpAndParseAllPages(gcsPath, dirPath string) (map[string]pageContent, err
 				log.Printf("Unknow metadata seen in page: %q", k)
 			}
 		}
-
-		pc.StorageBucketPath = gcsPath // Include the gcs bucket as well since this is what we pass to the teamplate later
 
 		// page as a template
 		tmpl, err := template.New("").Parse(html.String())

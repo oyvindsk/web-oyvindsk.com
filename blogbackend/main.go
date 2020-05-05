@@ -11,10 +11,6 @@ import (
 	"github.com/oyvindsk/post2mail"
 )
 
-const (
-	gcsPath = "https://storage.googleapis.com/stunning-symbol-139515.appspot.com/oyvindsk.com-static"
-)
-
 type server struct {
 	pages     map[string]pageContent
 	blogposts map[string]blogpostContent
@@ -56,23 +52,48 @@ func main() {
 	// ATM, we only do this here, so a restart is required to pick up new content
 	// Not an issue since we have to redeploy for new content anyway =/
 	// Also, all the template stuff are in the functions, since they're so small and it's not worth the overhead
-	pages, err := slurpAndParseAllPages(gcsPath, "pages")
+	pages, err := slurpAndParseAllPages("pages")
 	if err != nil {
 		log.Fatalln(err)
 	}
 	s.pages = pages
 
-	blogposts, err := slurpAndParseAllPosts(gcsPath, "blogposts")
+	blogposts, err := slurpAndParseAllPosts("blogposts")
 	if err != nil {
 		log.Fatalln(err)
 	}
 	s.blogposts = blogposts
 
 	// HTTP handlers
-	// static files are served directly from Google Cloud Storage
+	// do not modify too much: urls are linked to elsewhere (duh) and relative urls are used in the templates
 	http.HandleFunc("/", s.handlePage)
 	http.HandleFunc("/writing/", s.handleBlogpost)
 	http.HandleFunc("/contact-form", s.handleContactform)
+
+	// Serve static files "for the html", like css and js.
+	// Example: /html-related/css.css => static_files/html-related/css.css
+	http.Handle("/html-related/", http.StripPrefix("/html-related/", http.FileServer(http.Dir("static_files/html-related/"))))
+
+	// Serve static files for blogposts
+	http.Handle("/blogpost-files/", http.StripPrefix("/blogpost-files/", http.FileServer(http.Dir("static_files/blogpost-files/"))))
+
+	// Serve static files for the pages
+	http.Handle("/page-files/", http.StripPrefix("/page-files/", http.FileServer(http.Dir("static_files/page-files/"))))
+
+	// Serve static CV pdfs, english and norwegian, under 2 urls each
+	cvEn := func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("serving english cv")
+		http.ServeFile(w, r, "static_files/curricula-vitae/cv-øyvind_gerrard_skaar-2020_1-english.pdf")
+	}
+	http.HandleFunc("/cv/english.pdf", cvEn)
+	http.HandleFunc("/cv/cv-øyvind_gerrard_skaar-english.pdf", cvEn)
+
+	cvNo := func(w http.ResponseWriter, r *http.Request) {
+		log.Printf("serving norwegian cv")
+		http.ServeFile(w, r, "static_files/curricula-vitae/cv-øyvind_gerrard_skaar-2020_1-norwegian.pdf")
+	}
+	http.HandleFunc("/cv/norwegian.pdf", cvNo)
+	http.HandleFunc("/cv/cv-øyvind_gerrard_skaar-norwegian.pdf", cvNo)
 
 	// HTTP Listen
 	log.Printf("Getting ready to listen on port: %s", httpPort)

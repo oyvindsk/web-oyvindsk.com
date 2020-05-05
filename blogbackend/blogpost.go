@@ -16,7 +16,6 @@ type blogpostContent struct {
 	Path   string
 	Title  string // exported for the template lib
 	// PubTime           time.Time // TODO ?
-	StorageBucketPath string // ..
 
 	template *template.Template
 }
@@ -29,7 +28,7 @@ func (pm blogpostContent) String() string {
 	`, pm.Path, pm.Title, pm.Author)
 }
 
-func slurpAndParseAllPosts(gcsPath, dirPath string) (map[string]blogpostContent, error) {
+func slurpAndParseAllPosts(dirPath string) (map[string]blogpostContent, error) {
 
 	// Read the blogposts from files
 	log.Println("Reading blogposts from:", dirPath)
@@ -66,8 +65,6 @@ func slurpAndParseAllPosts(gcsPath, dirPath string) (map[string]blogpostContent,
 				log.Printf("Unknow metadata seen in blogpost: %q", k)
 			}
 		}
-
-		bpc.StorageBucketPath = gcsPath // Include the gcs bucket as well since this is what we pass to the teamplate later
 
 		// blogpost as a template
 		tmpl, err := template.New("blogpost").Parse(html.String())
