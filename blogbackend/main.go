@@ -74,6 +74,11 @@ func main() {
 	// Example: /html-related/css.css => static_files/html-related/css.css
 	http.Handle("/html-related/", http.StripPrefix("/html-related/", http.FileServer(http.Dir("static_files/html-related/"))))
 
+	// an alias url for favicon as some browsers request this url direclty when serving pdfs
+	http.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "static_files/html-related/favicon.ico")
+	})
+
 	// Serve static files for blogposts
 	http.Handle("/blogpost-files/", http.StripPrefix("/blogpost-files/", http.FileServer(http.Dir("static_files/blogpost-files/"))))
 
