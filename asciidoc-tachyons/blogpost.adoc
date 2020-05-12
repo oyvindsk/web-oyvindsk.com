@@ -20,7 +20,8 @@ Adam Morse
 // ----
 
 --
-|| {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015 ||
+|| {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015
+|| foo bar go  golang   javascript
 --
 
 

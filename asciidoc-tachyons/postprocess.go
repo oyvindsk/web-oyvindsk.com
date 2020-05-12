@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -101,15 +102,7 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 
 func main() {
 
-	// <div class="openblock">
-	// <div class="content">
-	// <div class="paragraph">
-	// <p>|| Adam Morse || Too many tools and frameworks: subTTT || 2015 || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015 ||</p>
-	// </div>
-	// </div>
-	// </div>
-
-	file, err := os.Open("doctor.html")
+	file, err := os.Open("blog-asciidoctor.html")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -117,94 +110,110 @@ func main() {
 
 	z := html.NewTokenizer(file)
 
-	var exclude bool
-	var excludeAfter = []string{}
-	var foundString bool
-
 	/*
 		States at the beginning of the big for loop:
 
-		exclude			excludeAfter		foundString 		MEANING
-		0 				0 					0					Looking for start div
-		0 				0 					1					Done excluding!
-		0 				1 					0					N/A : Turned on together, exclude turns off when !excludeAfter
-		0 				1 					1					N/A : Turned on together, exclude turns off when !excludeAfter
-
-		1 				0 					0					N/A : Turned on together, excludeAfter is not turned off when !foundString
-		1 				0 					1					Emptied excludeAfter but haven't turned exclude off yet. BUG??
-		1 				1 					0					Looking for foundString. Excluding and saving tags in excludeAfter
-		1 				1 					1					Looking for end div, removing tags from excludeAfter
+		Current State								Input that switches state 			Next state
+		----------------------------------------------------------------------------------------------------------
+		(lfop) Looking for opening token			div token with openblock class 		lfml
+		(lfml) Looking for magic lines				line that starts with "||"			iml
+		(iml)  In magic								line that does not start with ..	lfet
+		(lfet) Looking for tokens we should exclude last tokens in exclude list			done
+		(done) Done looking and exluding			n/a									n/a
 	*/
-	var excludedCnt int
+
+	// state machine variables
+	state := "lfot"                 // current state
+	var prevToken html.Token        // we sometimes have to look back to the previous token
+	var endTokensToExlcude []string // usen when excluding tokens around the metadata lines. Typically 3 tokens before and 3 after.
+
+	// results
+	var magicLines []string
 
 	for {
-		tt := z.Next()
 
+		// Advance to next token
+		tt := z.Next()
 		if tt == html.ErrorToken {
 			fmt.Println(z.Err().Error()) // FIXME
 			break                        // return
 		}
 
-		t := z.Token()
+		thisToken := z.Token() // The token we are currenlty looking at, as opposed to prevToken
 
-		// Look for metadata if we haven't found it yet
-		if !foundString && !exclude {
-			if tt == html.StartTagToken && t.Data == "div" {
-				for i := range t.Attr {
-					if t.Attr[i].Key == "class" {
-						if t.Attr[i].Val == "openblock" {
-							exclude = true
-							excludeAfter = append(excludeAfter, "div")
-							fmt.Println("EXCLUDE ON")
-							break // assume just 1 class
-						}
-					}
+		// Switch on the 5 known states. See above.
+		// this could of course be something other than a string, otoh ..
+		// we do not really enforce that all transitions are valid, but that would require a bug in the code (?)
+		switch state {
+
+		case "lfot":
+
+			// Look for opening div of metadata, with class openblock
+			var found bool
+			if tt == html.StartTagToken && thisToken.Data == "div" {
+				if found, _ = findAttr(thisToken.Attr, "class", "openblock"); found {
+					state = "lfml" // fmt.Println("\n\t==>\t Looking for magic lines")
+
+					// add this div to the list of tokens we want to exlude after the magic lines (in lfet)
+					endTokensToExlcude = append(endTokensToExlcude, thisToken.Data)
 				}
 			}
-		} else if exclude {
 
-			fmt.Printf("--   %q   %q\n", t.Data, t.Type.String())
-
-			if foundString {
-
-				fmt.Printf("%#v\n", excludeAfter)
-
-				if len(excludeAfter) == 0 {
-					fmt.Println("EXCLUDE OFF")
-					exclude = false
-				} else {
-					if tt == html.EndTagToken && t.Data == excludeAfter[len(excludeAfter)-1] {
-						excludeAfter = excludeAfter[:len(excludeAfter)-1]
-					}
-				}
-
+			// Include token unless it was the opening div we are looking for
+			if !found {
+				fmt.Print(thisToken.String())
 			}
 
-			if !foundString {
+		case "lfml":
 
-				if tt == html.StartTagToken {
-					excludeAfter = append(excludeAfter, t.Data)
-				}
-
-				if t.Type.String() == "Text" && strings.HasPrefix(t.Data, "||") {
-					fmt.Println("FOUND")
-					foundString = true
-				}
+			if thisToken.Type.String() == "Text" && strings.HasPrefix(thisToken.Data, "||") {
+				state = "iml" // fmt.Println("\n\t==>\t In magic")
+				break
 			}
+
+			// Add tokens we see before the firts line of magic
+			// to the list of tokens we want to exlude after the magic lines (in lfet)
+			if thisToken.Type == html.StartTagToken {
+				endTokensToExlcude = append(endTokensToExlcude, thisToken.Data)
+			}
+
+		case "iml":
+
+			// Save the magic lines(s) for later
+			// syntax from ascidoc(tor) puts it on 1 line with a \n, so ..
+			magicLines = append(magicLines, strings.Split(prevToken.String(), "\n")...)
+
+			if thisToken.Type.String() != "Text" || !strings.HasPrefix(thisToken.Data, "||") {
+				state = "lfet" // fmt.Printf("\n\t==>\t Looking for tags we should exclude\n")
+			}
+
+		case "lfet":
+
+			if prevToken.Type == html.EndTagToken && prevToken.Data == endTokensToExlcude[len(endTokensToExlcude)-1] {
+				//fmt.Printf("end token: %s\n", prevToken.Data)
+				endTokensToExlcude = endTokensToExlcude[:len(endTokensToExlcude)-1]
+			}
+
+			if len(endTokensToExlcude) == 0 {
+				state = "done" //	fmt.Println("\n\t==>\t DONE!")
+			}
+
+		case "done":
+			fmt.Print(thisToken.String())
+
+		default:
+			panic("unknown state") // FIXME
 		}
 
-		if exclude {
-			excludedCnt++
-			if excludedCnt > 20 {
-				fmt.Println("Error: Excluded too much from blogpost wehn looking for metadata, giving up!")
-				return // FIXME
-			}
-		} else {
-			fmt.Print(t.String())
-		}
-		// FIXME
+		prevToken = thisToken
 	}
 
+	metadata, err := blogMetadataFromMagicLines(magicLines)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	fmt.Printf("MAGIC: %d\n%#v\n\n%#v\n", len(magicLines), magicLines, metadata)
 }
 
 func postprocess() {
@@ -265,4 +274,57 @@ func postprocess() {
 	}
 	fmt.Print(footer) // FIXME
 
+}
+
+type blogMetadata struct {
+	author    string
+	title     string
+	subtitle  string
+	date      string
+	servePath string
+	tags      []string
+}
+
+// "|| Adam Morse || Too many tools and frameworks: subTTT || 2015 || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015"
+// "|| foo bar go golang javascript"
+
+func blogMetadataFromMagicLines(magicLines []string) (blogMetadata, error) {
+	if !(len(magicLines) == 1 || len(magicLines) == 2) {
+		return blogMetadata{}, fmt.Errorf("blogMetadataFromMagicLines: Expect 1 or 2 magix lines, got: %d", len(magicLines))
+	}
+
+	// First line, || separated, everything but the tags
+	l1 := regexp.MustCompile(`\s?\|\|\s?`).Split(magicLines[0], 100)
+	l1 = l1[1:] // first is always bogus since we start out line with ||
+
+	m := blogMetadata{
+		author:    l1[0],
+		title:     l1[1],
+		subtitle:  l1[4],
+		date:      l1[2],
+		servePath: l1[3],
+	}
+
+	// add tags if any
+	if len(magicLines) > 1 && len(magicLines[1]) > 4 {
+		if !strings.HasPrefix(magicLines[1], "|| ") {
+			return blogMetadata{}, fmt.Errorf("blogMetadataFromMagicLines: Tag line invalid, must start with '|| '")
+		}
+
+		//l2 := regexp.MustCompile(`\|?\|?\s`).Split(magicLines[1], 100)
+		m.tags = strings.Fields(magicLines[1][3:]) // split on space after '|| '
+	}
+
+	return m, nil
+}
+
+func findAttr(attrs []html.Attribute, key, val string) (bool, int) {
+	for i := range attrs {
+		if attrs[i].Key == key {
+			if attrs[i].Val == val {
+				return true, i // assume only 1 match
+			}
+		}
+	}
+	return false, 0
 }
