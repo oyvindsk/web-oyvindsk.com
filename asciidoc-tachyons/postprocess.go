@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"io"
+	"io/ioutil"
 	"os"
 	"regexp"
 	"strings"
@@ -9,7 +12,13 @@ import (
 	"golang.org/x/net/html"
 )
 
-const header = `<!DOCTYPE html>
+// Input:
+// BlogpostDate
+// BlogpostTitle
+// BlogpostSubtitle
+// BlogpostAuthor
+// BlogpostBody
+const templateTest = `<!DOCTYPE html>
 <html lang="en">
 	<title> </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,23 +28,23 @@ const header = `<!DOCTYPE html>
 		<article>
   			<header class="bg-gold sans-serif">
     			<div class="mw9 center pa4 pt5-ns ph7-l">
-      				<time class="f6 mb2 dib ttu tracked"><small>...DATE...</small></time>
+      				<time class="f6 mb2 dib ttu tracked"><small>{{ .BlogpostDate }}</small></time>
       				<h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
         				<span class="bg-black-90 lh-copy white pa1 tracked-tight">
-          					...TITLE...
+						{{ .BlogpostTitle }}
         				</span>
       				</h3>
-      				<h4 class="f3 fw1 georgia i">...SUBTITLE...</h4>
-      				<h5 class="f6 ttu tracked black-80">By ..AUTHOR..</h5>
+      				<h4 class="f3 fw1 georgia i">{{ .BlogpostSubtitle }}</h4>
+      				<h5 class="f6 ttu tracked black-80">By {{ .BlogpostAuthor }}</h5>
     			</div>
   			</header>
 
 			<div class="pa4 ph7-l georgia mw9-l center">
   
 				<!-- auto generert herfrra -->
-`
 
-const footer = `
+				{{ .BlogpostBody }}
+
 				<!-- auto generert hit -->
 
 			</div>
@@ -69,7 +78,6 @@ func (mt *tachyons) nextToken(t html.Token) {
 			mt.skip = false
 		}
 	}
-
 }
 
 func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string) (bool, string) {
@@ -108,7 +116,52 @@ func main() {
 		return
 	}
 
-	z := html.NewTokenizer(file)
+	blogBody1, blogMetadata, err := cutMetadata(file)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	blogBody2, err := postprocess(blogBody1)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	fmt.Println(blogMetadata.title)
+	b, err := ioutil.ReadAll(blogBody2)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+
+	t := template.New("blogpost")
+
+	template.Must(t.Parse(templateTest))
+
+	tInput := struct {
+		BlogpostDate     string
+		BlogpostTitle    string
+		BlogpostSubtitle string
+		BlogpostAuthor   string
+		BlogpostBody     template.HTML // Unsafe / unencoded. Input must be safe, a it is here since it comes from ascidoc(tor)
+	}{
+		blogMetadata.date,
+		blogMetadata.title,
+		blogMetadata.subtitle,
+		blogMetadata.author,
+		template.HTML(string(b)),
+	}
+	err = t.Execute(os.Stdout, tInput)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+}
+
+func cutMetadata(input io.Reader) (io.Reader, blogMetadata, error) {
+
+	z := html.NewTokenizer(input)
 
 	/*
 		States at the beginning of the big for loop:
@@ -127,16 +180,20 @@ func main() {
 	var prevToken html.Token        // we sometimes have to look back to the previous token
 	var endTokensToExlcude []string // usen when excluding tokens around the metadata lines. Typically 3 tokens before and 3 after.
 
-	// results
+	// results of the state machine loop (not the func)
 	var magicLines []string
+	var body strings.Builder
+	var err error
 
+MACHINE:
 	for {
 
 		// Advance to next token
 		tt := z.Next()
 		if tt == html.ErrorToken {
-			fmt.Println(z.Err().Error()) // FIXME
-			break                        // return
+			// This includes EOF, break out and deal with it later
+			err = z.Err()
+			break MACHINE
 		}
 
 		thisToken := z.Token() // The token we are currenlty looking at, as opposed to prevToken
@@ -161,7 +218,7 @@ func main() {
 
 			// Include token unless it was the opening div we are looking for
 			if !found {
-				fmt.Print(thisToken.String())
+				body.WriteString(thisToken.String())
 			}
 
 		case "lfml":
@@ -190,7 +247,6 @@ func main() {
 		case "lfet":
 
 			if prevToken.Type == html.EndTagToken && prevToken.Data == endTokensToExlcude[len(endTokensToExlcude)-1] {
-				//fmt.Printf("end token: %s\n", prevToken.Data)
 				endTokensToExlcude = endTokensToExlcude[:len(endTokensToExlcude)-1]
 			}
 
@@ -199,43 +255,50 @@ func main() {
 			}
 
 		case "done":
-			fmt.Print(thisToken.String())
+			body.WriteString(thisToken.String())
 
 		default:
-			panic("unknown state") // FIXME
+			err = fmt.Errorf("unknown state seen: %q", state)
+			break MACHINE
 		}
 
 		prevToken = thisToken
 	}
 
+	// Any parse / state machine error from?
+	if err != nil {
+		if err != io.EOF {
+			return nil, blogMetadata{}, fmt.Errorf("cutMetadata: error when running state machine: %s", err)
+		}
+		err = nil
+	}
+
+	// Convert the magic lines we found into blogMetadata
 	metadata, err := blogMetadataFromMagicLines(magicLines)
 	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+		return nil, blogMetadata{}, fmt.Errorf("cutMetadata: %s", err)
 	}
-	fmt.Printf("MAGIC: %d\n%#v\n\n%#v\n", len(magicLines), magicLines, metadata)
+
+	return strings.NewReader(body.String()), metadata, nil
 }
 
-func postprocess() {
+func postprocess(input io.Reader) (io.Reader, error) {
 
 	myTachyons := tachyons{}
 
-	file, err := os.Open("blogpost.html")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	z := html.NewTokenizer(input)
 
-	z := html.NewTokenizer(file)
-
-	fmt.Print(header) // FIXME
+	var body strings.Builder
+	var err error
 
 	for {
-		tt := z.Next()
 
+		// Advance to next token
+		tt := z.Next()
 		if tt == html.ErrorToken {
-			fmt.Println(z.Err().Error()) // FIXME
-			break                        // return
+			// This includes EOF, break out and deal with it later
+			err = z.Err()
+			break
 		}
 
 		t := z.Token()
@@ -270,10 +333,18 @@ func postprocess() {
 			}
 		}
 
-		fmt.Print(t.String()) // FIXME
+		body.WriteString(t.String())
 	}
-	fmt.Print(footer) // FIXME
 
+	// Any parse / state machine error from?
+	if err != nil {
+		if err != io.EOF {
+			return nil, fmt.Errorf("postprocess: error when replacing: %s", err)
+		}
+		err = nil
+	}
+
+	return strings.NewReader(body.String()), nil
 }
 
 type blogMetadata struct {
@@ -285,9 +356,9 @@ type blogMetadata struct {
 	tags      []string
 }
 
+// Input looks like this:
 // "|| Adam Morse || Too many tools and frameworks: subTTT || 2015 || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015"
 // "|| foo bar go golang javascript"
-
 func blogMetadataFromMagicLines(magicLines []string) (blogMetadata, error) {
 	if !(len(magicLines) == 1 || len(magicLines) == 2) {
 		return blogMetadata{}, fmt.Errorf("blogMetadataFromMagicLines: Expect 1 or 2 magix lines, got: %d", len(magicLines))
