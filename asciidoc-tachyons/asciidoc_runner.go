@@ -113,7 +113,10 @@ func runOriginalPDF(inputpath string) error {
 		return fmt.Errorf("runOriginalPDF: inputpath should be a docbook xml file and end in .xml")
 	}
 
-	cmd := exec.Command("a2x", "-d", "article", inputpath)
+	// Options for the pdf backend,
+	// http://www.methods.co.nz/asciidoc/faq.html#_how_can_i_customize_pdf_files_generated_by_dblatex
+	dblatexOpts := " -P doc.layout=\"coverpage mainmatter\" -P doc.publisher.show=0 -P latex.output.revhistory=0"
+	cmd := exec.Command("a2x", "-d", "article", "--dblatex-opts", dblatexOpts, inputpath)
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
