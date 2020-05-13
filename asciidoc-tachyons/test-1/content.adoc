@@ -1,6 +1,7 @@
-= Too many tools and frameworks: subTTT
-Adam Morse
-27 July, 2015
+//= Too many tools and frameworks2
+// Adam Morse
+// 27 July, 2015
+
 // :appversion: 1.0.0
 //:showtitle:
 //:showcomments:
@@ -15,17 +16,13 @@ Adam Morse
 // Subtitle: The definitive guide to the javascript tooling landscape in 2015
 // --
 
-// ----
-// || {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015 ||
-// ----
+// == sd {subtitleforpdf}
 
---
-|| {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015
-|| foo bar go  golang   javascript
---
-
-
-// || {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015 ||
+// old inline metadata:
+//  --
+// || {author} || {doctitle} || {revdate} || /foo/bar || Subtitle: The definitive guide to the javascript tooling landscape in 2015
+// || foo bar go  golang   javascript
+// --
 
 
 hei hallo ..
@@ -53,6 +50,7 @@ Theodore Sturgeon was a science fiction author, critic, and the basis for Kurt V
 [role="lead"]
 In 1958 he published a piece in Venture proclaiming what he called "Sturgeon's Revelation"
 
+NOT LEADada asdasdasd
 ____
 I repeat Sturgeon's Revelation, which was wrung out of me after twenty years of wearying defense of science fiction against attacks of people who used the worst examples of the field for ammunition, and whose conclusion was that ninety percent of SF is crud. Using the same standards that categorize 90% of science fiction as trash, crud, or crap, it can be argued that 90% of film, literature, consumer goods, etc. is crap. In other words, the claim (or fact) that 90% of science fiction is crap is ultimately uninformative, because science fiction conforms to the same trends of quality as all other artforms.
 ____
