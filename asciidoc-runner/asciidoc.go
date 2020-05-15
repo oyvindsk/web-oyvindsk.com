@@ -5,19 +5,13 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/oyvindsk/web-oyvindsk.com/internal/metadata"
 )
 
-func main() {
-
-	err := generateAll("test-1")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-}
-
 func generateAll(dirpath string) error {
+
+	fmt.Printf("Generating all static files in folder %q\n", dirpath)
 
 	err := os.Chdir(dirpath)
 	if err != nil {
@@ -26,7 +20,7 @@ func generateAll(dirpath string) error {
 
 	// create the html, the main content for the website
 	// it is not meant to be served directly, it be augmentet by postprocessing and go templates later
-	err = runDoctorHTML("content.adoc", "content.html")
+	err = runDoctorHTML(asciidocFilename, htmlFilename)
 	if err != nil {
 		return fmt.Errorf("generateAll: %s", err)
 
@@ -38,24 +32,24 @@ func generateAll(dirpath string) error {
 	// - must go through docbook first (at least with this setup)
 	// - needs the metadata beacuse the pdf must be complete, no header or footer is added (no template like html)
 
-	blogmetadata, err := loadMetadata("metadata.toml")
+	metadata, err := metadata.Fromfile(metadataFilename)
 	if err != nil {
 		return fmt.Errorf("generateAll: %s", err)
 	}
 
-	err = runDoctorDocbook("content.adoc", "full.xml", blogmetadata)
+	err = runDoctorDocbook(asciidocFilename, docBookFilename, metadata)
 	if err != nil {
 		return fmt.Errorf("generateAll: %s", err)
 
 	}
 
-	err = runOriginalPDF("full.xml")
+	err = runOriginalPDF(docBookFilename)
 	if err != nil {
 		return fmt.Errorf("generateAll: %s", err)
 	}
 
+	fmt.Println("Done!")
 	return nil
-
 }
 
 func runDoctorHTML(inputpath, outputpath string) error {
@@ -76,7 +70,7 @@ func runDoctorHTML(inputpath, outputpath string) error {
 	return nil
 }
 
-func runDoctorDocbook(inputpath, outputpath string, metadata BlogMetadata) error {
+func runDoctorDocbook(inputpath, outputpath string, meta metadata.M) error {
 
 	cmd := exec.Command(
 		"asciidoctor",
@@ -84,16 +78,16 @@ func runDoctorDocbook(inputpath, outputpath string, metadata BlogMetadata) error
 		"-b", "docbook", // docbook xml,  not html
 
 		// Set asciidoc variables so theyll be in the docbook, and eventually, the pdf
-		"-a", "doctitle="+metadata.Postmeta.Title,
-		"-a", "subtitleforpdf="+metadata.Postmeta.Subtitle,
-		"-a", "author="+metadata.Postmeta.Author,
-		"-a", "revdate="+metadata.Postmeta.Date.String(),
+		"-a", "doctitle="+meta.Title,
+		"-a", "subtitleforpdf="+meta.BlogSubtitle,
+		"-a", "author="+meta.Author,
+		"-a", "revdate="+meta.Date.String(),
 
 		inputpath,
 		"-o", outputpath,
 	)
 
-	fmt.Println(cmd.String())
+	// fmt.Println(cmd.String())
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
