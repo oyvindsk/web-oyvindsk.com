@@ -37,5 +37,10 @@ func Fromfile(filepath string) (M, error) {
 		return res, fmt.Errorf("Fromfile: path %q failed: %w", filepath, err)
 	}
 
+	// sanity check
+	if len(res.Title) < 3 {
+		return res, fmt.Errorf("Fromfile: title was suspiciously short for: %q", filepath)
+	}
+
 	return res, nil
 }

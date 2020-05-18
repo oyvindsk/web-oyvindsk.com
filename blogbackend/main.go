@@ -18,6 +18,9 @@ type server struct {
 		toAddress, smtpServer, smtpUser, smtpPass string
 		smtpPort                                  int
 	}
+
+	// tmp TODO
+	snew serverNew
 }
 
 func main() {
@@ -28,8 +31,17 @@ func main() {
 	s := server{
 		pages:     make(map[string]pageContent),
 		blogposts: make(map[string]blogpostContent),
+
+		snew: serverNew{
+			cfg: serverNewCfg{pathBlogposts: "new-content/blogposts", pathPages: "new-content/pages", pathTemplates: "new-templates"},
+		},
 	}
 
+	err := s.snew.loadMetadata()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	// log.Printf("%#v\n", snew.blogposts)
 	// Handle expected enironment variables
 
 	// SMTP and email parameters for the contact-me backend. All required!
@@ -111,6 +123,14 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("handlePage: looking for path: %q", path)
 
+	// try newServer first!
+	// TODO check error?
+	err := s.snew.servePage(w, r)
+	if err == nil {
+		return // Sucess!
+	}
+	log.Printf("handlePage: New result: %s", err)
+
 	pc, ok := s.pages[path]
 	if !ok {
 		log.Println("handlePage: Could not find: ", path)
@@ -121,7 +141,7 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 	log.Printf("handlePage: found: %#v", pc)
 
 	// execute them all, start with "layout" (defined in the tmpl)
-	err := pc.template.ExecuteTemplate(w, "layout", pc)
+	err = pc.template.ExecuteTemplate(w, "layout", pc)
 	if err != nil {
 		log.Fatalf("handlePage: template execution: %s", err)
 	}
@@ -134,6 +154,14 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("handleBlogpost: looking for path: %q", path)
 
+	// try newServer first!
+	// TODO check error?
+	err := s.snew.serveBlogpost(w, r)
+	if err == nil {
+		return // Sucess!
+	}
+	log.Printf("handleBlogpost: New result: %s", err)
+
 	bpc, ok := s.blogposts[path]
 	if !ok {
 		log.Println("handleBlogpost: Could not find: ", path)
@@ -144,7 +172,7 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 	log.Printf("handleBlogpost: found: %#v", bpc)
 
 	// execute them all, start with "layout" (defined in the tmpl)
-	err := bpc.template.ExecuteTemplate(w, "layout", bpc)
+	err = bpc.template.ExecuteTemplate(w, "layout", bpc)
 	if err != nil {
 		log.Fatalf("template execution: %s", err)
 	}

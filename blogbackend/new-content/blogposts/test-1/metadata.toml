@@ -1,13 +1,11 @@
 
-[ postmeta ]
 title = "Too many tools and frameworks3"
 subtitle = "The definitive guide to the javascript tooling landscape in 2015"
-author = "Adam Morse3"
+author = "Adam Morse"
 date = 2015-06-27
 
-[ enginemeta ]
 servepath = "test-1"
+published =  true
 tags = [ "foo", "bar", "go", "golang", "javascript" ]
 
-[ metameta ]
 thisformatversion = 1
