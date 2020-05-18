@@ -1,0 +1,46 @@
+# Use the offical Golang image to create a build artifact.
+# This is based on Debian and sets the GOPATH to /go.
+# https://hub.docker.com/_/golang
+FROM golang:1.14 as builder
+
+# Copy local code to the container image.
+# Just copy what we need: 
+# - blogbackend : the code, templates, static files etc
+# - internal    : internal packages
+# - go.*        : so go build understands what module we are in 
+#                 (can build the pkg from "import path" but still use the local files on disk)
+WORKDIR /app
+COPY blogbackend blogbackend 
+COPY internal internal 
+COPY go.mod .
+COPY go.sum .
+
+# Build the command inside the container.
+# Build with import path, maybe we should just give the local files instead: "./blogbackend" ??
+# go does not fetch the package from github since we are already i the module github.com/oyvindsk/web-oyvindsk.com
+RUN CGO_ENABLED=0 GOOS=linux go build -o runme "github.com/oyvindsk/web-oyvindsk.com/blogbackend"
+
+# Module / pkg debug: RUN go list -f '{{.Module.Dir}}' "github.com/oyvindsk/web-oyvindsk.com/blogbackend"
+
+# Move the compiled binary into the blogbackend, 
+# it expects to be started from the same dir as all it files it serves
+# FIXME TODO ?
+RUN mv runme blogbackend/
+
+# Use a Docker multi-stage build to create a lean production image.
+# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
+# TODO Alpine? Might not be a good idea ..
+FROM alpine
+RUN apk add --no-cache ca-certificates
+
+# Copy the all the files from the first build stage (container/image?)
+COPY --from=builder /app /
+
+# Set a few environment variables
+# could be secret if we don't have any "real" handling of secrets
+ENV EMAIL_TO="foobar@asd.com" SMTP_SERVER="" SMTP_USER="" SMTP_PASS=""
+
+# Run the compiled binary on container startup.
+# again, it expects to be started from the same dir as all it files it serves
+WORKDIR blogbackend
+CMD ["./runme"]
