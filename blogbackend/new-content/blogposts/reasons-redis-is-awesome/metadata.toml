@@ -1,0 +1,10 @@
+
+title = "A few (more than one and less than ten) reasons Redis is awesome!"
+author =  "Øyvind Gerrard Skaar" 
+subtitle = ""
+date = 2014-12-09
+servepath = "reasons-redis-is-awesome"
+published =  true
+tags = [ "foo", "bar", "go", "golang", "javascript" ]
+
+thisformatversion = 1
