@@ -1,40 +1,80 @@
  
-= Generating html the hard way
+= web-oyvindsk.com
 
-== Goal
-Generate blog posts from AsciiDoc, styled using teh Tachyons "framework"
+== About
+Simple go blog that serves http://oyvindsk.com.
 
-== AsciiDoc
+I'm currently using it to test Google Cloud Run. It used to run on App Engine Standard, and I might convert it back in the future.
+Both are container based PaaS solutions. Run is newer, is Docker based and offers more flexibility. It does lack some App Engine's features though.
+Both are fully managed (yay!) and can scale up "infinitely" and down to zero when there's no traffic (also yay).
 
-doctor handles footnotes in short ..
+=== Goals
+Serve pages, blog posts and static files.
 
-== Tachyons
+Support useful things like RSS and comments (todo)
 
-== Problem
-Asciidoctor generates html you don't reallu have any control over. This is usually true for markdown processors as well.
-I guess you would usually, you take the html they generate and create custom css for it.
+Generate blog posts from AsciiDoc, styled using the Tachyons css toolkit.
 
-But Tachyons does not work this way. It expects you to style by putting put the classe you want directly in the html code.
 
-== Sollution?
+=== Content flow
+ AsciiDoc + metadata 
+ => Asciidoc python or asciidoctor, run locally with ./asciidoc-runner
+ => generates html and pdf
+ => HTML PostProcess: remove standard css classes and add Tachyons classes (./blogbackend/internal/tachyons/)
+ => Go Templates: Put together a complete page from html, metadata and templates
+ => Serve the pdf as well, as an alternative
+
+
+== Generating html the hard way
+I'm currently re-writing this with a new layout and cleaner code. It uses an overly complicated way of producing html: Pages and blogposts are written in Asciidoc (similar to Markdown) and styled with the Tachyons CSS toolkit.
+
+This is done mostly for fun, not necessarily recommended for anyone else =)
+
+link:https://asciidoctor.org/docs/what-is-asciidoc/[About AsciiDoc]
+
+link:http://tachyons.io/[About Tachyons]
+
+
+
+
+
+=== Problem
+Asciidoctor generates html you don't really have any control over. This is usually true for markdown processors as well.
+You would usually take the default styling (css) or write css customized to the Asciidoc generators html.
+
+But Tachyons does not work this way. It expects you to style by putting the classe you want directly in the html code. See link:https://tailwindcss.com/[this example for Tailwind CSS], which works in a similar way.
+
+
+=== Solution?
 The html coming out of AsciiDoctor does not "work" with Tachyons. Therefore we want to change that, remove the stuff we don't want (unneeded classes etc) and add Tachyones clases we want. 
 
-Processing html is actually not that hard using the .. go lib.
+Processing html is actually not that hard using the _golang.org/x/net/html_ go lib.
 
-+
-Seperation of content (the Asciidoc) from the presentation (go code + Tachyons).
-The asciidoc can we converted into pdfs, ebooks or alternative html+css with one of the two main  AsciiDoc implementations.
-
-AsciiDoc is really nice to write in, hopefully ssaves me from having to go back and edit old blogposts evry time I change my layout and design. 
-
--
-Uncommon and ridiciously complicated 
-No complete AsciiDoc implementation for go yet. There's just one: . It didn't work when I tried, it repeated the content, but it's beeing activly worked on. Will try it again later.
-The go code is tied to the AsciiDoc implementation since they generate different html output.
+See the _blogbackend/internal/tachyons/_ package.
 
 
+==== Pros
+Fun!
 
-    AsciiDoc (asciidoc python or asciidoctor)
-     => HTML PostProcess: cut out blogpost metadata (front matter)
-     => HTML PostProcess: remove classes and add Tachyons
-     => Go Templates: Put together a complete page from blog-html, blog-metadata and html template
+Separation of content (the Asciidoc) from the presentations: 1) Go code + Tachyons, 2) PDF 3) Docbook?
+
+The asciidoc can later be converted into pdfs, ebooks or alternative html+css with one of the two main  AsciiDoc implementations (Asciidoc and Asciidoctor)
+
+AsciiDoc is really nice to write in, hopefully saves me from having to go back and edit old blogposts in the future when I change my layout and design.
+
+AsciiDoc will be useful for writing longer form as well, like an ebook.
+
+==== Cons
+Uncommon and ridiculously complicated.
+
+No complete AsciiDoc implementation for go yet. 
+
+Although it's much better than the Markdown universe, there's still 2 implementations that are not 100% compatible. 
+
+
+== Todo
+Too much to list =/
+
+== License
+Go code (*.go files) are MIT / BSD 2-clause. Files in the static directory have their own licenses, see the files themselves. The css files in static/ have an unknown license, but was pretty much copied from http://www.alexedwards.net/.
+
