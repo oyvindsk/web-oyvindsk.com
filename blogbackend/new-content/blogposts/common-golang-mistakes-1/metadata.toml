@@ -1,0 +1,10 @@
+
+title = "Learn from my Go mistakes, Part 1: Closing over loop variables"
+author =  "Øyvind Gerrard Skaar" 
+blogsubtitle = ""
+date = 2016-05-11
+servepath = "common-golang-mistakes-1"
+published =  true
+tags = [ "foo", "bar", "go", "golang", "javascript" ]
+
+thisformatversion = 1
