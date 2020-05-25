@@ -1,3 +1,8 @@
+// Package tachyons does html postprocessing to replace classes from the Asciidoc(tor) html output with Tachyons classes.
+// It is therefore a part of the styling for the website, along with the templates
+// It is not used with the pdf output (duh)
+// http://tachyons.io/
+// https://code.luasoftware.com/tutorials/web-development/tachyon-css-cheatsheet/
 package tachyons
 
 import (
@@ -8,6 +13,13 @@ import (
 	"strings"
 
 	"golang.org/x/net/html"
+)
+
+const (
+
+	// Images - we replace the filepaths of static files (works with pdfs) with a relative url
+	imgPathIn  = "../../../static_files/blogpost-files"
+	imgPathOut = "/blogpost-files"
 )
 
 func PostprocessFile(filepath string) (string, error) {
@@ -55,6 +67,9 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 
 		if tt == html.StartTagToken {
 
+			//
+			// Classes
+
 			// Find and save the original classes, if any.
 			var orgClasses string // class string
 			oci := -1             // index to remove later
@@ -79,6 +94,24 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 			if add {
 				t.Attr = append(t.Attr, html.Attribute{Key: "class", Val: classes})
 			}
+
+			//
+			// Images
+
+			// replace the local filepath with a relative url for web
+			if t.Data == "img" {
+				ai := -1
+				for i := range t.Attr {
+					if t.Attr[i].Key == "src" {
+						ai = i
+						break
+					}
+				}
+				if ai != -1 {
+					t.Attr[ai].Val = strings.Replace(t.Attr[ai].Val, imgPathIn, imgPathOut, 1)
+				}
+			}
+
 		}
 
 		body.WriteString(t.String())
@@ -129,9 +162,19 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 
 	// fmt.Printf("%#v\n%q\n", t, t.Type.String())
 
+	// Code blocks - Use a little more complicated matching than the later ones
+	if t.Data == "code" && strings.HasPrefix(orgClasses, "language-") {
+		return true, fmt.Sprintf("%s %s", orgClasses, "bg-washed-green f6 f5-ns code")
+	}
+	if t.Data == "pre" && orgClasses == "highlight" {
+		return true, fmt.Sprintf("%s %s", orgClasses, "lh-solid") // outher code block element
+	}
+
+	// Other classes, those simpler to match
 	switch orgClasses {
 	case "":
 		return false, ""
+
 	case "sect2":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f4 f2-ns lh-copy measure sans-serif")
 
@@ -140,10 +183,13 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 
 	case "paragraph lead":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f3-ns lh-copy measure georgia")
+
 	case "paragraph":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure mb4 georgia")
+
 	default:
-		return true, orgClasses
+		// Let's defaut to something sane for normal text
+		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure georgia")
 	}
 
 }
