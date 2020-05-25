@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-	<title> </title>
+	<title>{{ .Title }} || oyvindsk.com</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
   
@@ -17,16 +17,18 @@
 	<body>
 	
 		<article>
-  			<header class="sans-serif pb5">
+  			<header class="sans-serif">
 				
 				{{ template "headerLinks" . }}
 
-    			<div class="mw9 center pa4 pt5-ns ph7-l">
-      				<h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+    			<div class="mw9 center pt4 pt5-ns ph7-l">
+      				<!-- 
+						  <h1 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
         				<span class="black-70 lh-copy pa1 tracked-tight">
+						-->
+					<h1 class="f2 f1-m f-subheadline-l measure lh-title tracked-tight mv0">
 						{{ .Title }}
-        				</span>
-      				</h3>
+      				</h1>
       			</div>
   			</header>
 
