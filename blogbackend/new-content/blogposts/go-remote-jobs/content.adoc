@@ -1,0 +1,152 @@
+= A few places you can find Golang remote jobs
+Øyvind Gerrard Skaar
+v2, 2016-04-15
+
+image::https://blog.golang.org/gopher/usergroups.png[Gophers]
+
+
+[quote, golang.org]
+____
+Go is an open source programming language that makes it easy to build simple, reliable, and efficient software
+____            
+
+[role="lead"]
+Go (or golang) is a simple, general purpose programming language that excels at writing things like backend services. It's the language used to make Docker, among many other things.
+
+I'm currently using Golang almost exclusively and I'm looking for remote freelance jobs. I've therefor compiled this list for my own sake,
+but I guess it can be useful to others as well.
+
+== Websites specifically for Golang
+
+=== We Love Golang
+link:http://www.welovegolang.com/jobs/search?q=remote[http://www.welovegolang.com/jobs/search?q=remote]
+
+This is probably the site with the most Go specific listings. Many jobs in Europe and the US. It seems like searching for "remote" is not entirely reliable,
+so double check the results before getting too excited about a job :). This site also has developer profiles, and you can get listed just by tweeting them.
+
+=== Golangprojects.com
+link:http://www.golangprojects.com/golang-remote-jobs.html[http://www.golangprojects.com/golang-remote-jobs.html]
+
+Also a good place to find Go-specific job listings. This site also have developer profiles, but registering here is more work since they require more information.
+Seems like most of the jobs are full time at the moment. Remote jobs can sometimes be US-specific.
+
+
+== Websites specifically for remote jobs
+
+=== RemoteOK
+link:https://remoteok.io/remote-golang-jobs[https://remoteok.io/remote-golang-jobs]
+
+Great site with reposts jobs from other places. You can often click the "Apply for job" to get to the website with the original listing.
+
+=== Remotely Awesome Jobs
+link:https://www.remotelyawesomejobs.com/tags/golang?q=[https://www.remotelyawesomejobs.com/tags/golang?q=]
+
+Similar to the above, but fewer listings.
+
+=== FlexJobs.com
+link:https://www.flexjobs.com/search?search=golang&amp;location=[https://www.flexjobs.com/search?search=golang&amp;location=]
+
+Remote / telecommute jobs site.
+
+
+=== Jobspresso
+link:https://jobspresso.co/browsejobs/#s=1[https://jobspresso.co/browsejobs/#s=1]
+
+There's a couple of listings here, try searching for "golang" or maybe "go".
+
+
+
+== Golang Forums etc
+
+=== Gophers Slack channel
+link:https://gophers.slack.com/messages/golang-jobs/[https://gophers.slack.com/messages/golang-jobs/]
+
+The Gophers Slack is quite active and has a separate "Jobs" channel.
+
+
+=== The Golang forum
+link:https://forum.golangbridge.org/c/jobs[https://forum.golangbridge.org/c/jobs]
+
+
+
+=== The Golang-Jobs Google+ Community
+link:https://plus.google.com/communities/116819843904802051830[https://plus.google.com/communities/116819843904802051830]
+
+Not super active, 2 postings in the four first months of 2016.
+
+
+=== Hacker News Monthly Postings
+link:http://hnhiring.me/[http://hnhiring.me/]
+
+Hacker News has monthly "Ask HN: Who is hiring?" posts. This is an easy interface view and search this posts, you can filter on words etc.
+More geeky than most job listing sites =)
+
+
+== General job listing sites
+
+=== Angel List
+Startup jobs in the US and a few other places around the world. (No search function?)
+
+Remote Jobs at Angel List:
+link:https://angel.co/job-collections/remote[https://angel.co/job-collections/remote]
+
+
+Golang  jobs at Angel List. Varies how much these emphasize Go.
+link:https://angel.co/golang/jobs[https://angel.co/golang/jobs]
+
+
+=== Stack Overflow Jobs
+
+// this failes because of the [] and Asciidoc does not allow &rbrack; or asciidoctor extention
+Remote jobs tagged with golang: http:// stackoverflow.com/jobs?searchTerm=[golang]&allowsremote=true
+
+//link:http://stackoverflow.com/jobs?searchTerm=&lbrack;golang&rbrack;&amp;allowsremote=true[http://stackoverflow.com/jobs?searchTerm=&lbrack;golang&rbrack;&amp;allowsremote=true]
+
+Remote jobs containing the word "golang": link:https://stackoverflow.com/jobs?searchTerm=golang&allowsremote=true[https://stackoverflow.com/jobs?searchTerm=golang&allowsremote=true]
+
+=== Monster.com
+I was supriesd to find a few hits for "golang" and "remote" on Monster.com: link:http://jobs.monster.com/search/?q=golang&amp;where=remote[http://jobs.monster.com/search/?q=golang&amp;where=remote]
+
+
+== Others checked
+
+*link:https://remotecoder.io/[Remotecoder.io]*
+
+No Go jobs when I checked.
+
+
+*link:https://weworkremotely.com/jobs/search?term=golang[WeWorkRemotely.com]* 
+
+No Go jobs when I checked.
+
+
+*link:http://www.workingnomads.co/[Working Nomads]*
+
+No Go jobs when I checked.
+
+
+*link:https://www.wfh.io/categories/1-remote-software-development/jobs[Whf.io]*
+
+Hard to know for sure, but I could not find any Go jobs when I checked.
+
+
+*link:http://jobs.arcticstartup.com/[Job listings at Artic Startup]*
+
+Startups in the nordics. No Go jobs when I checked.
+
+
+*link:https://www.toptal.com/[Toptal]*
+
+"Exclusive" site for freelancers. Don't know if there's demand for Go programmers here, they don't list their openings.
+Last I checked (in 2014?) the onboarding process was very automated and not that great.
+You could not do it in Go, but maybe that has changed.
+
+
+*link:http://www.tryremote.com/jobs.html[More remote jobs links at tryremote.com]*
+
+A collection of the best resources for remote workers.
+
+
+
+
+(Original gopher graphics by link:http://reneefrench.blogspot.com[Renee French], modifications by link:https://blog.golang.org/gopher[unknown].)
