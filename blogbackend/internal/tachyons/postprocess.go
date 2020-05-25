@@ -190,6 +190,9 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 	case "paragraph":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure mb4 georgia")
 
+	case "ulist": // Unordered list, ul
+		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure mb4 georgia")
+
 	}
 
 	// Code blocks - Use a little more complicated matching than the others
