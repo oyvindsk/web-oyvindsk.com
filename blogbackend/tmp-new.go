@@ -46,12 +46,15 @@ func (s *serverNew) loadMetadata() error {
 	s.blogposts = make(map[string]serverNewContent)
 
 	for _, p := range bppaths {
-		fmt.Println("b patg:", p)
+		fmt.Println("b path:", p)
 		m, err := metadata.Fromfile(p + "/metadata.toml")
 		if err != nil {
 			return fmt.Errorf("loadMetadata: %w", err)
 		}
-		fmt.Printf("m: %#v\n", m)
+		fmt.Printf("\t%s [%s]\n", m.Title, m.Servepath)
+		if _, f := s.blogposts[m.Servepath]; f {
+			return fmt.Errorf("loadMetadata: can't load file: %q, Servepath %q aleready loaded", p, m.Servepath)
+		}
 		s.blogposts[m.Servepath] = serverNewContent{m, p}
 	}
 
@@ -64,12 +67,15 @@ func (s *serverNew) loadMetadata() error {
 	s.pages = make(map[string]serverNewContent)
 
 	for _, p := range ppaths {
-		fmt.Println("p patg:", p)
+		fmt.Println("p path:", p)
 		m, err := metadata.Fromfile(p + "/metadata.toml")
 		if err != nil {
 			return fmt.Errorf("loadMetadata: %w", err)
 		}
-		fmt.Printf("m: %#v\n", m)
+		fmt.Printf("\t%s [%s]\n", m.Title, m.Servepath)
+		if _, f := s.blogposts[m.Servepath]; f {
+			return fmt.Errorf("loadMetadata: can't load file: %q, Servepath %q aleready loaded", p, m.Servepath)
+		}
 		s.pages[m.Servepath] = serverNewContent{m, p}
 	}
 
