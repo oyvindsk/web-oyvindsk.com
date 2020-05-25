@@ -25,11 +25,26 @@
 // --
 
 
-hei hallo ..
+
+== 5 ting som mangler: Author, Date, title, subtitle
+h2 ==
+
+=== 5 ting som mangler: Author, Date, title, subtitle
+h3 ===
+
+==== 5 ting som mangler: Author, Date, title, subtitle
+h4 ====
+
+===== 5 ting som mangler: Author, Date, title, subtitle
+h5 =====
+
+====== 5 ting som mangler: Author, Date, title, subtitle
+h6 ======
+
 
 // 5 ting som mangler: Author, Date, title, subtitle
 // for bloggen: path
-== etter
+
 
 
 // = Writing posts

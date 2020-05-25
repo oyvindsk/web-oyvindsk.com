@@ -1,7 +1,7 @@
 
 title = "How-to build Docker from source"
 author =  "Øyvind Gerrard Skaar" 
-subtitle = ""
+blogsubtitle = ""
 date = 2015-07-23
 servepath = "docker-build-from-source"
 published =  true

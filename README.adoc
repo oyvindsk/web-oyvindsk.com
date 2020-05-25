@@ -77,8 +77,8 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 * RSS
 * Comments?
 * Layouts etc:
+** Top menu
 ** Image in blogposts: Scale on mobile? midtstill?
-** Ttile on the web blogposts / pages 
 ** Link to pdfs
 
 == License
