@@ -18,8 +18,8 @@ import (
 const (
 
 	// Images - we replace the filepaths of static files (works with pdfs) with a relative url
-	imgPathIn  = "../../../static_files/blogpost-files"
-	imgPathOut = "/blogpost-files"
+	staticRelRoot    = "../../../static_files/"
+	staticWebRelRoot = "/"
 )
 
 func PostprocessFile(filepath string) (string, error) {
@@ -108,7 +108,7 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 					}
 				}
 				if ai != -1 {
-					t.Attr[ai].Val = strings.Replace(t.Attr[ai].Val, imgPathIn, imgPathOut, 1)
+					t.Attr[ai].Val = strings.Replace(t.Attr[ai].Val, staticRelRoot, staticWebRelRoot, 1)
 				}
 			}
 

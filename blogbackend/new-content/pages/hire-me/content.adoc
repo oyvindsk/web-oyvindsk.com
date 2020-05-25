@@ -1,0 +1,366 @@
+
+= Hire Me
+Øyvind Gerrard Skaar
+May 2020
+:imagesdir: ../../../static_files/page-files/
+
+
+// WHY
+//     7 bags
+// HOW
+// WHEN
+
+// Things that need to be here:
+// which countries can I work? 
+// how does it work? How do I get payd?
+// testimonials
+// past projects
+// what I can do
+// what I can't do
+// ? who are my clients
+
+// WHY you should hire me! (implicit, explicit?)
+
+// TODO / FIXME:
+//  Contact form
+//  links in the middle? 
+
+image::øyvind.jpg[]
+
+[role=lead]
+Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
+I am: *currently looking for new projects*. See <<availability>> for the details. 
+//I run the world's smallest development &amp; consultant company, as well as participating in a few other projects. -->
+
+== Need additional Golang resources?
+
+=== What I can help you with
+Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than necessary because you have to few programmers?
+Money is lost when features have to be postponed and the bugs that annoy your customers are not fixed. 
+    
+Or maybe things are slow and you're looking to speed it up with newer technologies and smarter solutions?
+
+I help build distributed, scalable and fast back-end systems. I strongly prefer simplicity and strive for it whenever possible. My current language of choice is Golang and I build systems on the Google Cloud Platform.
+
+=== Background
+After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014.
+
+I have experience with many different technologies and programming languages, especially on the back-end. But now I'm focusing on just Go and the Google Cloud Platform.
+    
+
+[[availability]]
+=== Availability in 2020
+I'm activly looking for new projects for the rest of the year.
+
+[cols=2]
+|===     
+|March:
+|50%
+
+|April:
+|75%
+
+|May:
+|100% =)
+
+|June:
+|100% =)
+
+|July:
+|100% =)
+
+|August:
+|100% =)
+
+|September:
+|100% =)
+|===
+    
+
+[[contact]]
+== Contact me
+If you think I can help you, or you have any questions, please reach out.
+
+You can email me at hello@oyvindsk.com or use https://oyvindsk.com/hire-me#contact
+
+// <!-- Contact form-->
+// <!-- Also set the url in the js in template/layout.html -->
+// <form method="post" action="/contact-form" class="contact-form" id="contactForm" novalidate="">
+//     <div>
+//         <input style="width:500px;" name="name" placeholder="Your name" type="text">
+//     </div>
+//     <div>
+//         <input style="width:500px;" name="from" placeholder="Your email / phone number" type="email">
+//     </div>
+
+//     <div>
+//         <input style="width:500px;" name="subject" placeholder="Subject" type="text">
+//     </div>
+
+//     <div>
+//         <textarea style="width:500px;" name="text" placeholder="Hi. I would like to have a friendly chat about.." rows="7"></textarea>
+//     </div>
+
+//     <div class="get-it">
+//         <button name="submitButton" type="submit">Send</button>
+//     </div>
+// </form>
+
+// <div id="messages">msg</div>
+
+
+== Recent Go and Google Cloud Projects
+Lately I've been working on a few different things:
+    
+
+=== Google Cloud project for a large, international company
+An international enterprise is looking to the future and how the cloud can help transform their business models. They are therefore starting new projects to explore GCP.
+Being more experienced with the Google Cloud Platform and Golang, I can help them avoid some time-consuming mistakes and get them up and running quicker.  
+        
+        
+
+==== Challenges
+* Legacy software: They are in the early phases of transforming some of their legacy systems to use the cloud. Since legacy systems are not made with the cloud in mind, this typically poses a few challenges.
+
+* All new tech stack: Beginning with cloud and a new programming language means switching tech stack completely and therefore learning a number of new technologies at the same time. Luckily, there are some easy wins to be had.
+
+
+
+=== Backend for a reMarkable
+reMarkable has created the the only digital device that feels like paper. I started working with them early on, in 2016, and created the first version of their cloud services. 
+
+Initially, the main point of the cloud service was to sync your notes, drawings and documents to your phone and computers. The cloud backen has now grown quite a lot and more people have joined the team in the last couple of years. 
+        
+        
+==== Challenges
+* Real-time: Parts of the system requires soft real time attributes.
+
+* Novel: Parts of this system is quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices". 
+
+* Scale: Potentially large amount of concurrent users.
+
+=== Blog engine for a Swiss media company
+Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language. 
+        
+
+=== A distributed email address checker
+Like most of these projects it's partly for the usefulness, partly for learning and partly for the fun of it. This project chats with an SMTP server to find out if an email address is actually in use (works surprisingly well).  Now, I'm planning to run a few million addresses through this, so even with go's concurrency, it's going to need more than 1 server. This is not going to be used for spam, I promise :). It has a REST API for submitting email addresses. It works, but it's not finished.
+
+==== Challenges
+* Avoid getting blocked by smtp servers. Solution: Smart throttle and fan out to multiple machines (ip's)
+
+* Distributing the work and gathering the results. I chose to use NSQ to communicate between the processes and machines. It's a distributed message bus made by bit.ly. In terms of learning, it's been great, I've learned a lot. But in retrospect, NSQ might be a little too "low level" for this project. Something like Resque/Sidekiq, Gearmand or one of the Go alternatives would have been *much* easier to work with. With a 1-way message bus like NSQ you are responsible for matching replies to requests, and other things a job system gives you for free. On the other hand NSQ does not have any single point of failures, it's fast and you can just hook up new parts to the stream to get messages on the fly.
+
+* How should the throttling work? Per source IP? Per email domain (@gmail.com)? Can we save time by not re-connecting to the same smtp server all the time? How much traffic can you send to a server before you create problems for them? Or before they block you?    Solution: Start simple and "slow". Gradually crank it up and incorporate what you learn.
+
+* Running it in containers (Docker) changes things a little bit. The biggest reason to run it on multiple machines is to get many source ip's. But with containers it could place all the workers on the same machine. It was tested in something called Rancher, which "fixes" this, but has a bug that complicates the NSQ deployment.
+        
+link:https://github.com/oyvindsk/go-email-address-check/[Github (with code and even more text)]  
+
+link:http://nsq.io/[NSQ]
+        
+=== Prototype "Social E-comerce platform" App Engine
+Prototype made for Shout Out Referral. (A less technical project description follows later). It connects to social media like Facebook and Twitter. The full version would run in, and integrate with, a webshop. 
+
+I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
+
+I really like the idea of PaaS, especially for projects that are going to grow big. I did feel the pain on working with App Engine though:
+
+* Code must be written for especially for App Engine
+
+* This, coupled with all the custom infrastructure really lock you in to App Engine, you can't easily quit
+
+* Steep learning curve
+
+* Many 3rd party packages does not work on the App Engine. It took me days, not minutes,  to get Facebook and Twitter integration to work
+
+* Can be expensive
+
+But let's not forget the positives:
+* Scales totally automatically and indefinitely (If you use it correctly). This is how people often think all clouds work, but that's almost never the case. Especially for the database / nosql / datastore.
+
+* The cost scales linearly with what you use (if I'm reading the pricing correctly). Unlike Heroku, for example. This makes a lot of business sense in many cases. Start out free or very cheap and pay more as the usage grows. Often the growing usage and expenses means more paying customers.
+
+* Google cloud has so many cool tools to play with. Some of them gives you the power of thousands of servers and can thus take a heavy task form 10 minutes to 10 seconds.
+
+No code to show as this was payed work for a client.
+        
+=== This blog
+I wrote my own website backend and blog engine in Go. It's a playgroaund for testing new technologies and crazy ideas =) 
+
+https://github.com/oyvindsk/web-oyvindsk.com
+    
+// == Links
+    
+== Other Projects and Clients
+
+image::client-logos/intolife.png[IntoLife logo]
+=== Intolife: Substainable food managment system
+==== 2014 - Present
+==== Backend, frontend, architecture
+                     
+==== Press
+link:http://tv.nrk.no/serie/dagsrevyen/NNFA02050915/09-05-2015#t=17m32s[TV - NRK Lørdagsrevyen 9. mai 2015 (Norwegian)]
+                    
+==== Links
+http://intolife.no/                    
+                    
+==== About Intolife
+____
+More and more customers want healthy & sustainable food choices. IntoLife's toolkits will help you to do this by improving menu sustainability and cutting your food waste by half. Our technology solutions put sustainability into your business operations, allowing you to develop sustainable menus and reduce your food waste
+____
+                                   
+Intolife works with restaurants, caterers and other players in the food industry. They help them cut their environmental impact. And to do it in a way that makes sense for their business. Intolife can also help them use this in their marketing.  Intolife is a young and emerging company that innovates on several fronts. Few things are set in stone. As with most innovative projects, they have goals and know where they want to go, but not always how to get there. It’s important for them to always learn and adapt to the marked.
+
+==== The Project
+The workflow used by Intolife before this project was based on Excel and manual data input. This worked fine. But it was time-consuming and limited the possibilities for interacting with third parties.  With this project we created a fully customized web-based application (so called Software as a Service, or Saas) for Intolife. The goals where to cut down the time required for data entry and to automatically generate reports.  We also wanted to allow for future expansion and integration with other software and services.
+We developed this project using  lean startup methodologies. This gave us more flexibility. It also saved money by avoiding the development of unnecessary features.
+                    
+==== Results
+The result is a web-based application that helps with data-input and report generation. This helped Intolife use approximately 50% less time on each of their projects. The application is used mainly by Intolife, but it's also open to other partners and customer. It generates reports with 1 click. Since flexibility is important, we develop the software in phases, with their own milestones. This made  it possible to quickly incorporate the lessons learned during development into the project.  We meet the short-term needs while keeping the software open for future development.
+
+The software also laid the groundwork for future expansions, and was later expanded with a REST API. This made it possible to automatically communicate with other systems. Examples are the customers systems and third party systems.
+
+==== What we learned
+* Be uncompromising when it comes to prioritizing features and keeping things simple. These are, by far,  the most important factors for keeping the development costs low.
+
+* Prioritizing features and keeping things simple also creates a better product.
+
+* Remember to account for hosting expenses.  We host the service on a Norwegian cloud provider (2020 update: It's now in Google Cloud Plaform). Since the number of users is low (it's not a product for the general public) this is not too expensive. Running the service requires operational  work. These are things like database backups and software upgrades and maintenance. This adds to the costs. In technical terms it might make sense to move from Infrastructure as a Service (IaaS) to a Platform as a Service (PaaS) solution. This is to move more of the operational challenges to a third party.
+
+==== Technologies
+* Perl 5
+* Nginx
+* Mojolicious
+* PostgreSQL
+* Linux
+* Docker
+* Google Cloud Platform - Compute Engine (was Zetta.io, a Norwegian Iaas)
+
+
+image::client-logos/shoutoutreferral.png[Shout Out Referral logo]
+=== Shout Out Referral: Prototype design and implementation
+==== 2015
+==== Backend (App Engine), technical architecture
+                     
+==== Links
+http://www.shoutoutreferral.com
+
+==== Project background
+                    
+`A social media engagement platform for e-merchants`
+
+Shout out Referral is a referral system for web-shops that merges  e-commerce with social media. It's a new project from individuals with success from other e-commerce ventures.  The projects is still in the prototype MVP / phase.
+They had a good idea and e-commerce experience. What they needed was someone with technical know-how and developer background to help them move forward from the idea phase.
+                    
+==== Results
+I helped draw up the technical architecture and the rest of the technology stack. After figuring out what the core features are, I implemented a simple prototype. The purpose was twofold: to  explore the possibilities and limitations of  different social media providers, and secondly to show off the idea.
+We ended up with a simple, but working prototype. It shows off a typical use-case for the product. Developing the prototype taught us much. We explored the different social media providers. The merging of different technologies unveiled some unexpected results. Also, we learned that authenticating with many social media providers make identity handling challenging.
+
+Developing a prototype was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it's important to check these assumptions as early as possible.
+                    
+==== What we learned
+This project depends heavily on social media integrations. We soon discovered that not all the providers have equally good APIs. Also, the different providers have different policies and guidelines. Since these factors are outside our control, these limitations can not be "fixed". We must work around them. The advantage of following lean practices are clear here. We discovered these limitations early in the process, before wasting time on creating the wrong plans and unneeded code.
+
+Using new technology can be unpredictable. There can be hidden advantages and disadvantages. Hidden disadvantages are likely more common, the advantages are often well promoted.  In making the prototype we used somewhat new and unknown technology.  In particular, the open source OAuth / Oauth2 library for Golang did not support App Engine. I therefore had to modify it. This was unexpected and made developing the social media log-ins ten times as time-consuming  as expected. However, more often than not, the advantages new technologies bring will be worth the effort.
+                    
+==== Technologies
+* Go (Golang)
+** “Goth” OAuth / OAuth2 library
+** Gorilla Web libraries
+
+* Google App Engine (Cloud PaaS)
+** Datastore
+                            
+* Social Media APIs: Facebook, Twitter, Pintrest
+ 
+
+
+image::client-logos/intolife.png[IntoLife logo]
+=== Intolife: Backend REST API
+==== 2015, 2016
+==== REST API design and implementation (Perl5). API client example (php)
+
+[quote, Intolife.no/news]
+____
+We are proud to announce the forthcoming release of the integration platform for IntoFood.  This will allow existing food service management systems to automatically connect to IntoFood and receive sustainability metrics for menus, sales and purchasing.
+
+By integrating with IntoFood you can see the climate change impact of your menu items, test new menus, and identify hotspots where you have the greatest opportunity to be more sustainable.
+____
+
+==== Project background
+We launched this project to make it possible to integrate the _Intolife web application_ with third parties. These third parties are typically customers and partners. They can use the API to include  waste and emission data (GHG) in their own software and appliances. Using the API they can get this data automatically, without human interaction.
+                    
+==== Results
+The API is  functional and in "beta" status. Documentation was written to make it easier to implement the API. Intolife is currently in talks with potential early adopters.
+
+The API opens up a whole lot of new possibilities. Use-cases that would otherwise involve too much human labor are now quick and easy.
+
+==== What we learned
+                    
+*Moving forward in the face of uncertainty.* This project faces some challenges, that are in many ways quite typical for startup projects. The first of these is the question of exactly what we are making. We had a good sense of where we were heading and why. But neither we or Intolife's customers and partners had a concrete case in mind. We were treading new ground and the customers do not always know exactly what they want until they see it. This lead to a "catch-22" situation. We needed to show something for people to understand the use-case. But, at the same time we needed customer feedback to make it in the first place. There's no easy, magical solution to this. The way through seems to be to learn as much as possible while spending as little time and money as possible. In this case we implemented a first version of the API in cooperation with one of the customers. We will use this first version to get feedback and drive customer engagement. Improve and iterate, or `build measure learn` as Eric Ries puts it.
+
+*Extending existing system does not have to be hard.* There was also a perceived challenge to fit this new API "on top" of the existing code and data model. Although it's certainly easier to start with a clean slate, this turned out to be quite manageable. The web application was made in a way that makes it easy to extend. The right level of flexibility and fairly clean and  commented code makes this possible.
+
+*Writing documentation is time-consuming.* The time and effort needed to write good API documentation surprised me. It was worth it though, as having this is crucial for adaptation of the API. I've previously experienced how missing or lacking documentation can make it unnecessary difficult to implement external APIs.
+                    
+==== Technologies
+* Perl 5
+* Nginx
+* Mojolicious
+* PostgreSQL
+* Linux
+* Docker
+* Google Cloud Platform - Compute Engine (was Zetta.io, a Norwegian Iaas)
+
+image::client-logos/picterus.png[Picterus logo]
+=== Picterus: Backend API for mobile app (Subcontractor)
+==== 2015
+==== REST API design and implementation. Backend (php)
+
+==== Links
+http://www.picterus.com
+
+Picturus  is a medial app designed to diagnose Jaundice in newborns.
+Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
+
+A team is therefore working on developing a smartphone app capable of diagnosing this condition.
+                    
+As a sub-contractor I developed a small part of this app. Within my speciality in back-end systems I created a REST API to support features in the app that relies on something outside the device itself.
+                    
+==== Technologies
+* PHP
+* PostgreSQL
+* Sqlite (development environment)
+* Standard Norwegian webhost
+                    
+
+
+image::client-logos/villoid.png[Villoid logo]
+=== Villoid: Backend Servers and API
+==== 2015
+==== Backend programming (Python and Django), freelance
+
+==== Press
+* link:http://www.forbes.com/sites/sboyd/2015/09/15/alexa-chung-debuts-villoid-fashion-app/[Forbes]
+
+* link:http://www.reuters.com/article/villoid-idUSnBw106279a+100+BSW20150910[Reuters]
+
+* link:http://www.dn.no/etterBors/2015/10/18/1934/Medier/fotomodell-lfter-norsk-app-til-topps[Dagens Næringsliv (Norwegian)]
+
+==== Links
+https://www.villoid.com
+                    
+==== Villoid - Your social fashion app
+Villoid (previously Sobazaar) is a social fashion and shopping app  for Apple devices. They have a fairly large user-base in Norway and expanded to the US autumn 2015.
+                    
+I freelanced for them during the summer of 2015. The work revolved around the backend: implementing new features and making it more scalable. The expanding user-base created some unique technical challenges. Rapid development, with short cycles,  made it a interesting place to work.
+                    
+Beeing a startup means things move fast. One of the advantages of using freelancers is the short start-up time. Villoid needed someone with backend skills to join their team, and they did not have time to wait for a normal hiring process.
+                    
+==== Technologies
+* Python
+* Django
+* Cloud Computing (IaaS): Amazon Web Services (AWS)
+* Docker
+* MySQL
