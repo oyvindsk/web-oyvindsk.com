@@ -1,5 +1,5 @@
 
-IMAGE_URL=oyvindksk-blog:latest
+IMAGE_URL=oyvindsk.com:latest
 
 # remove :latest so we don't acidentally run an old one
 # don't use :latest when deploying, keep it ..
