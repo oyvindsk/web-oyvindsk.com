@@ -162,21 +162,24 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 
 	// fmt.Printf("%#v\n%q\n", t, t.Type.String())
 
-	// Code blocks - Use a little more complicated matching than the later ones
-	if t.Data == "code" && strings.HasPrefix(orgClasses, "language-") {
-		return true, fmt.Sprintf("%s %s", orgClasses, "bg-washed-green f6 f5-ns code")
-	}
-	if t.Data == "pre" && orgClasses == "highlight" {
-		return true, fmt.Sprintf("%s %s", orgClasses, "lh-solid") // outher code block element
+	// Headers:
+	// Title (h1 from asciidoc, in templates): f2 f1-m f-headline-l
+	commonH := "measure lh-title" // for all headers
+	switch t.Data {
+	case "h2": // h2 == (sect1 from asciidoc)
+		return true, fmt.Sprintf("%s %s", commonH, "f3 f2-m f1-l")
+	case "h3": // h3 ===
+		return true, fmt.Sprintf("%s %s", commonH, "f4 f3-m f2-l mv0")
+	case "h4": // h4 ====
+		return true, fmt.Sprintf("%s %s", commonH, "f5 f4-m f3-l mv0")
+	case "h5": // h5 =====
+		return true, fmt.Sprintf("%s %s", commonH, "f6 f5-m f4-l mv0")
+	case "h6": // h6 ======
+		return true, fmt.Sprintf("%s %s", commonH, "f7 f6-m f5-l mv0")
 	}
 
-	// Other classes, those simpler to match
+	// Paragraphs and quote blocks
 	switch orgClasses {
-	case "":
-		return false, ""
-
-	case "sect2":
-		return true, fmt.Sprintf("%s %s", orgClasses, "f4 f2-ns lh-copy measure sans-serif")
 
 	case "quoteblock":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f6 f5-ns lh-copy measure i bl bw1 b--gold mb4")
@@ -187,11 +190,18 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 	case "paragraph":
 		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure mb4 georgia")
 
-	default:
-		// Let's defaut to something sane for normal text
-		return true, fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure georgia")
 	}
 
+	// Code blocks - Use a little more complicated matching than the others
+	if t.Data == "code" && strings.HasPrefix(orgClasses, "language-") {
+		return true, fmt.Sprintf("%s %s", orgClasses, "bg-washed-green f6 f5-ns code")
+	}
+	if t.Data == "pre" && orgClasses == "highlight" {
+		return true, fmt.Sprintf("%s %s", orgClasses, "lh-solid") // outher code block element
+	}
+
+	// Default, if haven't matched anything
+	return true, orgClasses // fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure georgia")
 }
 
 func findAttr(attrs []html.Attribute, key, val string) (bool, int) {
