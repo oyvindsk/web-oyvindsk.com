@@ -1,0 +1,10 @@
+
+title = "How to use Google Cloud Storage with Golang"
+author =  "Øyvind Gerrard Skaar" 
+blogsubtitle = "(with a Google Cloud rant thrown in)"
+date = 2016-10-26
+servepath = "how-to-use-google-cloud-storage-with-golang"
+published =  true
+tags = [ "foo", "bar", "go", "golang", "javascript" ]
+
+thisformatversion = 1
