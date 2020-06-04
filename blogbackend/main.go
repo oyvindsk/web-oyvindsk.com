@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/oyvindsk/post2mail"
 )
@@ -92,6 +93,7 @@ func main() {
 	})
 
 	// Serve static files for blogposts
+	// TODO: merge these into the blog-post directories (if just in one post)
 	http.Handle("/blogpost-files/", http.StripPrefix("/blogpost-files/", http.FileServer(http.Dir("static_files/blogpost-files/"))))
 
 	// Serve static files for the pages
@@ -124,6 +126,13 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 	log.Printf("handlePage: looking for path: %q", path)
 
 	// try newServer first!
+	// Handle pdf links seperatly since we don't process them in any way
+	if strings.HasSuffix(r.URL.Path, "full.pdf") {
+		s.snew.servePagePDF(w, r)
+		return
+	}
+
+	// try newServer first!
 	// TODO check error?
 	err := s.snew.servePage(w, r)
 	if err == nil {
@@ -153,6 +162,13 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 	path := path.Base(r.URL.Path)
 
 	log.Printf("handleBlogpost: looking for path: %q", path)
+
+	// try newServer first!
+	// Handle pdf links seperatly since we don't process them in any way
+	if strings.HasSuffix(r.URL.Path, "full.pdf") {
+		s.snew.serveBlogpostPDF(w, r)
+		return
+	}
 
 	// try newServer first!
 	// TODO check error?

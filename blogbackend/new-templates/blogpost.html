@@ -31,7 +31,11 @@
 					<h4 class="f3 fw1 georgia i">{{ .BlogSubtitle }}</h4>
 					<time class="f6 mb2 dib ttu tracked"><small>{{ .Date }}</small></time>
       				<!-- <h5 class="f6 ttu tracked black-80">By {{ .Author }}</h5> -->
-    			</div>
+					
+					Activepage: {{ .Activepage }}
+					Servepath: {{ .Servepath }}
+					<a href="/writing/{{ .Servepath }}/full.pdf">This post as PDF</a>
+				</div>
   			</header>
 
 			<div class="pa4 ph7-l georgia mw9-l center">

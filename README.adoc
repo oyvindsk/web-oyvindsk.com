@@ -75,11 +75,12 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 == Todo
 
 * RSS
+* Tags for blogposts
 * Comments?
 * Layouts etc:
+** Nye sider: Hire Me, Projects and Clients, Contact me, Now
 ** Top menu
 ** Image in blogposts: Scale on mobile? midtstill?
-** Link to pdfs
 
 == License
 Go code (*.go files) are MIT / BSD 2-clause. Files in the static directory have their own licenses, see the files themselves. The css files in static/ have an unknown license, but was pretty much copied from http://www.alexedwards.net/.

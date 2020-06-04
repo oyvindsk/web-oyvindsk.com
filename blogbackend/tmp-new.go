@@ -6,6 +6,8 @@ import (
 	"log"
 	"net/http"
 	"path"
+	"path/filepath"
+	"strings"
 
 	"github.com/oyvindsk/web-oyvindsk.com/blogbackend/internal/tachyons"
 	"github.com/oyvindsk/web-oyvindsk.com/internal/metadata"
@@ -88,10 +90,10 @@ func (s *serverNew) loadMetadata() error {
 func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 
 	log.Printf("newServer: blogpost: %q", r.URL.Path)
-	path := path.Base(r.URL.Path)
-	log.Printf("newServer: blogpost: looking for path: %q", path)
+	p := path.Base(r.URL.Path)
+	log.Printf("newServer: blogpost: looking for path: %q", p)
 
-	content, ok := s.blogposts[path]
+	content, ok := s.blogposts[p]
 	if !ok {
 		// it could be an old post, return an error and let caller deal
 		return fmt.Errorf("serveBlogpost: Not found")
@@ -119,19 +121,40 @@ func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 	}
 	err = t.ExecuteTemplate(w, "blogpost", tInput)
 	if err != nil {
-		return fmt.Errorf("fooPath: %s", err)
+		return fmt.Errorf("serveBlogpost: %w", err)
 	}
 
 	return nil
 }
 
+func (s serverNew) serveBlogpostPDF(w http.ResponseWriter, r *http.Request) {
+
+	// turn the req path into a relative disk path, e.g.:
+	// 	/writing/how-to-use-google-cloud-storage-with-golang/full.pdf
+	// 		==>
+	// 	new-content/blogposts/how-to-use-google-cloud-storage-with-golang/full.pdf
+	//
+	// split so we can ignore the /writing/ part of the url
+	ps := strings.Split(r.URL.Path, "/") // strigs split since this is not a filepath yet
+	if len(ps) != 4 {
+		log.Printf("newServer: serveBlogpostPDF: failed: path looks wrong: %q => %#v", r.URL.Path, ps)
+		s.serve500(w, r)
+		return
+	}
+
+	// full path on disk
+	fp := filepath.Join(s.cfg.pathBlogposts, ps[2], ps[3])
+	log.Printf("newServer: serveBlogpostPDF: looking for filepath: %q", fp)
+	http.ServeFile(w, r, fp)
+}
+
 func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 
 	log.Printf("newServer: servePage: %q", r.URL.Path)
-	path := path.Base(r.URL.Path)
-	log.Printf("newServer: servePage: looking for path: %q", path)
+	p := path.Base(r.URL.Path)
+	log.Printf("newServer: servePage: looking for path: %q", p)
 
-	content, ok := s.pages[path]
+	content, ok := s.pages[p]
 	if !ok {
 		// it could be an old page, return an error and let caller deal
 		return fmt.Errorf("newServer: servePage: Not found")
@@ -154,7 +177,7 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 		Body       template.HTML // Unsafe / unencoded. Input must be safe, a it is here since it comes from ascidoc(tor)
 	}{
 		content,
-		path,
+		p,
 		template.HTML(body),
 	}
 	err = t.ExecuteTemplate(w, "page", tInput)
@@ -165,6 +188,18 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
+func (s serverNew) servePagePDF(w http.ResponseWriter, r *http.Request) {
+	filepath := path.Join(s.cfg.pathPages, r.URL.Path)
+	log.Printf("newServer: servePDF: looking for filepath: %q", filepath)
+	http.ServeFile(w, r, filepath)
+}
+
 func (s serverNew) serve404(w http.ResponseWriter, r *http.Request) {
+	log.Printf("newServer: serving 404 for: %q", r.URL.Path)
 	http.Error(w, "404 - Could Not find that =(", http.StatusNotFound)
+}
+
+func (s serverNew) serve500(w http.ResponseWriter, r *http.Request) {
+	log.Printf("newServer: serving 500 for: %q", r.URL.Path)
+	http.Error(w, "500 - I Failed :'(  Please try again a little later", http.StatusInternalServerError)
 }
