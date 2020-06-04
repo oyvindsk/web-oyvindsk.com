@@ -29,7 +29,12 @@ func PostprocessFile(filepath string) (string, error) {
 		return "", fmt.Errorf("PostprocessFile: %w", err)
 	}
 
-	bodyr, err := Postprocess(file)
+	body1, err := FOO(file)
+	if err != nil {
+		return "", fmt.Errorf("PostprocessFile FOO: %w", err)
+	}
+
+	bodyr, err := Postprocess(body1)
 	if err != nil {
 		return "", fmt.Errorf("PostprocessFile: %w", err)
 	}
