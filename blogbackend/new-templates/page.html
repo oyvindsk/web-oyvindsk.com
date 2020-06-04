@@ -38,6 +38,48 @@
 			</div>
 		</article>
 
+		<!-- 
+			Page Javascript 
+			We don't acare about contact forms in the blogposts etc
+		-->
+		<script src="/html-related/jquery.js"></script>
+
+		<script type="text/javascript">
+
+			$(document).ready(function() {
+ 
+			  // Post the contact form but give a nice message back to the user
+			  // adapted from fastprisapps.no
+			  // Uses go-post2mail on the server
+			  var url = "/contact-form"; // "https://oyvindsk.com/contact-form"; 
+			  
+			  // SHow response in a div .. hide it now
+			  $('#messages').hide();
+  
+			  $('form#contactForm button').click( function(e) {
+					  //console.log('click');
+					  e.preventDefault();
+					  $.post( 
+						  url, 
+						  $('form#contactForm').serialize(), 
+						  function(data) {
+							  // this never runs, cross-origin ??
+							  console.log("Server returned:");
+							  console.log(data);
+						  }
+						 // 'html' // I expect a html response
+					  );
+  
+					  // show a "nice" response to the user
+					  $('#contactForm').fadeOut(1000).delay(800).slideUp(2000);
+					  $('#messages').html("<h3>Thank you!</h3><h3>I will read and respond to your message promptly</h3>")
+					  $('#messages').delay(500).fadeIn(1000);                    
+			  });
+  
+	  		});
+  
+  		</script>
+
 	</body>
 </html>
 
