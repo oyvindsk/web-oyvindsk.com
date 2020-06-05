@@ -4,36 +4,38 @@
     <a class="link dim black b f6 f5-ns dib mr3 dtc-l v-mid w-100 w-25-l tc tl-l mb2 mb0-l" href="/" title="Home">Øyvind G. Skaar</a>
     <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
         
-        {{ if eq .Activepage "" }}
-            <a class="link dim dark-gray b f6 f5-l dib mr3 mr4-l" href="/" title="Home">Home</a>
-        {{ else }}
-            <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l"   href="/" title="Home">Home</a>
+        {{ $commonClasses := "link dim dark-gray f6 f5-l dib mr3 mr4-l" }}
+     
+        {{ if eq .Activepage "about" }}     <a class="{{ $commonClasses }} b"   href="/about" title="About">About</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/about" title="About">About</a>
         {{ end }}
-           
-        {{ if eq .Activepage "blog" }}
-            <a class="link dim black b f6 f5-l dib mr3 mr4-l"   href="/blog" title="Blog">Blog</a>
-        {{ else }}
-            <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/blog" title="Blog">Blog</a>
+        
+        {{ if eq .Activepage "writing" }}   <a class="{{ $commonClasses }} b"   href="/writing" title="Articles">Articles</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/writing" title="Articles">Articles</a>
         {{ end }}
 
-        {{ if eq .Activepage "hire-me" }}
-            <a class="link dim dark-gray b f6 f5-l dib mr3 mr4-l" href="/hire-me" title="Hire Me">Hire Me</a>
-        {{ else }}
-            <a class="link dim dark-gray   f6 f5-l dib mr3 mr4-l" href="/hire-me" title="Hire Me">Hire Me</a>
+        {{ if eq .Activepage "hire-me" }}   <a class="{{ $commonClasses }} b"   href="/hire-me" title="Hire Me">Hire Me</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/hire-me" title="Hire Me">Hire Me</a>
         {{ end }}
 
-        {{ if eq .Activepage "contact" }}
-            <a class="link dim dark-gray b f6 f5-l dib mr3 mr4-l" href="/hire-me#contact" title="Contact">Contact</a>
-        {{ else }}
-            <a class="link dim dark-gray   f6 f5-l dib mr3 mr4-l" href="/hire-me#contact" title="Contact">Contact</a>
+        {{ if eq .Activepage "projects" }}  <a class="{{ $commonClasses }} b"   href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
         {{ end }}
 
-        {{ if eq .Activepage "now" }}
-            <a class="link dim dark-gray b f6 f5-l dib mr3 mr4-l" href="/now" title="Now">Now</a>
-        {{ else }}
-            <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l"   href="/now" title="Now">Now</a>
+        {{ if eq .Activepage "contact" }}   <a class="{{ $commonClasses }} b"   href="/contact" title="Contact">Contact</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/contact" title="Contact">Contact</a>
         {{ end }}
 
+        {{ if eq .Activepage "now" }}       <a class="{{ $commonClasses }} b"   href="/now" title="Now">Now</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/now" title="Now">Now</a>
+        {{ end }}
+
+        <!--
+        {{ if eq .Activepage "" }}          <a class="{{ $commonClasses }} b"   href="/" title="Home">Home</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/" title="Home">Home</a>
+        {{ end }}
+        -->
+       
        
       </div>
   </nav>

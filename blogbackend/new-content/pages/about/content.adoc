@@ -1,0 +1,8 @@
+
+= ABout
+Øyvind Gerrard Skaar
+June 2020
+
+== About
+// [role="lead"]
+Nope, in Oslo =/ 
