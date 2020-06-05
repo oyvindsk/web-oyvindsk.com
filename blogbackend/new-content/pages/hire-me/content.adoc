@@ -5,26 +5,6 @@ May 2020
 :imagesdir: ../../../static_files/page-files/
 
 
-// WHY
-//     7 bags
-// HOW
-// WHEN
-
-// Things that need to be here:
-// which countries can I work? 
-// how does it work? How do I get payd?
-// testimonials
-// past projects
-// what I can do
-// what I can't do
-// ? who are my clients
-
-// WHY you should hire me! (implicit, explicit?)
-
-// TODO / FIXME:
-//  Contact form
-//  links in the middle? 
-
 image::øyvind.jpg[]
 
 [role=lead]
@@ -82,31 +62,6 @@ I'm activly looking for new projects for the rest of the year.
 If you think I can help you, or you have any questions, please reach out.
 
 You can email me at hello@oyvindsk.com or use https://oyvindsk.com/hire-me#contact
-
-// <!-- Contact form-->
-// <!-- Also set the url in the js in template/layout.html -->
-// <form method="post" action="/contact-form" class="contact-form" id="contactForm" novalidate="">
-//     <div>
-//         <input style="width:500px;" name="name" placeholder="Your name" type="text">
-//     </div>
-//     <div>
-//         <input style="width:500px;" name="from" placeholder="Your email / phone number" type="email">
-//     </div>
-
-//     <div>
-//         <input style="width:500px;" name="subject" placeholder="Subject" type="text">
-//     </div>
-
-//     <div>
-//         <textarea style="width:500px;" name="text" placeholder="Hi. I would like to have a friendly chat about.." rows="7"></textarea>
-//     </div>
-
-//     <div class="get-it">
-//         <button name="submitButton" type="submit">Send</button>
-//     </div>
-// </form>
-
-// <div id="messages">msg</div>
 
 
 == Recent Go and Google Cloud Projects

@@ -140,20 +140,20 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("handlePage: New result: %s", err)
 
-	pc, ok := s.pages[path]
-	if !ok {
-		log.Println("handlePage: Could not find: ", path)
-		http.Error(w, "Page not found =(", http.StatusNotFound)
-		return
-	}
+	// pc, ok := s.pages[path]
+	// if !ok {
+	// 	log.Println("handlePage: Could not find: ", path)
+	// 	http.Error(w, "Page not found =(", http.StatusNotFound)
+	// 	return
+	// }
 
-	log.Printf("handlePage: found: %#v", pc)
+	// log.Printf("handlePage: found: %#v", pc)
 
-	// execute them all, start with "layout" (defined in the tmpl)
-	err = pc.template.ExecuteTemplate(w, "layout", pc)
-	if err != nil {
-		log.Fatalf("handlePage: template execution: %s", err)
-	}
+	// // execute them all, start with "layout" (defined in the tmpl)
+	// err = pc.template.ExecuteTemplate(w, "layout", pc)
+	// if err != nil {
+	// 	log.Fatalf("handlePage: template execution: %s", err)
+	// }
 }
 
 // handleBlogpost looks for the blogpost in the templates we have parsed already
@@ -162,6 +162,14 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 	path := path.Base(r.URL.Path)
 
 	log.Printf("handleBlogpost: looking for path: %q", path)
+
+	// Handle the special case for /writing/, it should be a page, but the way routes are set up now with /net/http it's not possible??
+	// TODO FIXME ugly to call across like this =/ ?
+	if path == "writing" || r.URL.Path == "/writing/full.pdf" {
+		log.Printf("handleBlogpost: Calling handlePage() for /writing/")
+		s.handlePage(w, r)
+		return
+	}
 
 	// try newServer first!
 	// Handle pdf links seperatly since we don't process them in any way
@@ -178,20 +186,20 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("handleBlogpost: New result: %s", err)
 
-	bpc, ok := s.blogposts[path]
-	if !ok {
-		log.Println("handleBlogpost: Could not find: ", path)
-		http.Error(w, "Blogpost not found =(", http.StatusNotFound)
-		return
-	}
+	// bpc, ok := s.blogposts[path]
+	// if !ok {
+	// 	log.Println("handleBlogpost: Could not find: ", path)
+	// 	http.Error(w, "Blogpost not found =(", http.StatusNotFound)
+	// 	return
+	// }
 
-	log.Printf("handleBlogpost: found: %#v", bpc)
+	// log.Printf("handleBlogpost: found: %#v", bpc)
 
-	// execute them all, start with "layout" (defined in the tmpl)
-	err = bpc.template.ExecuteTemplate(w, "layout", bpc)
-	if err != nil {
-		log.Fatalf("template execution: %s", err)
-	}
+	// // execute them all, start with "layout" (defined in the tmpl)
+	// err = bpc.template.ExecuteTemplate(w, "layout", bpc)
+	// if err != nil {
+	// 	log.Fatalf("template execution: %s", err)
+	// }
 }
 
 // Status returned to the HTTP client for non-pages

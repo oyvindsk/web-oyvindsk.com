@@ -13,6 +13,7 @@ asciidoc-runner/asciidoc-runner
 
 blogbackend/new-content/pages/writing/metadata.toml.hash
 blogbackend/new-content/pages/projects/metadata.toml.hash
+blogbackend/new-content/pages/home/metadata.toml.hash
 blogbackend/new-content/pages/contact/metadata.toml.hash
 blogbackend/new-content/pages/now/metadata.toml.hash
 blogbackend/new-content/pages/about/metadata.toml.hash
@@ -25,6 +26,7 @@ blogbackend/new-content/blogposts/reasons-redis-is-awesome/metadata.toml.hash
 blogbackend/new-content/blogposts/build-docker-from-source/metadata.toml.hash
 blogbackend/new-content/pages/writing/content.adoc.hash
 blogbackend/new-content/pages/projects/content.adoc.hash
+blogbackend/new-content/pages/home/content.adoc.hash
 blogbackend/new-content/pages/contact/content.adoc.hash
 blogbackend/new-content/pages/now/content.adoc.hash
 blogbackend/new-content/pages/about/content.adoc.hash
@@ -37,6 +39,7 @@ blogbackend/new-content/blogposts/reasons-redis-is-awesome/content.adoc.hash
 blogbackend/new-content/blogposts/build-docker-from-source/content.adoc.hash
 blogbackend/new-content/pages/writing/content.html
 blogbackend/new-content/pages/projects/content.html
+blogbackend/new-content/pages/home/content.html
 blogbackend/new-content/pages/contact/content.html
 blogbackend/new-content/pages/now/content.html
 blogbackend/new-content/pages/about/content.html
@@ -49,6 +52,7 @@ blogbackend/new-content/blogposts/reasons-redis-is-awesome/content.html
 blogbackend/new-content/blogposts/build-docker-from-source/content.html
 blogbackend/new-content/pages/writing/full.pdf
 blogbackend/new-content/pages/projects/full.pdf
+blogbackend/new-content/pages/home/full.pdf
 blogbackend/new-content/pages/contact/full.pdf
 blogbackend/new-content/pages/now/full.pdf
 blogbackend/new-content/pages/about/full.pdf
@@ -61,6 +65,7 @@ blogbackend/new-content/blogposts/reasons-redis-is-awesome/full.pdf
 blogbackend/new-content/blogposts/build-docker-from-source/full.pdf
 blogbackend/new-content/pages/writing/full.xml
 blogbackend/new-content/pages/projects/full.xml
+blogbackend/new-content/pages/home/full.xml
 blogbackend/new-content/pages/contact/full.xml
 blogbackend/new-content/pages/now/full.xml
 blogbackend/new-content/pages/about/full.xml

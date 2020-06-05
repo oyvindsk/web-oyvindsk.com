@@ -1,8 +1,52 @@
-
-= ABout
+= About
 Øyvind Gerrard Skaar
 June 2020
+:imagesdir: ../../../static_files/page-files/
 
-== About
-// [role="lead"]
-Nope, in Oslo =/ 
+
+image::øyvind.jpg[]
+
+[role=lead]
+Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
+I'm an independent consultant, developer and architect, working with Google Cloud technologies and Go (golang). 
+
+After studying computer science and working for a few years, I left my job in 2014 to start my own company and work as a freelancer and independent consultant.
+I've done quite a few things since then.
+Primarily, I've worked with startups and other innovative companies that use newer technologies and have a knack for creative, pragmatic solutions.
+
+Having worked with startups in the past, I'm well-versed in on open source software and cloud deployments.
+My specialty is back-end, server-side technology and architecture. 
+
+Now it's all link:http://golang.org[Go (golang)] and link:http://cloud.google.com[Google Cloud Platform] but previous technologies include:
+link:http://docker.com[Docker],
+link:http://digitalocean.com[several]
+link:http://zetta.io[cloud]
+link:http://aws.amazon.com[providers] and languages such as
+link:http://python.org[Python]
+link:http://djangoproject.com[(w/ Django)],
+link:http://www.perl.org[Perl 5]
+link:http://mojolicio.us[(w/ Mojolicious)],
+link:http://php.net[PHP] and
+link:http://ruby-lang.org[Ruby]
+link:http://rubyonrails.org/[(w/ Rails)],
+as well as databases etc. See link:https://oyvindsk.com/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf[my CV] for more.
+          
+                
+This site is devoted to Go, Google Cloud and a few other technical topics. 
+  
+== I'm currently working on two projects
+                    
+=== reMarkable:
+reMarkable created a new type of device, a "paper tablet" to read, write and sketch on.
+I started working with them early on, in 2016, and created the first version of their cloud services. link:https://remarkable.com/[reMarkable Website]
+
+=== Intolife
+I also make and support a webapp for Intolife. The web-based application, called IntoFood helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners. 
+(link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood])
+
+
+== Online
+* link:http://www.linkedin.com/in/oskaar[LinkedIn] / link:https://oyvindsk.com/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf[CV]
+* link:http://twitter.com/oyvindsk[Twitter]
+* link:http://github.com/oyvindsk[Github]
+* link:mailto:hello@%6F%79vindsk.com[hello @ oyvindsk.com]

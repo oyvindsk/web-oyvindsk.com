@@ -26,8 +26,14 @@
 						  <h1 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
         				<span class="black-70 lh-copy pa1 tracked-tight">
 						-->
-					Activepage: {{ .Activepage }}
-					<a href="/{{ .Activepage }}/full.pdf">This page as PDF</a>
+
+					{{ $pdfURL := printf "/%s/full.pdf" .Activepage }}
+					{{ if eq .Activepage "/" }}
+						{{ $pdfURL = "/home/full.pdf" }}
+					{{ end }}
+					<a href="{{ $pdfURL }}">This page as PDF</a>
+					<!-- Activepage: {{ .Activepage }}  {{ $pdfURL }}  -->
+
 				</div>
   			</header>
 
