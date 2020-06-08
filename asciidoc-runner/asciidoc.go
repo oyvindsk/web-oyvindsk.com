@@ -9,20 +9,20 @@ import (
 	"github.com/oyvindsk/web-oyvindsk.com/internal/metadata"
 )
 
-func generateAll(dirpath string) error {
+func generate(dirpath string) error {
 
 	fmt.Printf("Generating all static files in folder %q\n", dirpath)
 
 	err := os.Chdir(dirpath)
 	if err != nil {
-		return fmt.Errorf("generateAll: %s", err)
+		return fmt.Errorf("generateAll: %w", err)
 	}
 
 	// create the html, the main content for the website
 	// it is not meant to be served directly, it be augmentet by postprocessing and go templates later
 	err = runDoctorHTML(asciidocFilename, htmlFilename)
 	if err != nil {
-		return fmt.Errorf("generateAll: %s", err)
+		return fmt.Errorf("generateAll: %w", err)
 
 	}
 
@@ -30,22 +30,28 @@ func generateAll(dirpath string) error {
 	// this is more involved since it:
 	// - needs another prog
 	// - must go through docbook first (at least with this setup)
-	// - needs the metadata beacuse the pdf must be complete, no header or footer is added (no template like html)
+	// - needs the metadata beacuse the pdf must be complete, no header or footer is added (no template like in the html)
 
 	metadata, err := metadata.Fromfile(metadataFilename)
 	if err != nil {
-		return fmt.Errorf("generateAll: %s", err)
+		return fmt.Errorf("generateAll: %w", err)
 	}
 
 	err = runDoctorDocbook(asciidocFilename, docBookFilename, metadata)
 	if err != nil {
-		return fmt.Errorf("generateAll: %s", err)
+		return fmt.Errorf("generateAll: %w", err)
 
 	}
 
 	err = runOriginalPDF(docBookFilename)
 	if err != nil {
-		return fmt.Errorf("generateAll: %s", err)
+		return fmt.Errorf("generateAll: %w", err)
+	}
+
+	// Remove the DocBook file if we suceeded with the pdf
+	err = os.Remove(docBookFilename)
+	if err != nil {
+		return fmt.Errorf("generateAll: %w", err)
 	}
 
 	fmt.Println("Done!")
@@ -60,7 +66,7 @@ func runDoctorHTML(inputpath, outputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runDoctorHTML: %s", err)
+		return fmt.Errorf("runDoctorHTML: %w", err)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -91,7 +97,7 @@ func runDoctorDocbook(inputpath, outputpath string, meta metadata.M) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runDoctorDocbook: %s", err)
+		return fmt.Errorf("runDoctorDocbook: %w", err)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -114,7 +120,7 @@ func runOriginalPDF(inputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runOriginalPDF: %s", err)
+		return fmt.Errorf("runOriginalPDF: %w", err)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -131,7 +137,7 @@ func runOriginalHTML(inputpath, outputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runOriginalHTML: %s", err)
+		return fmt.Errorf("runOriginalHTML: %w", err)
 	}
 
 	if len(stdoutStderr) != 0 {

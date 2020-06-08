@@ -12,7 +12,7 @@ const (
 	metadataFilename   = "metadata.toml" // input
 	asciidocFilename   = "content.adoc"  // input
 	htmlFilename       = "content.html"  // output
-	docBookFilename    = "full.xml"      // output
+	docBookFilename    = "full.xml"      // output, removed on success. PDF will be full.pdf
 	hashFilenameSuffix = ".hash"
 )
 
@@ -35,9 +35,9 @@ func main() {
 			continue
 		}
 
-		err = generateAll(fp)
+		err = generate(fp)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Printf("\n\nERROR !!:\n%s\n\n", err)
 			return
 		}
 
