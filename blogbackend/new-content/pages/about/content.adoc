@@ -3,7 +3,6 @@
 June 2020
 :imagesdir: ../../../static_files/page-files/
 
-
 image::øyvind.jpg[]
 
 [role=lead]
@@ -30,23 +29,5 @@ link:http://php.net[PHP] and
 link:http://ruby-lang.org[Ruby]
 link:http://rubyonrails.org/[(w/ Rails)],
 as well as databases etc. See link:https://oyvindsk.com/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf[my CV] for more.
-          
-                
-This site is devoted to Go, Google Cloud and a few other technical topics. 
-  
-== I'm currently working on two projects
-                    
-=== reMarkable:
-reMarkable created a new type of device, a "paper tablet" to read, write and sketch on.
-I started working with them early on, in 2016, and created the first version of their cloud services. link:https://remarkable.com/[reMarkable Website]
 
-=== Intolife
-I also make and support a webapp for Intolife. The web-based application, called IntoFood helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners. 
-(link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood])
-
-
-== Online
-* link:http://www.linkedin.com/in/oskaar[LinkedIn] / link:https://oyvindsk.com/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf[CV]
-* link:http://twitter.com/oyvindsk[Twitter]
-* link:http://github.com/oyvindsk[Github]
-* link:mailto:hello@%6F%79vindsk.com[hello @ oyvindsk.com]
+link:https://oyvindsk.com/contact[Contact information]

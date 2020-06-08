@@ -3,6 +3,18 @@
 Øyvind Gerrard Skaar
 June 2020
 
-== Contact
-// [role="lead"]
-Nope, in Oslo =/ 
+
+== Contact me
+If you think I can help you, or you have any questions, please reach out.
+
+You can email me at hello@oyvindsk.com or use https://oyvindsk.com/contact
+
+=== Offline
+ * Phone: +47 482 78 480
+ * Company: Devbyte AS, Org nr 920 646 417, Grønlandsleiret 81, 0190 Oslo, Norway. 
+ * Offices: Currently renting a desk at Startup Campus, Christian Kroghs Gate 1, Oslo, Norway.
+
+=== Online 
+* link:http://www.linkedin.com/in/oskaar[LinkedIn]
+* link:http://twitter.com/oyvindsk[Twitter] (inactive)
+* link:http://github.com/oyvindsk[Github]

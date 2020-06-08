@@ -7,15 +7,25 @@ June 2020
 image::øyvind.jpg[]
 
 [role=lead]
-Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
-I'm an independent consultant, developer and architect, working with Google Cloud technologies and Go (golang). 
-link:https://oyvindsk.com/about[More about me here]
+Hi, I'm Øyvind. I'm an independent consultant, developer and architect, based in Oslo, Norway.
+
+link:https://oyvindsk.com/about[More about me] // link:https://oyvindsk.com/contact[Contact information] // link:https://oyvindsk.com/now[now: What I'm up to these days]
 
 
-I also write about Go, Google Cloud Platform and other related technoligies:
+I've taken contract work since 2014 and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects. 
+
+link:https://oyvindsk.com/projects[Projects & Clients]
+
+
+These days I only work on projects using Go and/or Google Cloud Platform (but not for the reasons you think ;).
+
+link:https://oyvindsk.com/hire-me[More about what I do and how]
+
+
+I also write about backend architecture, Go, Google Cloud Platform and related topics:
 
 * link:https://oyvindsk.com/writing/how-to-use-google-cloud-storage-with-golang[How to use Google Cloud Storage with Golang (with a Google Cloud rant thrown in)] (October 2016)
-* link:https://oyvindsk.com/writing/common-golang-mistakes-1[Learn from my Go mistakes, Part 1:<br>Closing over loop variables] (May 2016)
+* link:https://oyvindsk.com/writing/common-golang-mistakes-1[Learn from my Go mistakes, Part 1: Closing over loop variables] (May 2016)
 * link:https://oyvindsk.com/writing/go-remote-jobs[A few places you can find Golang remote jobs] (April 2016)
 * link:https://oyvindsk.com/writing/docker-build-from-source[How-to build Docker from source] (July 2015)
 * link:https://oyvindsk.com/writing/reasons-redis-is-awesome[A few (more than one and less than ten) reasons Redis is awesome!] (December 2014)

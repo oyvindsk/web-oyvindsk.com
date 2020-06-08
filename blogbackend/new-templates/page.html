@@ -21,20 +21,7 @@
 				
 				{{ template "headerLinks" . }}
 
-    			<div class="mw9 center pt4 pt5-ns ph7-l">
-      				<!-- 
-						  <h1 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
-        				<span class="black-70 lh-copy pa1 tracked-tight">
-						-->
-
-					{{ $pdfURL := printf "/%s/full.pdf" .Activepage }}
-					{{ if eq .Activepage "/" }}
-						{{ $pdfURL = "/home/full.pdf" }}
-					{{ end }}
-					<a href="{{ $pdfURL }}">This page as PDF</a>
-					<!-- Activepage: {{ .Activepage }}  {{ $pdfURL }}  -->
-
-				</div>
+    	
   			</header>
 
 			<div class="pa4 ph7-l georgia mw9-l center">
@@ -43,6 +30,21 @@
 
 			</div>
 		</article>
+
+		<div class="mw9 center pt4 pt5-ns ph7-l">
+			<!-- 
+				<h1 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+			  <span class="black-70 lh-copy pa1 tracked-tight">
+			  -->
+
+		  {{ $pdfURL := printf "/%s/full.pdf" .Activepage }}
+		  {{ if eq .Activepage "/" }}
+			  {{ $pdfURL = "/home/full.pdf" }}
+		  {{ end }}
+		  <a href="{{ $pdfURL }}">This page as PDF</a>
+		  <!-- Activepage: {{ .Activepage }}  {{ $pdfURL }}  -->
+
+	  </div>
 
 		<!-- 
 			Page Javascript 
