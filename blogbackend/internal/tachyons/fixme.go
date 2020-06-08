@@ -39,9 +39,12 @@ const (
 	
 	<div id="messages">msg</div>
 	`
+
+	urlToRelativize = "https://oyvindsk.com/"
 )
 
 // FOO Look for a contact-me div block. Cut in and include html for a contact me form instead
+// assumes there's only 1 concat form =/
 func FOO(input io.Reader) (io.Reader, error) {
 
 	// <div class="paragraph">
@@ -125,6 +128,53 @@ MACHINE:
 	if err != nil {
 		if err != io.EOF {
 			return nil, fmt.Errorf("FOO: error when running state machine: %s", err)
+		}
+	}
+
+	return strings.NewReader(body.String()), nil
+}
+
+// FOO2 Look for other html to replace or "fix"
+func FOO2(input io.Reader) (io.Reader, error) {
+
+	z := html.NewTokenizer(input)
+
+	// results of the state machine loop (not the func)
+	var body strings.Builder
+	var err error
+
+MACHINE:
+	for {
+
+		// Advance to next token
+		tt := z.Next()
+		if tt == html.ErrorToken {
+			// This includes EOF, break out and deal with it later
+			err = z.Err()
+			break MACHINE
+		}
+
+		thisToken := z.Token() // The token we are currenlty looking at
+
+		// Replace urls linking to ourself witha relative url
+		// we use the full in pages beacuse the relative ones get effd in the PDFs for some reason =/
+		if thisToken.Type == html.StartTagToken && thisToken.Data == "a" {
+			if ok, i := findAttr(thisToken.Attr, "href"); ok {
+				if strings.Contains(thisToken.Attr[i].Val, urlToRelativize) {
+					// log.Printf("MACHINE: token: %q  %q  %d  %s\n", thisToken.Type.String(), thisToken.Data, i, thisToken.Attr[i].Val)
+					thisToken.Attr[i].Val = strings.Replace(thisToken.Attr[i].Val, urlToRelativize, "/", 1)
+				}
+			}
+		}
+
+		body.WriteString(thisToken.String())
+
+	}
+
+	// Any parse / state machine error from?
+	if err != nil {
+		if err != io.EOF {
+			return nil, fmt.Errorf("FOO2: error when running state machine: %s", err)
 		}
 	}
 

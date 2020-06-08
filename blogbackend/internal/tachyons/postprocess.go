@@ -29,12 +29,19 @@ func PostprocessFile(filepath string) (string, error) {
 		return "", fmt.Errorf("PostprocessFile: %w", err)
 	}
 
+	// FIXME TODO
+
 	body1, err := FOO(file)
 	if err != nil {
 		return "", fmt.Errorf("PostprocessFile FOO: %w", err)
 	}
 
-	bodyr, err := Postprocess(body1)
+	body2, err := FOO2(body1)
+	if err != nil {
+		return "", fmt.Errorf("PostprocessFile FOO2: %w", err)
+	}
+
+	bodyr, err := Postprocess(body2)
 	if err != nil {
 		return "", fmt.Errorf("PostprocessFile: %w", err)
 	}
@@ -212,7 +219,16 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 	return true, orgClasses // fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure georgia")
 }
 
-func findAttr(attrs []html.Attribute, key, val string) (bool, int) {
+func findAttr(attrs []html.Attribute, key string) (bool, int) {
+	for i := range attrs {
+		if attrs[i].Key == key {
+			return true, i // assume only 1 match
+		}
+	}
+	return false, 0
+}
+
+func findAttrVal(attrs []html.Attribute, key, val string) (bool, int) {
 	for i := range attrs {
 		if attrs[i].Key == key {
 			if attrs[i].Val == val {
