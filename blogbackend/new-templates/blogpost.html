@@ -14,7 +14,7 @@
 <html lang="en">
 	<title>{{ .Title }} || oyvindsk.com</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
+	<link rel="stylesheet" href="/html-related/tachyons.min.css">
   
 	<body>
 		<article>
@@ -30,11 +30,10 @@
       				</h1>
 					<h4 class="f3 fw1 georgia i">{{ .BlogSubtitle }}</h4>
 					<time class="f6 mb2 dib ttu tracked"><small>{{ .Date }}</small></time>
-      				<!-- <h5 class="f6 ttu tracked black-80">By {{ .Author }}</h5> -->
 					
-					Activepage: {{ .Activepage }}
-					Servepath: {{ .Servepath }}
-					<a href="/writing/{{ .Servepath }}/full.pdf">This post as PDF</a>
+					<br>
+					<a href="{{ .PDFurl }}"><img class="mw1 mw2-ns" src="/html-related/Pdf_by_mimooh.svg" alt="PDF icon"></a>
+
 				</div>
   			</header>
 
@@ -45,6 +44,8 @@
 			</div>
 
 		</article>
+
+		{{ template "footer" . }}
 
 	</body>
 </html>

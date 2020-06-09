@@ -112,11 +112,13 @@ func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 
 	tInput := struct {
 		serverNewContent
-		Activepage string
+		Activepage string // used to highlite the link in the header,
+		PDFurl     string
 		Body       template.HTML // Unsafe / unencoded. Input must be safe, a it is here since it comes from ascidoc(tor)
 	}{
 		content,
-		"blog",
+		"writing",
+		fmt.Sprintf("/writing/%s/full.pdf", content.Servepath),
 		template.HTML(body),
 	}
 	err = t.ExecuteTemplate(w, "blogpost", tInput)
@@ -174,12 +176,23 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 	tInput := struct {
 		serverNewContent
 		Activepage string
+		PDFurl     string
 		Body       template.HTML // Unsafe / unencoded. Input must be safe, a it is here since it comes from ascidoc(tor)
 	}{
-		content,
-		p,
-		template.HTML(body),
+		serverNewContent: content,
+		Activepage:       p,
+		Body:             template.HTML(body),
 	}
+
+	// Figure out the PDF link
+	// with a specialcase for the homepage, it's too different from the others
+	if p == "/" {
+		tInput.PDFurl = "/home/full.pdf"
+	} else {
+		tInput.PDFurl = fmt.Sprintf("/%s/full.pdf", p)
+	}
+
+	// Execute the blog template with all the data in tInput
 	err = t.ExecuteTemplate(w, "page", tInput)
 	if err != nil {
 		return fmt.Errorf("newServer: servePage: %w", err)

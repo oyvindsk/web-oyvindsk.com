@@ -80,8 +80,8 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 * Move contact-me html postprocessing out of tachyons
 * Cleanup old code, remove "new-"
 * Layouts etc:
+** Footer: flexbox? https://webdevtrick.com/html-css-footer/ https://css-tricks.com/couple-takes-sticky-footer/
 ** Nye sider: Home, Hire Me, Projects and Clients, Contact me, Now
-** Top menu
 ** Image in blogposts: Scale on mobile? midtstill?
 * PDFs:
 ** Can relative links work in pdfs?

@@ -1,6 +1,12 @@
 {{ define "headerLinks" }}
 
-<nav class="db dt-l w-100 border-box pa3 ph5-l bg-gold bb b--yellow">
+{{ $borderClasses := "" }}
+{{ if eq .Activepage "writing" }}
+{{ $borderClasses = "bb b--yellow" }}
+{{ end }}    
+
+
+<nav class="db dt-l w-100 border-box pa3 ph5-l bg-gold {{ $borderClasses }}">
     <a class="link dim black b f6 f5-ns dib mr3 dtc-l v-mid w-100 w-25-l tc tl-l mb2 mb0-l" href="/" title="Home">Øyvind G. Skaar</a>
     <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
         
@@ -10,12 +16,12 @@
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/writing" title="Articles">Articles</a>
         {{ end }}    
 
-        {{ if eq .Activepage "projects" }}  <a class="{{ $commonClasses }} b"   href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
-        {{ else }}                          <a class="{{ $commonClasses }}"     href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
-        {{ end }}
-
         {{ if eq .Activepage "hire-me" }}   <a class="{{ $commonClasses }} b"   href="/hire-me" title="Hire Me">Hire Me</a>
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/hire-me" title="Hire Me">Hire Me</a>
+        {{ end }}
+
+        {{ if eq .Activepage "projects" }}  <a class="{{ $commonClasses }} b"   href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
+        {{ else }}                          <a class="{{ $commonClasses }}"     href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
         {{ end }}
 
         {{ if eq .Activepage "about" }}     <a class="{{ $commonClasses }} b"   href="/about" title="About">About</a>
