@@ -13,9 +13,7 @@ import (
 )
 
 type server struct {
-	pages     map[string]pageContent
-	blogposts map[string]blogpostContent
-	email     struct {
+	email struct {
 		toAddress, smtpServer, smtpUser, smtpPass string
 		smtpPort                                  int
 	}
@@ -30,9 +28,6 @@ func main() {
 	// by convencion not passed further than the handlers
 	// and only written to here in main() (otherwise a lock or guardian goroutine is needed)
 	s := server{
-		pages:     make(map[string]pageContent),
-		blogposts: make(map[string]blogpostContent),
-
 		snew: serverNew{
 			cfg: serverNewCfg{pathBlogposts: "new-content/blogposts", pathPages: "new-content/pages", pathTemplates: "new-templates"},
 		},
@@ -43,6 +38,7 @@ func main() {
 		log.Fatalln(err)
 	}
 	// log.Printf("%#v\n", snew.blogposts)
+
 	// Handle expected enironment variables
 
 	// SMTP and email parameters for the contact-me backend. All required!
@@ -61,22 +57,6 @@ func main() {
 		httpPort = "8080"
 	}
 
-	// Parse all our templates on disk
-	// ATM, we only do this here, so a restart is required to pick up new content
-	// Not an issue since we have to redeploy for new content anyway =/
-	// Also, all the template stuff are in the functions, since they're so small and it's not worth the overhead
-	pages, err := slurpAndParseAllPages("pages")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	s.pages = pages
-
-	blogposts, err := slurpAndParseAllPosts("blogposts")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	s.blogposts = blogposts
-
 	// HTTP handlers
 	// do not modify too much: urls are linked to elsewhere (duh) and relative urls are used in the templates
 	http.HandleFunc("/", s.handlePage)
@@ -93,10 +73,11 @@ func main() {
 	})
 
 	// Serve static files for blogposts
-	// TODO: merge these into the blog-post directories (if just in one post)
+	// TODO: merge these into the blog-post directories (if just in one post) ??
 	http.Handle("/blogpost-files/", http.StripPrefix("/blogpost-files/", http.FileServer(http.Dir("static_files/blogpost-files/"))))
 
 	// Serve static files for the pages
+	// TODO: merge these into the page directories (if just in one page) ??
 	http.Handle("/page-files/", http.StripPrefix("/page-files/", http.FileServer(http.Dir("static_files/page-files/"))))
 
 	// Serve static CV pdfs, english and norwegian, under 2 urls each
@@ -125,14 +106,12 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("handlePage: looking for path: %q", path)
 
-	// try newServer first!
 	// Handle pdf links seperatly since we don't process them in any way
 	if strings.HasSuffix(r.URL.Path, "full.pdf") {
 		s.snew.servePagePDF(w, r)
 		return
 	}
 
-	// try newServer first!
 	// TODO check error?
 	err := s.snew.servePage(w, r)
 	if err == nil {
@@ -140,20 +119,6 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("handlePage: New result: %s", err)
 
-	// pc, ok := s.pages[path]
-	// if !ok {
-	// 	log.Println("handlePage: Could not find: ", path)
-	// 	http.Error(w, "Page not found =(", http.StatusNotFound)
-	// 	return
-	// }
-
-	// log.Printf("handlePage: found: %#v", pc)
-
-	// // execute them all, start with "layout" (defined in the tmpl)
-	// err = pc.template.ExecuteTemplate(w, "layout", pc)
-	// if err != nil {
-	// 	log.Fatalf("handlePage: template execution: %s", err)
-	// }
 }
 
 // handleBlogpost looks for the blogpost in the templates we have parsed already
@@ -171,14 +136,12 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// try newServer first!
 	// Handle pdf links seperatly since we don't process them in any way
 	if strings.HasSuffix(r.URL.Path, "full.pdf") {
 		s.snew.serveBlogpostPDF(w, r)
 		return
 	}
 
-	// try newServer first!
 	// TODO check error?
 	err := s.snew.serveBlogpost(w, r)
 	if err == nil {
@@ -186,20 +149,6 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 	}
 	log.Printf("handleBlogpost: New result: %s", err)
 
-	// bpc, ok := s.blogposts[path]
-	// if !ok {
-	// 	log.Println("handleBlogpost: Could not find: ", path)
-	// 	http.Error(w, "Blogpost not found =(", http.StatusNotFound)
-	// 	return
-	// }
-
-	// log.Printf("handleBlogpost: found: %#v", bpc)
-
-	// // execute them all, start with "layout" (defined in the tmpl)
-	// err = bpc.template.ExecuteTemplate(w, "layout", bpc)
-	// if err != nil {
-	// 	log.Fatalf("template execution: %s", err)
-	// }
 }
 
 // Status returned to the HTTP client for non-pages
