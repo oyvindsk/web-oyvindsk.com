@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/oyvindsk/web-oyvindsk.com/blogbackend/internal/tachyons"
+	"github.com/oyvindsk/web-oyvindsk.com/blogbackend/internal/postprocess/html"
 	"github.com/oyvindsk/web-oyvindsk.com/internal/metadata"
 )
 
@@ -37,6 +37,12 @@ type serverNewContent struct {
 	dirpath string
 }
 
+// TODO:
+// - Merge with serve funcs in main.go
+// - Parse all our templates on disk? A restart would be required to pick up new content
+// 		Not an issue since we have to redeploy for new content anyway =/
+// 		OTOH disk is really memory in Cloud Run, so this shouldn't make it any faster (?)
+
 func (s *serverNew) loadMetadata() error {
 
 	// Load blogposts
@@ -48,16 +54,16 @@ func (s *serverNew) loadMetadata() error {
 	s.blogposts = make(map[string]serverNewContent)
 
 	for _, p := range bppaths {
-		fmt.Println("b path:", p)
 		m, err := metadata.Fromfile(p + "/metadata.toml")
 		if err != nil {
 			return fmt.Errorf("loadMetadata: %w", err)
 		}
-		fmt.Printf("\t%s [%s]\n", m.Title, m.Servepath)
 		if _, f := s.blogposts[m.Servepath]; f {
 			return fmt.Errorf("loadMetadata: can't load file: %q, Servepath %q aleready loaded", p, m.Servepath)
 		}
 		s.blogposts[m.Servepath] = serverNewContent{m, p}
+
+		log.Printf("loadMetadata: blogpost: %q [%q]\n", m.Title, m.Servepath)
 	}
 
 	// Load pages
@@ -69,22 +75,19 @@ func (s *serverNew) loadMetadata() error {
 	s.pages = make(map[string]serverNewContent)
 
 	for _, p := range ppaths {
-		fmt.Println("p path:", p)
 		m, err := metadata.Fromfile(p + "/metadata.toml")
 		if err != nil {
 			return fmt.Errorf("loadMetadata: %w", err)
 		}
-		fmt.Printf("\t%s [%s]\n", m.Title, m.Servepath)
 		if _, f := s.blogposts[m.Servepath]; f {
 			return fmt.Errorf("loadMetadata: can't load file: %q, Servepath %q aleready loaded", p, m.Servepath)
 		}
 		s.pages[m.Servepath] = serverNewContent{m, p}
+
+		log.Printf("loadMetadata: page: %q [%q]\n", m.Title, m.Servepath)
 	}
 
-	// fmt.Printf("%#v\n\n%#v\n", ppaths, ppaths)
-
 	return nil
-
 }
 
 func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
@@ -100,7 +103,7 @@ func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 	}
 	log.Printf("newServer: blogpost: %s\n", content.Title)
 
-	body, err := tachyons.PostprocessFile(content.dirpath + "/content.html")
+	body, err := html.PostprocessFile(content.dirpath + "/content.html")
 	if err != nil {
 		return fmt.Errorf("serveBlogpost: %w", err)
 	}
@@ -163,7 +166,7 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 	}
 	log.Printf("newServer: servePage: page: %s\n", content.Title)
 
-	body, err := tachyons.PostprocessFile(content.dirpath + "/content.html")
+	body, err := html.PostprocessFile(content.dirpath + "/content.html")
 	if err != nil {
 		return fmt.Errorf("newServer: servePage: %w", err)
 	}
