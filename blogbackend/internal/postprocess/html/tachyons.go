@@ -1,62 +1,21 @@
-// Package tachyons does html postprocessing to replace classes from the Asciidoc(tor) html output with Tachyons classes.
-// It is therefore a part of the styling for the website, along with the templates
-// It is not used with the pdf output (duh)
-// http://tachyons.io/
-// https://code.luasoftware.com/tutorials/web-development/tachyon-css-cheatsheet/
-package tachyons
+package html
 
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
-	"os"
 	"strings"
 
 	"golang.org/x/net/html"
 )
 
-const (
+// These functions do html postprocessing to replace classes from the Asciidoc(tor) html output with Tachyons classes.
+// http://tachyons.io/
+// https://code.luasoftware.com/tutorials/web-development/tachyon-css-cheatsheet/
 
-	// Images - we replace the filepaths of static files (works with pdfs) with a relative url
-	staticRelRoot    = "../../../static_files/"
-	staticWebRelRoot = "/"
-)
+// InsertTachyonsClasses looks at the html from AsciiDoc(tor) and the classes specified and inserts tachyons css classes to get the layout we want
+func InsertTachyonsClasses(input io.Reader) (io.Reader, error) {
 
-func PostprocessFile(filepath string) (string, error) {
-
-	file, err := os.Open(filepath)
-	if err != nil {
-		return "", fmt.Errorf("PostprocessFile: %w", err)
-	}
-
-	// FIXME TODO
-
-	body1, err := FOO(file)
-	if err != nil {
-		return "", fmt.Errorf("PostprocessFile FOO: %w", err)
-	}
-
-	body2, err := FOO2(body1)
-	if err != nil {
-		return "", fmt.Errorf("PostprocessFile FOO2: %w", err)
-	}
-
-	bodyr, err := Postprocess(body2)
-	if err != nil {
-		return "", fmt.Errorf("PostprocessFile: %w", err)
-	}
-
-	body, err := ioutil.ReadAll(bodyr)
-	if err != nil {
-		return "", fmt.Errorf("PostprocessFile: %w", err)
-	}
-
-	return string(body), nil
-}
-
-func Postprocess(input io.Reader) (io.Reader, error) {
-
-	myTachyons := tachyons{}
+	myTachyons := tachyons{} // used to remember some state
 
 	z := html.NewTokenizer(input)
 
@@ -73,9 +32,9 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 			break
 		}
 
-		t := z.Token()
+		thisToken := z.Token()
 
-		myTachyons.nextToken(t)
+		myTachyons.nextToken(thisToken)
 
 		if tt == html.StartTagToken {
 
@@ -83,56 +42,33 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 			// Classes
 
 			// Find and save the original classes, if any.
+			// Remove the original class attr
 			var orgClasses string // class string
-			oci := -1             // index to remove later
-			for i := range t.Attr {
-				if t.Attr[i].Key == "class" {
-					orgClasses = t.Attr[i].Val
-					oci = i
-					break // assume just 1 class
-				}
-			}
+			if ok, oci := findAttr(thisToken.Attr, "class"); ok {
+				orgClasses = thisToken.Attr[oci].Val
 
-			// Remove the original class attr. Assume order of is irrelevant
-			if oci >= 0 {
-				t.Attr[oci] = t.Attr[0]
-				t.Attr = t.Attr[1:]
+				// Remove the original class attr. Assume order of is irrelevant
+				thisToken.Attr[oci] = thisToken.Attr[0]
+				thisToken.Attr = thisToken.Attr[1:]
+
 				// t.Attr[oci] = t.Attr[len(t.Attr)-1] // or just t.Attr[0] = t.Attr[oci] , t.Attr = t.Attr[1:] ??
 				// t.Attr = t.Attr[:len(t.Attr)-1]
 			}
 
-			add, classes := myTachyons.getClasses(tt, t, orgClasses)
+			add, classes := myTachyons.tachyonsClasses(tt, thisToken, orgClasses)
 
 			if add {
-				t.Attr = append(t.Attr, html.Attribute{Key: "class", Val: classes})
+				thisToken.Attr = append(thisToken.Attr, html.Attribute{Key: "class", Val: classes})
 			}
-
-			//
-			// Images
-
-			// replace the local filepath with a relative url for web
-			if t.Data == "img" {
-				ai := -1
-				for i := range t.Attr {
-					if t.Attr[i].Key == "src" {
-						ai = i
-						break
-					}
-				}
-				if ai != -1 {
-					t.Attr[ai].Val = strings.Replace(t.Attr[ai].Val, staticRelRoot, staticWebRelRoot, 1)
-				}
-			}
-
 		}
 
-		body.WriteString(t.String())
+		body.WriteString(thisToken.String())
 	}
 
 	// Any parse / state machine error from?
 	if err != nil {
 		if err != io.EOF {
-			return nil, fmt.Errorf("postprocess: error when replacing: %s", err)
+			return nil, fmt.Errorf("InsertTachyonsClasses: error when replacing: %s", err)
 		}
 		err = nil
 	}
@@ -140,8 +76,9 @@ func Postprocess(input io.Reader) (io.Reader, error) {
 	return strings.NewReader(body.String()), nil
 }
 
+// keep state while advancing ourtokens
 type tachyons struct {
-	skip bool
+	skip bool // should this token have tachyons classes added?
 }
 
 func (mt *tachyons) nextToken(t html.Token) {
@@ -165,7 +102,7 @@ func (mt *tachyons) nextToken(t html.Token) {
 	}
 }
 
-func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string) (bool, string) {
+func (mt tachyons) tachyonsClasses(tt html.TokenType, t html.Token, orgClasses string) (bool, string) {
 
 	// Are we in skip mode? Not all tokens should have classes, they can override some we just higher in the tree
 	if mt.skip {
@@ -217,24 +154,4 @@ func (mt tachyons) getClasses(tt html.TokenType, t html.Token, orgClasses string
 
 	// Default, if haven't matched anything
 	return true, orgClasses // fmt.Sprintf("%s %s", orgClasses, "f5 f4-ns lh-copy measure georgia")
-}
-
-func findAttr(attrs []html.Attribute, key string) (bool, int) {
-	for i := range attrs {
-		if attrs[i].Key == key {
-			return true, i // assume only 1 match
-		}
-	}
-	return false, 0
-}
-
-func findAttrVal(attrs []html.Attribute, key, val string) (bool, int) {
-	for i := range attrs {
-		if attrs[i].Key == key {
-			if attrs[i].Val == val {
-				return true, i // assume only 1 match
-			}
-		}
-	}
-	return false, 0
 }

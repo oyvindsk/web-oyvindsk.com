@@ -1,4 +1,4 @@
-package tachyons
+package html
 
 import (
 	"fmt"
@@ -8,12 +8,18 @@ import (
 	"golang.org/x/net/html"
 )
 
-// FIXME TODO new package?
+// Code for other, non-tachyons post-processing
+// usually needed because what work with the Asciidoc(tor) PDF does not work with the html for the final site:
+// - html contact form should be inserted
+// - image paths should be relative and start with /
+// - links to internal pages should be relative and start with /
 
 const (
-	magicParagraphExcludeText = "You can email me at"
+	contactFormTextNeedle = "You can email me at"
 
 	contactForm = `
+	</p> <!-- form in not allowed inside p ? -->
+	
 	<!-- Contact form-->
 	<!-- Also set the url in the js in template/layout.html -->
 	<form method="post" action="/contact-form" class="contact-form" id="contactForm" novalidate="">
@@ -43,18 +49,17 @@ const (
 	urlToRelativize = "https://oyvindsk.com/"
 )
 
-// FOO Look for a contact-me div block. Cut in and include html for a contact me form instead
-// assumes there's only 1 concat form =/
-func FOO(input io.Reader) (io.Reader, error) {
+// InsertContactForm Looks for a contact-me div block. Cut out some text and include html for a contact me form instead
+// assumes there's only 1 contact form =/
+func InsertContactForm(input io.Reader) (io.Reader, error) {
 
+	// Looking for html:
 	// <div class="paragraph">
-	//
 	// <p>You can email me at
 	//		<a href="mailto:hello@oyvindsk.com">hello@oyvindsk.com</a>
 	//  	or use
 	// 		<a href="https://oyvindsk.com/hire-me#contact" class="bare">https://oyvindsk.com/hire-me#contact</a>
 	// </p>
-	//
 	// </div>
 
 	z := html.NewTokenizer(input)
@@ -98,8 +103,8 @@ MACHINE:
 
 		case "lft":
 
-			if thisToken.Type.String() == "Text" && strings.Contains(thisToken.Data, magicParagraphExcludeText) {
-				fmt.Println("\n\t==>\t Looking for end of p")
+			if thisToken.Type.String() == "Text" && strings.Contains(thisToken.Data, contactFormTextNeedle) {
+				// fmt.Println("\n\t==>\t Looking for end of p")
 				state = "lfep"
 			} else {
 				body.WriteString(thisToken.String())
@@ -107,11 +112,11 @@ MACHINE:
 
 		case "lfep":
 			if tt == html.EndTagToken && thisToken.Data == "p" {
-				fmt.Println("\n\t==>\t Done")
+				// fmt.Println("\n\t==>\t Done")
 				state = "done"
 
-				body.WriteString("DONE HERE:" + contactForm)
-				body.WriteString(thisToken.String())
+				body.WriteString(contactForm)
+				// don't write this </p>, we closed it in contactForm to avoid illegal html
 			}
 
 		case "done":
@@ -127,15 +132,15 @@ MACHINE:
 	// Any parse / state machine error from?
 	if err != nil {
 		if err != io.EOF {
-			return nil, fmt.Errorf("FOO: error when running state machine: %s", err)
+			return nil, fmt.Errorf("InsertContactForm: error when running state machine: %s", err)
 		}
 	}
 
 	return strings.NewReader(body.String()), nil
 }
 
-// FOO2 Look for other html to replace or "fix"
-func FOO2(input io.Reader) (io.Reader, error) {
+// ReplaceOtherHTML looks for other html to replace or "fix"
+func ReplaceOtherHTML(input io.Reader) (io.Reader, error) {
 
 	z := html.NewTokenizer(input)
 
@@ -156,7 +161,8 @@ MACHINE:
 
 		thisToken := z.Token() // The token we are currenlty looking at
 
-		// Replace urls linking to ourself witha relative url
+		// LINKS
+		// Replace urls linking to ourself with a relative url
 		// we use the full in pages beacuse the relative ones get effd in the PDFs for some reason =/
 		if thisToken.Type == html.StartTagToken && thisToken.Data == "a" {
 			if ok, i := findAttr(thisToken.Attr, "href"); ok {
@@ -167,6 +173,14 @@ MACHINE:
 			}
 		}
 
+		// IMAGES
+		// replace the local filepath with a relative url for web
+		if thisToken.Type == html.StartTagToken && thisToken.Data == "img" {
+			if ok, i := findAttr(thisToken.Attr, "src"); ok {
+				thisToken.Attr[i].Val = strings.Replace(thisToken.Attr[i].Val, staticRelRoot, staticWebRelRoot, 1)
+			}
+		}
+
 		body.WriteString(thisToken.String())
 
 	}
@@ -174,7 +188,7 @@ MACHINE:
 	// Any parse / state machine error from?
 	if err != nil {
 		if err != io.EOF {
-			return nil, fmt.Errorf("FOO2: error when running state machine: %s", err)
+			return nil, fmt.Errorf("ReplaceOtherHTML: error when running state machine: %s", err)
 		}
 	}
 
