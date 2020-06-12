@@ -2,6 +2,6 @@
 title = "What I’m doing now"
 author = "Øyvind Gerrard Skaar"
 date = 2020-05-13
-published = true
+published = false
 servepath = "now"
 thisformatversion = 1

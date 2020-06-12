@@ -9,15 +9,14 @@ image::øyvind.jpg[]
 [role=lead]
 Hi, I'm Øyvind. I'm an independent consultant, developer and architect, based in Oslo, Norway.
 
-link:https://oyvindsk.com/about[More about me] // link:https://oyvindsk.com/contact[Contact information] // link:https://oyvindsk.com/now[now: What I'm up to these days]
-
+// link:https://oyvindsk.com/about[More about me] // link:https://oyvindsk.com/now[now: What I'm up to these days]
+link:https://oyvindsk.com/contact[Contact information]
 
 I've taken contract work since 2014 and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects. 
 
 link:https://oyvindsk.com/projects[Projects & Clients]
 
-
-These days I only work on projects using Go and/or Google Cloud Platform (but not for the reasons you think ;).
+These days I only work on projects using Go and/or Google Cloud Platform. This is _not_ because I believe they are strictly superior, or even that the choice of technology is very important for most projects. 
 
 link:https://oyvindsk.com/hire-me[More about what I do and how]
 

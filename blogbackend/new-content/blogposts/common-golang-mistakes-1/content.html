@@ -1,0 +1,302 @@
+<div id="preamble">
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="../../../static_files/blogpost-files/gopher-fail.jpg" alt="Gopher fail!">
+</div>
+</div>
+<div class="paragraph">
+<p>This post is about a mistake that&#8217;s common and easy to make in Golang. I show a few examples, explain why it happens and how you can avoid it. This is explained in many places already (see links at the end). My goal is to be more thorough than the others.</p>
+</div>
+<div class="paragraph">
+<p>There might be many of these blogposts. There&#8217;s at least one more topic I want to write about. We&#8217;ll see.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_closing_over_a_loop_variable">Closing over a loop variable</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This mistake is very easy to make in some situations. If you please, take a look at the code below and try to figure out why Example B fails.</p>
+</div>
+<div class="paragraph">
+<p>(Most code snipet has a link in the header to the Go Playground where you can run and play with the code. All links open in this window).</p>
+</div>
+<div class="paragraph">
+<p>Print out the numbers from 0 to 2:</p>
+</div>
+<div class="paragraph">
+<p>(<a href="https://play.golang.org/p/NJhdSw-sSC">On the playgroud</a>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// A
+	fmt.Println("Example A - Count to 2, This works :) ")
+	for a := 0; a &lt; 3; a++ {
+		fmt.Println("a is:", a)
+	}
+
+	// B
+	fmt.Println("\n\nExample B - Count to 2, concurrently.")
+	fmt.Println("This does not work :( ")
+	for b := 0; b &lt; 3; b++ {
+		// Run fmt.Println(..) in the background
+		go func() {
+			fmt.Println("b is:", b)
+		}()
+	}
+
+	// we sleep to let the go functions finish before the program quits
+	time.Sleep(2 * time.Second)
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Running the above code prints:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Example A - Count to 2, This works :)
+a is: 0
+a is: 1
+a is: 2
+
+
+Example B - Count to 2, concurrently.
+This does not work :(
+b is: 3
+b is: 3
+b is: 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Huh? 3, 3, 3? Where&#8217;s zero and one? And wasn&#8217;t it suppose to stop at two?
+Bah! We can&#8217;t even count to 2, what&#8217;s going on? Two things:</p>
+</div>
+<div class="sect2">
+<h3 id="_closures">Closures</h3>
+<div class="paragraph">
+<p>Firstly, when we print variable <em>b</em> in Example B what are we even referring to? It&#8217;s inside of a function, and there&#8217;s no variable <em>b</em> inside this function body. If you did this in a normal function you would get a nice little error from the compiler complaining that there&#8217;s no <em>b</em>.</p>
+</div>
+<div class="paragraph">
+<p>This does not happen here. The function we have in Example B, <em>func(){..}</em>,  is not a normal function: it&#8217;s in the middle of another one and it lacks a name. These types of functions are often call <em>function literals</em> or <em>anonymous functions</em>. I like "anonymous functions". An anonymous function can "see" variables from the function it&#8217;s inside (enclosed in). That means that in our example it can access variable <em>b</em>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../../../static_files/blogpost-files/gopher-fail-1-example-b.png" alt="Example 1">
+</div>
+</div>
+<div class="paragraph">
+<p>This is not a bug in Go, by the way. It&#8217;s intended behavior that can be used to do some pretty advanced stuff. See the "function closures"  links at the end.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_variable_reuse">Variable reuse</h3>
+<div class="paragraph">
+<p>Our anonymous function can access variable <em>b</em>. But it&#8217;s the same variable <em>b</em>, accessed 3 time in the loop. It&#8217;s declared once before the loop starts to run. It then changes value from 0 to 1, then to 2 and finally to 3.
+Then the loop stops since 3 is not less than 3.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_goroutines_runs_out_of_order">Goroutines runs out of order</h3>
+<div class="paragraph">
+<p>With our <em>go func()..</em> statement we start a new goroutine. They run concurrently, which they do not run one after the other in an orderly fashion.
+They could in theory run one after the other, or they could all run at the same time (in parallel). Or maybe the "last one" runs first and then the "first one" and the "second one" runs last, or maybe.. think you get the point; it&#8217;s unpredictable.
+Well this is kind of the point of using Goroutines in the first place. We want to be able to run many things at once. In this example it does not make a lot of sense, but imagine, if you will, that the printing took 10 seconds. Or we did something else that took 10 seconds. In that case Example A would take 30 seconds to complete and Example B would only take 10 seconds. Great!</p>
+</div>
+<div class="paragraph">
+<p>We can think of the go statement as "run this code in the background at some point". It could run right away, or it could run later. Thinking like this it becomes more clear why Example B fails.
+It&#8217;s possible, likely even, that the loop finishes before the first <em>fmt.Println("b is:", b)</em> ever runs. So the loops runs, increasing <em>b</em> to 3 and then stopping. <strong>Then</strong> the goroutines run and print variable b. They all look at the same variable b, the one declared at the start of the loop. They never got their own copy. At this point <em>b</em> is 3, so they all print 3.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_fixing_it">Fixing it</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There are several ways to change our code and fix this bug. I&#8217;ve listed the 3 I could come up with at this time, with the last one possibly being the most "idiomatic" go.</p>
+</div>
+<div class="paragraph">
+<p>Each of these examples should print something like this if you run them. Note that the numbers can be out of order, since the goroutines can run in any possible order, or all at once.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>Fix 2 for Example B
+dd is: 1
+dd is: 0
+dd is: 2</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alternative_1">Alternative 1</h3>
+<div class="paragraph">
+<p>One easy way of fixing this is to change the anonymous function to a normal function call. Normal functions can not refer to variables "outside" itself. This forces us to pass the variable we want to use as an argument to the function (print() in our example).
+    When you call a normal function the arguments are copied, every time you call it. That is, the value of <em>c</em> (0, 1 or 2) is copied and given to the invoked function. Therefore this works as you would expect:</p>
+</div>
+<div class="paragraph">
+<p>(<a href="https://play.golang.org/p/RuUUVeH1ZG">On the playgroud</a>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 1
+	fmt.Println("\n\nFix 1 for Example B")
+	for c := 0; c &lt; 3; c++ {
+		// same code as earlier,
+		// but no longer in an anonymous function:
+		go print(c)
+
+		// The value of c is copied when we call print()
+		//   so it's no longer reffering to the same variable.
+
+		// This copying happens before the code
+		//   in print() actually runs
+	}
+
+	time.Sleep(2 * time.Second)
+}
+
+func print(c int) {
+	// The value of c was copied.
+	// So 'c' here is not the same as 'c' in the for loop above.
+	// It's a "coincidence" that they are both named c
+	// (it's irrelevant).
+	fmt.Println("c is:", c)
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alternative_2">Alternative 2</h3>
+<div class="paragraph">
+<p>But let&#8217;s say you wanted to keep the anonymous function? They can certainly be useful, creating a named function that is only used in one place is kind of ugly.
+This code fixes this by explicitly copying the variable before using it in the anonymous function. This works because each run (iteration) through the loop now gets its own variable, with its own value.
+So it does not matter when the goroutine actually runs. It will refer to its own variable <em>dd</em> that never changes.</p>
+</div>
+<div class="paragraph">
+<p>(<a href="https://play.golang.org/p/MDg7Pl0-E4">On the playgroud</a>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 2
+	fmt.Println("Fix 2 for Example B")
+	for d := 0; d &lt; 3; d++ {
+		// The value of d is copied into its own variable.
+		// This happens for every iteration in the loop.
+		dd := d
+		go func() {
+			fmt.Println("dd is:", dd)
+		}()
+	}
+
+	time.Sleep(2 * time.Second)
+
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_alternative_3">Alternative 3</h3>
+<div class="paragraph">
+<p>Finally this fix is similar to the first one (well, actually they&#8217;re all pretty similar). Here we also copy the variable for every iteration of the <strong>for</strong> loop.
+Our anonymous function still sees the variable <em>e</em> but ignores it. Instead we send in the variable we want to access when we call the anonymous function.</p>
+</div>
+<div class="paragraph">
+<p>Having both <em>e</em> and <em>ee</em> inside the function body can be a little confusing. We could for example use variable <em>e</em> by mistake and the compiler would not complain. Therefore some people prefer to
+name the second variable the same as the first one (<em>e</em> instead of <em>ee</em> in our example). This has the effect of hiding (shadowing) the first one and thus making it inaccessible.</p>
+</div>
+<div class="paragraph">
+<p>(<a href="https://play.golang.org/p/QO506H3qTz">On the playgroud</a>)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-go" data-lang="go">package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	// Fix 3
+	fmt.Println("Fix 3 for Example B")
+	for e := 0; e &lt; 3; e++ {
+		go func(ee int) {
+			// The value of e is copied into its own variable ee
+			// (We could also call this new variable e)
+			fmt.Println("ee is:", ee)
+		}(e) // e becomes ee inside the function
+	}
+
+	time.Sleep(2 * time.Second)
+
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_thats_it">That&#8217;s it</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Ok, that&#8217;s it =) Hit me up on twitter (<a href="http://twitter.com/oyvindsk">@oyvindsk</a>) if you have any questions or corrections. All honest feedback is welcome. You can also enter your email underneath to get future articles.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_links">Links</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_closures_in_go">Closures in Go</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://gobyexample.com/closures" class="bare">https://gobyexample.com/closures</a></p>
+</li>
+<li>
+<p><a href="https://tour.golang.org/moretypes/25" class="bare">https://tour.golang.org/moretypes/25</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_other">Other</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#closure_for_it_vars">Entry at the 50 shades of Go for this gotcha</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>

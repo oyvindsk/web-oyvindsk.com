@@ -3,12 +3,17 @@
 Øyvind Gerrard Skaar
 June 2020
 :imagesdir: ../../../static_files/page-files/
+:toc: macro
+// ^^ Asciidoctor, in asciidoc it's :toc-placement: manual
 
 == Projects & Clients
 I’ve taken contract work since 2014 and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
 
-HIRE ME / CONTACT
+link:https://oyvindsk.com/hire-me[If you want to learn more about how I work, please seee this page].
+link:https://oyvindsk.com/contact[]
 
+
+toc::[]
 
                  
 === reMarkable

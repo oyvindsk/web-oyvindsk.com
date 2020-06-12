@@ -1,3 +1,4 @@
+# `gcloud build submit` will ignore (leave out) these as well, by default!
 *.log
 *SECRET*
 
@@ -10,56 +11,3 @@ asciidoc-runner/asciidoc-runner
 
 ## echo -e "\n" >> .gitignore 
 ## ./asciidoc-runner/find-files-to-cleanup.sh blogbackend/ >> .gitignore
-
-blogbackend/new-content/pages/writing/metadata.toml.hash
-blogbackend/new-content/pages/projects/metadata.toml.hash
-blogbackend/new-content/pages/home/metadata.toml.hash
-blogbackend/new-content/pages/contact/metadata.toml.hash
-blogbackend/new-content/pages/now/metadata.toml.hash
-blogbackend/new-content/pages/about/metadata.toml.hash
-blogbackend/new-content/pages/hire-me/metadata.toml.hash
-blogbackend/new-content/blogposts/common-golang-mistakes-1/metadata.toml.hash
-blogbackend/new-content/blogposts/how-to-use-google-cloud-storage-with-golang/metadata.toml.hash
-blogbackend/new-content/blogposts/go-remote-jobs/metadata.toml.hash
-blogbackend/new-content/blogposts/test-1/metadata.toml.hash
-blogbackend/new-content/blogposts/reasons-redis-is-awesome/metadata.toml.hash
-blogbackend/new-content/blogposts/build-docker-from-source/metadata.toml.hash
-blogbackend/new-content/pages/writing/content.adoc.hash
-blogbackend/new-content/pages/projects/content.adoc.hash
-blogbackend/new-content/pages/home/content.adoc.hash
-blogbackend/new-content/pages/contact/content.adoc.hash
-blogbackend/new-content/pages/now/content.adoc.hash
-blogbackend/new-content/pages/about/content.adoc.hash
-blogbackend/new-content/pages/hire-me/content.adoc.hash
-blogbackend/new-content/blogposts/common-golang-mistakes-1/content.adoc.hash
-blogbackend/new-content/blogposts/how-to-use-google-cloud-storage-with-golang/content.adoc.hash
-blogbackend/new-content/blogposts/go-remote-jobs/content.adoc.hash
-blogbackend/new-content/blogposts/test-1/content.adoc.hash
-blogbackend/new-content/blogposts/reasons-redis-is-awesome/content.adoc.hash
-blogbackend/new-content/blogposts/build-docker-from-source/content.adoc.hash
-blogbackend/new-content/pages/writing/content.html
-blogbackend/new-content/pages/projects/content.html
-blogbackend/new-content/pages/home/content.html
-blogbackend/new-content/pages/contact/content.html
-blogbackend/new-content/pages/now/content.html
-blogbackend/new-content/pages/about/content.html
-blogbackend/new-content/pages/hire-me/content.html
-blogbackend/new-content/blogposts/common-golang-mistakes-1/content.html
-blogbackend/new-content/blogposts/how-to-use-google-cloud-storage-with-golang/content.html
-blogbackend/new-content/blogposts/go-remote-jobs/content.html
-blogbackend/new-content/blogposts/test-1/content.html
-blogbackend/new-content/blogposts/reasons-redis-is-awesome/content.html
-blogbackend/new-content/blogposts/build-docker-from-source/content.html
-blogbackend/new-content/pages/writing/full.pdf
-blogbackend/new-content/pages/projects/full.pdf
-blogbackend/new-content/pages/home/full.pdf
-blogbackend/new-content/pages/contact/full.pdf
-blogbackend/new-content/pages/now/full.pdf
-blogbackend/new-content/pages/about/full.pdf
-blogbackend/new-content/pages/hire-me/full.pdf
-blogbackend/new-content/blogposts/common-golang-mistakes-1/full.pdf
-blogbackend/new-content/blogposts/how-to-use-google-cloud-storage-with-golang/full.pdf
-blogbackend/new-content/blogposts/go-remote-jobs/full.pdf
-blogbackend/new-content/blogposts/test-1/full.pdf
-blogbackend/new-content/blogposts/reasons-redis-is-awesome/full.pdf
-blogbackend/new-content/blogposts/build-docker-from-source/full.pdf
