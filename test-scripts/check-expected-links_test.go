@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const baseURL = "http://localhost:8080" // "https://oyvindsk.com"
+const baseURL = "https://oyvindsk.com" // "http://localhost:8080" //
 
 func TestLinks(t *testing.T) {
 
@@ -22,12 +22,12 @@ func TestLinks(t *testing.T) {
 		needle string
 	}{
 		{"/", "I’m an independent consultant, developer and architect"},
-		{"/hire-me", "Need additional Golang resources"},
-		{"/contact", "Contact me"},                    // v2
-		{"/about", "After studying computer science"}, // v2
-		{"/writing", "FIXME"},                         // v2
-		{"/projects", "Intolife"},                     // v2
-		{"/now", "Traveling?"},                        // v2
+		{"/hire-me", "Are you working on building something new?"},
+		{"/contact", "Contact me"},                                   // added in 2020
+		{"/writing", "A few places you can find Golang remote jobs"}, // added in 2020
+		{"/projects", "Intolife"},                                    // added in 2020
+		//	{"/about", "After studying computer science"}, // add in 2020?
+		//	{"/now", "Traveling?"},                        // add in 2020?
 
 		{"/writing/how-to-use-google-cloud-storage-with-golang", "I have to rant a little about the Google Cloud"},
 		{"/writing/common-golang-mistakes-1", "Print out the numbers from 0 to 2"},
