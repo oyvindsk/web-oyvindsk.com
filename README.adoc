@@ -20,7 +20,9 @@ Generate blog posts from AsciiDoc, styled using the Tachyons css toolkit.
  AsciiDoc + metadata 
  => Asciidoc python or asciidoctor, run locally with ./asciidoc-runner
  => generates html and pdf
- => HTML PostProcess: remove standard css classes and add Tachyons classes (./blogbackend/internal/tachyons/)
+ => Find and load metadata files for pages and blogposts (.toml)
+ => HTML PostProcess: fix some things, like absolute image urls, that are needed for PDFs generation but wrong in the html
+ => HTML PostProcess: remove standard css classes and add Tachyons classes 
  => Go Templates: Put together a complete page from html, metadata and templates
  => Serve the pdf as well, as an alternative
 
@@ -77,7 +79,6 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 * RSS
 * Tags for blogposts
 * Comments?
-* Move contact-me html postprocessing out of tachyons
 * Cleanup old code, remove "new-"
 * Layouts etc:
 ** Footer: flexbox? https://webdevtrick.com/html-css-footer/ https://css-tricks.com/couple-takes-sticky-footer/

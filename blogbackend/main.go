@@ -112,12 +112,13 @@ func (s server) handlePage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO check error?
+	// TODO handle errors better!
 	err := s.snew.servePage(w, r)
-	if err == nil {
-		return // Sucess!
+	if err != nil {
+		log.Printf("handlePage: error, will return 500: %s", err)
+		s.snew.serve500(w, r)
+		return
 	}
-	log.Printf("handlePage: New result: %s", err)
 
 }
 
@@ -142,13 +143,13 @@ func (s server) handleBlogpost(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// TODO check error?
+	// TODO handle errors better!
 	err := s.snew.serveBlogpost(w, r)
-	if err == nil {
-		return // Sucess!
+	if err != nil {
+		log.Printf("handleBlogpost: error, will return 500: %s", err)
+		s.snew.serve500(w, r)
+		return
 	}
-	log.Printf("handleBlogpost: New result: %s", err)
-
 }
 
 // Status returned to the HTTP client for non-pages

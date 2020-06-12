@@ -98,10 +98,15 @@ func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 
 	content, ok := s.blogposts[p]
 	if !ok {
-		// it could be an old post, return an error and let caller deal
 		return fmt.Errorf("serveBlogpost: Not found")
 	}
 	log.Printf("newServer: blogpost: %s\n", content.Title)
+
+	if !content.Published {
+		log.Printf("newServer: blogpost: not serving unpublished: %s\n", content.Title)
+		s.serve404(w, r)
+		return nil
+	}
 
 	body, err := html.PostprocessFile(content.dirpath + "/content.html")
 	if err != nil {
@@ -161,10 +166,15 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 
 	content, ok := s.pages[p]
 	if !ok {
-		// it could be an old page, return an error and let caller deal
 		return fmt.Errorf("newServer: servePage: Not found")
 	}
 	log.Printf("newServer: servePage: page: %s\n", content.Title)
+
+	if !content.Published {
+		log.Printf("newServer: servePage: not serving unpublished: %s\n", content.Title)
+		s.serve404(w, r)
+		return nil
+	}
 
 	body, err := html.PostprocessFile(content.dirpath + "/content.html")
 	if err != nil {
