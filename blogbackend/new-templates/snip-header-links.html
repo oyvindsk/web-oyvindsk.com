@@ -24,18 +24,22 @@
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/projects" title="Projects &amp; Clients">Projects &amp; Clients</a>
         {{ end }}
 
+        <!--
         {{ if eq .Activepage "about" }}     <a class="{{ $commonClasses }} b"   href="/about" title="About">About</a>
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/about" title="About">About</a>
         {{ end }}
+        -->
 
         {{ if eq .Activepage "contact" }}   <a class="{{ $commonClasses }} b"   href="/contact" title="Contact">Contact</a>
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/contact" title="Contact">Contact</a>
         {{ end }}
-
+        
+        <!--
         {{ if eq .Activepage "now" }}       <a class="{{ $commonClasses }} b"   href="/now" title="Now">Now</a>
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/now" title="Now">Now</a>
         {{ end }}
-
+        -->
+        
         <!--
         {{ if eq .Activepage "" }}          <a class="{{ $commonClasses }} b"   href="/" title="Home">Home</a>
         {{ else }}                          <a class="{{ $commonClasses }}"     href="/" title="Home">Home</a>
