@@ -2,9 +2,10 @@
 Diff fra AE:
 
 ++
-
+ + Can run Docker images
 --
- - No traffic split
+ - Must run Docker images 
+ - Can't test versions without traffic (?) In AE all deloys, even with 0 traffic gets their own url and can be called directly
 
 Other:
 
