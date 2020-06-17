@@ -86,8 +86,8 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 ** Image in blogposts: Scale on mobile? midtstill?
 * PDFs:
 ** Better filename when downloading pdfs
+** Link to CVs do not work (beacuse of the ø?)
 ** Can relative links work in pdfs?
-** test pdf links in check-exptected-links_test.go
 
 == License
 Go code (*.go files) are MIT / BSD 2-clause. Files in the static directory have their own licenses, see the files themselves. The css files in static/ have an unknown license, but was pretty much copied from http://www.alexedwards.net/.

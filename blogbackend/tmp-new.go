@@ -139,12 +139,12 @@ func (s serverNew) serveBlogpost(w http.ResponseWriter, r *http.Request) error {
 
 func (s serverNew) serveBlogpostPDF(w http.ResponseWriter, r *http.Request) {
 
-	// turn the req path into a relative disk path, e.g.:
+	// turn the req path into a path for the pdf on disk, e.g.:
 	// 	/writing/how-to-use-google-cloud-storage-with-golang/full.pdf
 	// 		==>
-	// 	new-content/blogposts/how-to-use-google-cloud-storage-with-golang/full.pdf
+	// 	/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/how-to-use-google-cloud-storage-with-golang/full.pdf
 	//
-	// split so we can ignore the /writing/ part of the url
+	// split so we can ignore the /writing/ and "full.pdf" part of the url
 	ps := strings.Split(r.URL.Path, "/") // strigs split since this is not a filepath yet
 	if len(ps) != 4 {
 		log.Printf("newServer: serveBlogpostPDF: failed: path looks wrong: %q => %#v", r.URL.Path, ps)
@@ -152,9 +152,19 @@ func (s serverNew) serveBlogpostPDF(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// log.Printf("ps:\n%#v\n%#v\n", ps, s.blogposts[ps[2]])
+
+	content, ok := s.blogposts[ps[2]]
+	if !ok {
+		log.Printf("newServer: serveBlogpostPDF: failed: 404 for servepath: %q", ps[2])
+		s.serve404(w, r)
+		return
+	}
+
 	// full path on disk
-	fp := filepath.Join(s.cfg.pathBlogposts, ps[2], ps[3])
-	log.Printf("newServer: serveBlogpostPDF: looking for filepath: %q", fp)
+	fp := filepath.Join(content.dirpath, "full.pdf")
+	// log.Printf("newServer: serveBlogpostPDF: looking for filepath: %q", fp)
+
 	http.ServeFile(w, r, fp)
 }
 
@@ -198,13 +208,8 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 	}
 
 	// Figure out the PDF link
-	// with a specialcase for the homepage, it's too different from the others
-	if p == "/" {
-		tInput.PDFurl = "/home/full.pdf"
-	} else {
-		tInput.PDFurl = fmt.Sprintf("/%s/full.pdf", p)
-	}
 
+	tInput.PDFurl = filepath.Join("/", p, "full.pdf")
 	// Execute the blog template with all the data in tInput
 	err = t.ExecuteTemplate(w, "page", tInput)
 	if err != nil {
@@ -215,9 +220,39 @@ func (s serverNew) servePage(w http.ResponseWriter, r *http.Request) error {
 }
 
 func (s serverNew) servePagePDF(w http.ResponseWriter, r *http.Request) {
-	filepath := path.Join(s.cfg.pathPages, r.URL.Path)
-	log.Printf("newServer: servePDF: looking for filepath: %q", filepath)
-	http.ServeFile(w, r, filepath)
+
+	// turn the req path into a path for the pdf on disk, e.g.:
+	// 	/hire-me/full.pdf
+	// 		==>
+	// 	/home/os/web-oyvindsk.com/blogbackend/new-content/pages/hire-me/full.pdf
+	//
+	// split so we can ignore the "full.pdf" part of the url
+	var p string
+	if r.URL.Path == "/full.pdf" {
+		// Dumb special case for /full.pdf , since it's different from all the others
+		p = "/"
+	} else {
+		ps := strings.Split(r.URL.Path, "/") // strigs split since this is not a filepath yet
+		if len(ps) != 3 {
+			log.Printf("newServer: servePagePDF: failed: path looks wrong: %q => %#v", r.URL.Path, ps)
+			s.serve500(w, r)
+			return
+		}
+		p = ps[1]
+	}
+
+	content, ok := s.pages[p]
+	if !ok {
+		log.Printf("newServer: servePagePDF: failed: 404 for servepath: %q", p)
+		s.serve404(w, r)
+		return
+	}
+
+	// full path on disk
+	fp := filepath.Join(content.dirpath, "full.pdf")
+	// log.Printf("newServer: servePagePDF: looking for filepath: %q", fp)
+
+	http.ServeFile(w, r, fp)
 }
 
 func (s serverNew) serve404(w http.ResponseWriter, r *http.Request) {
