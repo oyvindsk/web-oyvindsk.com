@@ -1,0 +1,45 @@
+
+= AsciiDoc Runner
+Recursivly finds all AsciiDoc (.adoc) files and generates html and pdf output. 
+
+It finds the files and "shells out" to do the actual work. It also uses a simple hash scheme to speed things up by not generating the same output more than once.
+
+I use it in https://github.com/oyvindsk/web-oyvindsk.com and commit all the output to git. That way I can run it on multiple machines without re-generating unchanged content. 
+
+Example output:
+
+* HTML: https://github.com/oyvindsk/web-oyvindsk.com/blob/master/blogbackend/new-content/pages/projects/content.html 
+* HTML, after post-processing: https://oyvindsk.com/projects
+* PDF: https://oyvindsk.com/projects/full.pdf
+
+(these links could die when I restructure the code. In that case, see https://oyvindsk.com for example output)
+
+== Example:
+    go run *.go ../blogbackend/
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/  build-docker-from-source", hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/  common-golang-mistakes-1", hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/  go-remote-jobs", hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/  how-to-use-google-cloud-storage-with-golang", hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/  reasons-redis-is-awesome", hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/blogposts/test-1",  hash match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/pages/about", hash  match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/pages/contact", hash    match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/pages/hire-me", hash    match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/pages/home", hash   match!
+    Skipping "/home/os/web-oyvindsk.com/blogbackend/new-content/pages/now", hash match!
+    Generating all static files in folder "/home/os/web-oyvindsk.com/blogbackend/   new-content/pages/projects"
+    Done!
+    done!
+
+
+== Dependencies: 
+* AsciiDoctor: The newer Ruby implementation for Asciidoc. Used for html generation
+* Asciidoc:    The original python implementation, used for pdf creation
+* dblatex:     DocBook to PDF (and others) converter using latex.
+** So also Latex and some DocBook stuff =/
+
+==== On Arch Linux
+    pacman -S asciidoc
+    pacman -S asciidoctor
+    pacman -S dblatex       # somewhat heavy =/
+

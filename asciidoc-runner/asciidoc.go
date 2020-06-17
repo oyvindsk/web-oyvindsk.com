@@ -66,7 +66,7 @@ func runDoctorHTML(inputpath, outputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runDoctorHTML: %w", err)
+		return fmt.Errorf("runDoctorHTML: %w, cmd output: %s", err, stdoutStderr)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -97,7 +97,7 @@ func runDoctorDocbook(inputpath, outputpath string, meta metadata.M) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runDoctorDocbook: %w", err)
+		return fmt.Errorf("runDoctorDocbook: %w, cmd output: %s", err, stdoutStderr)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -120,7 +120,7 @@ func runOriginalPDF(inputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runOriginalPDF: %w", err)
+		return fmt.Errorf("runOriginalPDF: %w, cmd output: %s", err, stdoutStderr)
 	}
 
 	if len(stdoutStderr) != 0 {
@@ -137,7 +137,7 @@ func runOriginalHTML(inputpath, outputpath string) error {
 
 	stdoutStderr, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("runOriginalHTML: %w", err)
+		return fmt.Errorf("runOriginalHTML: %w, cmd output: %s", err, stdoutStderr)
 	}
 
 	if len(stdoutStderr) != 0 {
