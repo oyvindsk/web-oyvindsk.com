@@ -72,9 +72,13 @@ as well as databases etc.
 
 
 == Background
-After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014.
+After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014. Since then I’ve taken contract work and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
 
+For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
+* link:https://www.linkedin.com/in/oskaar/[LinkedIn] 
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English CV (PDF)] 
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian CV (PDF)] 
 // After studying computer science and working for a few years, I left my job in 2014 to start my own company and work as a freelancer and independent consultant.
 // I've done quite a few things since then.
 // Primarily, I've worked with startups and other innovative companies that use newer technologies and have a knack for creative, pragmatic solutions.

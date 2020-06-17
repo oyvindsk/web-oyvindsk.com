@@ -18,3 +18,7 @@ You can email me at hello@oyvindsk.com or use https://oyvindsk.com/contact
 * link:http://www.linkedin.com/in/oskaar[LinkedIn]
 * link:http://twitter.com/oyvindsk[Twitter] (inactive)
 * link:http://github.com/oyvindsk[Github]
+
+=== CV
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English (PDF)] 
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian (PDF)] 
