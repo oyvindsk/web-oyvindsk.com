@@ -65,8 +65,6 @@ Prototype, backend (App Engine), technical architecture.
 reMarkable created a new type of device, a "paper tablet" to read, write and sketch on.
 I started working with them early on, in 2016, and created the first version of their cloud services. link:https://remarkable.com/[reMarkable Website]
 
-reMarkable has created the the only digital device that feels like paper. I started working with them early on, in 2016, and created the first version of their cloud services. 
-
 Initially, the main point of the cloud service was to sync your notes, drawings and documents to your phone and computers. The cloud backen has now grown quite a lot and more people have joined the team in the last couple of years. 
 
 === Challenges
@@ -83,11 +81,14 @@ Initially, the main point of the cloud service was to sync your notes, drawings 
 [[intolife1]]
 == Intolife
 I also make and support a webapp for Intolife. The web-based application, called IntoFood helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners. 
+
+This webapp was built over several years. We started with basic data import and report generation and gradually added a few needed features. It is used by customers, but no longer activly developed. I maintain and run it in Google Cloud. 
+
 (link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood])
 
 
 
-=== Intolife: IntoFood, a substainable food managment system
+=== IntoFood, a substainable food managment system
 2014 - Present
 
 Backend, frontend, architecture
@@ -96,7 +97,8 @@ Backend, frontend, architecture
 link:http://tv.nrk.no/serie/dagsrevyen/NNFA02050915/09-05-2015#t=17m32s[TV - NRK Lørdagsrevyen 9. mai 2015 (Norwegian)]
                     
 ==== Links
-http://intolife.no/                    
+* http://intolife.no/
+* link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood]               
                     
 ==== About Intolife
 ____
@@ -150,7 +152,7 @@ ____
 We launched this project to make it possible to integrate the _Intolife web application_ with third parties. These third parties are typically customers and partners. They can use the API to include  waste and emission data (GHG) in their own software and appliances. Using the API they can get this data automatically, without human interaction.
                     
 ==== Results
-The API is  functional and in "beta" status. Documentation was written to make it easier to implement the API. Intolife is currently in talks with potential early adopters.
+The API is up and running and is used by IntoLife customers. Documentation was written to make it easier to implement the API. 
 
 The API opens up a whole lot of new possibilities. Use-cases that would otherwise involve too much human labor are now quick and easy.
 
@@ -187,10 +189,64 @@ Goals: Avoid the most common mistakes and get up and running quicker.
 * All new tech stack: Beginning with cloud and a new programming language means switching tech stack completely and therefore learning a number of new technologies at the same time. Luckily, there are some easy wins to be had.
 
 
+[[villoid]]
+== Villoid: Backend Servers and API
+2015
 
-[[swissblog]]
-== Blog engine for a Swiss media company
-Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language. 
+Backend programming (Python and Django), freelance
+
+=== Press
+* link:http://www.forbes.com/sites/sboyd/2015/09/15/alexa-chung-debuts-villoid-fashion-app/[Forbes]
+
+* link:http://www.reuters.com/article/villoid-idUSnBw106279a+100+BSW20150910[Reuters]
+
+* link:http://www.dn.no/etterBors/2015/10/18/1934/Medier/fotomodell-lfter-norsk-app-til-topps[Dagens Næringsliv (Norwegian)]
+
+=== Links
+https://www.villoid.com
+                    
+=== Villoid - Your social fashion app
+Villoid (previously Sobazaar) is a social fashion and shopping app  for Apple devices. They have a fairly large user-base in Norway and expanded to the US autumn 2015.
+                    
+I freelanced for them during the summer of 2015. The work revolved around the backend: implementing new features and making it more scalable. The expanding user-base created some unique technical challenges. Rapid development, with short cycles,  made it a interesting place to work.
+                    
+Beeing a startup means things move fast. One of the advantages of using freelancers is the short start-up time. Villoid needed someone with backend skills to join their team, and they did not have time to wait for a normal hiring process.
+                    
+=== Technologies
+* Python
+* Django
+* Cloud Computing (IaaS): Amazon Web Services (AWS)
+* Docker
+* MySQL
+
+
+
+
+[[picturus]]
+== Picterus: Backend API for mobile app (Subcontractor)
+2015
+
+REST API design and implementation. Backend (php)
+
+=== Links
+http://www.picterus.com
+
+Picturus  is a medial app designed to diagnose Jaundice in newborns.
+Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
+
+A team is therefore working on developing a smartphone app capable of diagnosing this condition.
+                    
+As a sub-contractor I developed a small part of this app. Within my speciality in back-end systems I created a REST API to support features in the app that relies on something outside the device itself.
+                    
+=== Technologies
+* PHP
+* PostgreSQL
+* Sqlite (development environment)
+* Standard Norwegian webhost
+
+
+
+
 
 
 
@@ -253,67 +309,10 @@ But let's not forget the positives:
 
 No code to show as this was payed work for a client.
         
-    
-  
- 
 
-
-
-[[picturus]]
-== Picterus: Backend API for mobile app (Subcontractor)
-2015
-
-REST API design and implementation. Backend (php)
-
-=== Links
-http://www.picterus.com
-
-Picturus  is a medial app designed to diagnose Jaundice in newborns.
-Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
-
-A team is therefore working on developing a smartphone app capable of diagnosing this condition.
-                    
-As a sub-contractor I developed a small part of this app. Within my speciality in back-end systems I created a REST API to support features in the app that relies on something outside the device itself.
-                    
-=== Technologies
-* PHP
-* PostgreSQL
-* Sqlite (development environment)
-* Standard Norwegian webhost
-                    
-
-
-[[villoid]]
-== Villoid: Backend Servers and API
-2015
-
-Backend programming (Python and Django), freelance
-
-=== Press
-* link:http://www.forbes.com/sites/sboyd/2015/09/15/alexa-chung-debuts-villoid-fashion-app/[Forbes]
-
-* link:http://www.reuters.com/article/villoid-idUSnBw106279a+100+BSW20150910[Reuters]
-
-* link:http://www.dn.no/etterBors/2015/10/18/1934/Medier/fotomodell-lfter-norsk-app-til-topps[Dagens Næringsliv (Norwegian)]
-
-=== Links
-https://www.villoid.com
-                    
-=== Villoid - Your social fashion app
-Villoid (previously Sobazaar) is a social fashion and shopping app  for Apple devices. They have a fairly large user-base in Norway and expanded to the US autumn 2015.
-                    
-I freelanced for them during the summer of 2015. The work revolved around the backend: implementing new features and making it more scalable. The expanding user-base created some unique technical challenges. Rapid development, with short cycles,  made it a interesting place to work.
-                    
-Beeing a startup means things move fast. One of the advantages of using freelancers is the short start-up time. Villoid needed someone with backend skills to join their team, and they did not have time to wait for a normal hiring process.
-                    
-=== Technologies
-* Python
-* Django
-* Cloud Computing (IaaS): Amazon Web Services (AWS)
-* Docker
-* MySQL
-
-
+[[swissblog]]
+== Blog engine for a Swiss media company
+Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language. 
 
 
 == Other projects

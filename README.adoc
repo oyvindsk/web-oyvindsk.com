@@ -85,6 +85,7 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 ** Nye sider: Home, Hire Me, Projects and Clients, Contact me, Now
 ** Image in blogposts: Scale on mobile? midtstill?
 * PDFs:
+** Better filename when downloading pdfs
 ** Can relative links work in pdfs?
 ** test pdf links in check-exptected-links_test.go
 
