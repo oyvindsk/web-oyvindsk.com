@@ -11,7 +11,7 @@ image::øyvind.jpg[]
 Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
 
 [role=lead]
-I am *currently looking for new projects*. See <<availability>> for the details. 
+I am currently building an MVP for HeiPetter. *Looking for new projects starting in September or later*. See <<availability>> for the details. 
 
 == What I can help you with
 Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than necessary because you don't have enough programmers?
@@ -95,14 +95,14 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 [[availability]]
 == Availability in 2020
-I have time for new projects in 2020:
+I'm currently quite busy, but I have time for new projects later in 2020:
 
 [cols=2]
 |===     
 |July:
-| Partily availible for new projects
+| Little or no time for new projects
 |August:
-|Partily availible for new projects
+| Little or no time for new projects
 |September:
 | Availible for new projects
 |October:
@@ -112,7 +112,7 @@ I have time for new projects in 2020:
 |December:
 | Availible for new projects
 |===
-(last updated: 9th June 2020)
+(last updated: July 10th 2020)
     
 
 [[contact]]
