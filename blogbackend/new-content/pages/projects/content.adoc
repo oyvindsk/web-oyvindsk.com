@@ -9,7 +9,7 @@ June 2020
 // link="https://oyvindsk.com/projects/full.pdf"]
 
 == Projects for Clients
-I’ve taken contract work since 2014 and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
+I’ve taken contract work since 2014 and worked on 12 projects for 9 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
 
 link:https://oyvindsk.com/hire-me[Interested in working together? See this page].
 
@@ -65,12 +65,12 @@ Prototype, backend (App Engine), technical architecture.
 reMarkable created a new type of device, a "paper tablet" to read, write and sketch on.
 I started working with them early on, in 2016, and created the first version of their cloud services. link:https://remarkable.com/[reMarkable Website]
 
-Initially, the main point of the cloud service was to sync your notes, drawings and documents to your phone and computers. The cloud backen has now grown quite a lot and more people have joined the team in the last couple of years. 
+Initially, the main point of the cloud service was to sync your notes, drawings and documents to your phone and computers. The cloud backen has now grown quite a lot and more people have joined the team in the last couple of years.
 
 === Challenges
 * Real-time: Parts of the system requires soft real time attributes.
 
-* Novel: Parts of this system is quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices". 
+* Novel: Parts of this system is quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices".
 
 * Scale: Potentially large amount of concurrent users.
 
@@ -80,9 +80,9 @@ Initially, the main point of the cloud service was to sync your notes, drawings 
 
 [[intolife1]]
 == Intolife
-I also make and support a webapp for Intolife. The web-based application, called IntoFood helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners. 
+I also make and support a webapp for Intolife. The web-based application, called IntoFood helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners.
 
-This webapp was built over several years. We started with basic data import and report generation and gradually added a few needed features. It is used by customers, but no longer activly developed. I maintain and run it in Google Cloud. 
+This webapp was built over several years. We started with basic data import and report generation and gradually added a few needed features. It is used by customers, but no longer activly developed. I maintain and run it in Google Cloud.
 
 (link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood])
 
@@ -92,25 +92,25 @@ This webapp was built over several years. We started with basic data import and 
 2014 - Present
 
 Backend, frontend, architecture
-                     
+
 ==== Press
 link:http://tv.nrk.no/serie/dagsrevyen/NNFA02050915/09-05-2015#t=17m32s[TV - NRK Lørdagsrevyen 9. mai 2015 (Norwegian)]
-                    
+
 ==== Links
 * http://intolife.no/
-* link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood]               
-                    
+* link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood]
+
 ==== About Intolife
 ____
 More and more customers want healthy & sustainable food choices. IntoLife's toolkits will help you to do this by improving menu sustainability and cutting your food waste by half. Our technology solutions put sustainability into your business operations, allowing you to develop sustainable menus and reduce your food waste
 ____
-                                   
+
 Intolife works with restaurants, caterers and other players in the food industry. They help them cut their environmental impact. And to do it in a way that makes sense for their business. Intolife can also help them use this in their marketing.  Intolife is a young and emerging company that innovates on several fronts. Few things are set in stone. As with most innovative projects, they have goals and know where they want to go, but not always how to get there. It’s important for them to always learn and adapt to the marked.
 
 ==== The Project
 The workflow used by Intolife before this project was based on Excel and manual data input. This worked fine. But it was time-consuming and limited the possibilities for interacting with third parties.  With this project we created a fully customized web-based application (so called Software as a Service, or Saas) for Intolife. The goals where to cut down the time required for data entry and to automatically generate reports.  We also wanted to allow for future expansion and integration with other software and services.
 We developed this project using  lean startup methodologies. This gave us more flexibility. It also saved money by avoiding the development of unnecessary features.
-                    
+
 ==== Results
 The result is a web-based application that helps with data-input and report generation. This helped Intolife use approximately 50% less time on each of their projects. The application is used mainly by Intolife, but it's also open to other partners and customer. It generates reports with 1 click. Since flexibility is important, we develop the software in phases, with their own milestones. This made  it possible to quickly incorporate the lessons learned during development into the project.  We meet the short-term needs while keeping the software open for future development.
 
@@ -150,20 +150,20 @@ ____
 
 ==== Project background
 We launched this project to make it possible to integrate the _Intolife web application_ with third parties. These third parties are typically customers and partners. They can use the API to include  waste and emission data (GHG) in their own software and appliances. Using the API they can get this data automatically, without human interaction.
-                    
+
 ==== Results
-The API is up and running and is used by IntoLife customers. Documentation was written to make it easier to implement the API. 
+The API is up and running and is used by IntoLife customers. Documentation was written to make it easier to implement the API.
 
 The API opens up a whole lot of new possibilities. Use-cases that would otherwise involve too much human labor are now quick and easy.
 
 ==== What we learned
-                    
+
 *Moving forward in the face of uncertainty.* This project faces some challenges, that are in many ways quite typical for startup projects. The first of these is the question of exactly what we are making. We had a good sense of where we were heading and why. But neither we or Intolife's customers and partners had a concrete case in mind. We were treading new ground and the customers do not always know exactly what they want until they see it. This lead to a "catch-22" situation. We needed to show something for people to understand the use-case. But, at the same time we needed customer feedback to make it in the first place. There's no easy, magical solution to this. The way through seems to be to learn as much as possible while spending as little time and money as possible. In this case we implemented a first version of the API in cooperation with one of the customers. We will use this first version to get feedback and drive customer engagement. Improve and iterate, or `build measure learn` as Eric Ries puts it.
 
 *Extending existing system does not have to be hard.* There was also a perceived challenge to fit this new API "on top" of the existing code and data model. Although it's certainly easier to start with a clean slate, this turned out to be quite manageable. The web application was made in a way that makes it easy to extend. The right level of flexibility and fairly clean and  commented code makes this possible.
 
 *Writing documentation is time-consuming.* The time and effort needed to write good API documentation surprised me. It was worth it though, as having this is crucial for adaptation of the API. I've previously experienced how missing or lacking documentation can make it unnecessary difficult to implement external APIs.
-                    
+
 ==== Technologies
 * Perl 5
 * Nginx
@@ -179,9 +179,9 @@ The API opens up a whole lot of new possibilities. Use-cases that would otherwis
 
 [[schlumberger]]
 == Schlumberger
-Helped a team at Schlumberger Norway getting up and running with web API's, Google Cloud Platform and Go. 
+Helped a team at Schlumberger Norway getting up and running with web API's, Google Cloud Platform and Go.
 Goals: Avoid the most common mistakes and get up and running quicker.
-        
+
 
 === Challenges
 * Legacy software: They were in the early phases of transforming some of their legacy systems to use the cloud. Since legacy systems are not made with the cloud in mind, this typically poses challenges.
@@ -204,14 +204,14 @@ Backend programming (Python and Django), freelance
 
 === Links
 https://www.villoid.com
-                    
+
 === Villoid - Your social fashion app
 Villoid (previously Sobazaar) is a social fashion and shopping app  for Apple devices. They have a fairly large user-base in Norway and expanded to the US autumn 2015.
-                    
+
 I freelanced for them during the summer of 2015. The work revolved around the backend: implementing new features and making it more scalable. The expanding user-base created some unique technical challenges. Rapid development, with short cycles,  made it a interesting place to work.
-                    
+
 Beeing a startup means things move fast. One of the advantages of using freelancers is the short start-up time. Villoid needed someone with backend skills to join their team, and they did not have time to wait for a normal hiring process.
-                    
+
 === Technologies
 * Python
 * Django
@@ -235,9 +235,9 @@ Picturus  is a medial app designed to diagnose Jaundice in newborns.
 Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
 
 A team is therefore working on developing a smartphone app capable of diagnosing this condition.
-                    
+
 As a sub-contractor I developed a small part of this app. Within my speciality in back-end systems I created a REST API to support features in the app that relies on something outside the device itself.
-                    
+
 === Technologies
 * PHP
 * PostgreSQL
@@ -255,24 +255,24 @@ As a sub-contractor I developed a small part of this app. Within my speciality i
 2015
 
 Backend (App Engine), technical architecture
-             
+
 === Project background
 `A social media engagement platform for e-merchants`
 
 Shout out Referral is a referral system for web-shops that merges  e-commerce with social media. It's a new project from individuals with success from other e-commerce ventures.  The projects is still in the prototype MVP / phase.
 They had a good idea and e-commerce experience. What they needed was someone with technical know-how and developer background to help them move forward from the idea phase.
-                    
+
 === Results
 I helped draw up the technical architecture and the rest of the technology stack. After figuring out what the core features are, I implemented a simple prototype. The purpose was twofold: to  explore the possibilities and limitations of  different social media providers, and secondly to show off the idea.
 We ended up with a simple, but working prototype. It shows off a typical use-case for the product. Developing the prototype taught us much. We explored the different social media providers. The merging of different technologies unveiled some unexpected results. Also, we learned that authenticating with many social media providers make identity handling challenging.
 
 Developing a prototype was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it's important to check these assumptions as early as possible.
-                    
+
 === What we learned
 This project depends heavily on social media integrations. We soon discovered that not all the providers have equally good APIs. Also, the different providers have different policies and guidelines. Since these factors are outside our control, these limitations can not be "fixed". We must work around them. The advantage of following lean practices are clear here. We discovered these limitations early in the process, before wasting time on creating the wrong plans and unneeded code.
 
 Using new technology can be unpredictable. There can be hidden advantages and disadvantages. Hidden disadvantages are likely more common, the advantages are often well promoted.  In making the prototype we used somewhat new and unknown technology.  In particular, the open source OAuth / Oauth2 library for Golang did not support App Engine. I therefore had to modify it. This was unexpected and made developing the social media log-ins ten times as time-consuming  as expected. However, more often than not, the advantages new technologies bring will be worth the effort.
-                    
+
 === Implementation details
 
 * Go (Golang)
@@ -281,10 +281,10 @@ Using new technology can be unpredictable. There can be hidden advantages and di
 
 * Google App Engine (Cloud PaaS)
 ** Datastore
-                            
+
 * Social Media APIs: Facebook, Twitter, Pintrest
 
-The prototype connects to social media like Facebook and Twitter. The full version would run in, and integrate with, a webshop. 
+The prototype connects to social media like Facebook and Twitter. The full version would run in, and integrate with, a webshop.
 
 I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
 
@@ -308,18 +308,18 @@ But let's not forget the positives:
 * Google cloud has so many cool tools to play with. Some of them gives you the power of thousands of servers and can thus take a heavy task form 10 minutes to 10 seconds.
 
 No code to show as this was payed work for a client.
-        
+
 
 [[swissblog]]
 == Blog engine for a Swiss media company
-Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language. 
+Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language.
 
 
 == Other projects
 
 [[blog]]
 === This blog, oyvindsk.com
-I wrote my own website backend and blog engine in Go, using AsciiDoc and Tachyons css . It's a playgroaund for testing new technologies and crazy ideas =) 
+I wrote my own website backend and blog engine in Go, using AsciiDoc and Tachyons css . It's a playgroaund for testing new technologies and crazy ideas =)
 
 https://github.com/oyvindsk/web-oyvindsk.com
 
@@ -338,7 +338,7 @@ Like most of these projects it's partly for the usefulness, partly for learning 
 * How should the throttling work? Per source IP? Per email domain (@gmail.com)? Can we save time by not re-connecting to the same smtp server all the time? How much traffic can you send to a server before you create problems for them? Or before they block you?    Solution: Start simple and "slow". Gradually crank it up and incorporate what you learn.
 
 * Running it in containers (Docker) changes things a little bit. The biggest reason to run it on multiple machines is to get many source ip's. But with containers it could place all the workers on the same machine. It was tested in something called Rancher, which "fixes" this, but has a bug that complicates the NSQ deployment.
-        
-link:https://github.com/oyvindsk/go-email-address-check/[Github (with code and even more text)]  
+
+link:https://github.com/oyvindsk/go-email-address-check/[Github (with code and even more text)]
 
 link:http://nsq.io/[NSQ]

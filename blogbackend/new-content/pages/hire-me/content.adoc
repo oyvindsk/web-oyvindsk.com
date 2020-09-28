@@ -11,7 +11,7 @@ image::øyvind.jpg[]
 Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
 
 [role=lead]
-I am currently building an MVP for HeiPetter. *Looking for new projects starting in September or later*. See <<availability>> for the details. 
+I am currently the CTO of link:http://heipetter.no[HeiPetter] and consulting for Shortcut. See <<availability>> for the details.
 
 == What I can help you with
 Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than necessary because you don't have enough programmers?
@@ -25,16 +25,16 @@ Please don't hesitate to contact me if you are unsure of what kind of developer 
 For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
 == How I preffer to work
-I strongly prefer simplicity and strive for it whenever possible. 
+I strongly prefer simplicity and strive for it whenever possible.
 
 
 === Technology
 
-My current language of choice is link:http://golang.org[Go (golang)] and I build systems on the link:http://cloud.google.com[Google Cloud Platform]. 
+My current language of choice is link:http://golang.org[Go (golang)] and I build systems on the link:http://cloud.google.com[Google Cloud Platform].
 
-To be honest, I do not think choosing the "right" technology is very important. Usually, there are many that will do the trick and there are many ways to get the job done. There are, of course, exceptions. But for most projects choosing one technology over another does not give any great advantages. 
+To be honest, I do not think choosing the "right" technology is very important. Usually, there are many that will do the trick and there are many ways to get the job done. There are, of course, exceptions. But for most projects choosing one technology over another does not give any great advantages.
 
-It is much more important to know your tools and their strengths and weaknesses. That's what I'm achieving by sticking with a few selected technologies. So while it's fun to learn new things and tempting to jump on the latest fashions, it can be harmful to productivity and the goals of the business footnote:[The customer does not care what programming language you use or if your running Istio or not. They _might_ care how often you deploy].  I try to counteract this by trying new things on my own time. 
+It is much more important to know your tools and their strengths and weaknesses. That's what I'm achieving by sticking with a few selected technologies. So while it's fun to learn new things and tempting to jump on the latest fashions, it can be harmful to productivity and the goals of the business footnote:[The customer does not care what programming language you use or if your running Istio or not. They _might_ care how often you deploy].  I try to counteract this by trying new things on my own time.
 
 Other, important are things, are:
 
@@ -42,19 +42,19 @@ Other, important are things, are:
 * Understanding the larger picture. What are we making and why?
 * Understanding the priorities of the business. Is 99.99% uptime critical?  Time-to-market? Or maybe giving yourselvs many chances of succeeding by saving money and taking sane shortcuts.
 
-Having said that, there are reasons I choose to work with Go and the Google Cloud Platform. I like Go, both the simplicity of the language and the culture of pragmatism. It's a language very well suited for building back-end servers. Google Cloud Platform also has its strengths. I've always been a fan of their first platform-as-a-service, App Engine. They also seem to have a even stronger focus on pay-for-what-you-use than other cloud providers. 
+Having said that, there are reasons I choose to work with Go and the Google Cloud Platform. I like Go, both the simplicity of the language and the culture of pragmatism. It's a language very well suited for building back-end servers. Google Cloud Platform also has its strengths. I've always been a fan of their first platform-as-a-service, App Engine. They also seem to have a even stronger focus on pay-for-what-you-use than other cloud providers.
 
-I have experience with many different technologies and programming languages. Especially on the back-end. And, of course, I also know "adjacent" tools used by modern cloud-native deployments, such as: 
-link:http://docker.com[Docker], 
-link:https://kubernetes.io[Kubernetes], 
-link:http://git-scm.com[Git] and CI/CD systems. 
-I've worked with severeal databases and datastores, mainly the Google Cloud native ones:  
-link:https://cloud.google.com/firestore[Datastore / Firestore], 
-link:https://cloud.google.com/storage[Storage] and 
-link:https://cloud.google.com/sql[Cloud SQL]. Outside of GCP I've used  
-link:https://www.mysql.com/[MySQL / MariaDB] extensivly,  
-link:https://www.postgresql.org/[PostgreSQL], 
-link:https://redis.io/[Redis] and 
+I have experience with many different technologies and programming languages. Especially on the back-end. And, of course, I also know "adjacent" tools used by modern cloud-native deployments, such as:
+link:http://docker.com[Docker],
+link:https://kubernetes.io[Kubernetes],
+link:http://git-scm.com[Git] and CI/CD systems.
+I've worked with severeal databases and datastores, mainly the Google Cloud native ones:
+link:https://cloud.google.com/firestore[Datastore / Firestore],
+link:https://cloud.google.com/storage[Storage] and
+link:https://cloud.google.com/sql[Cloud SQL]. Outside of GCP I've used
+link:https://www.mysql.com/[MySQL / MariaDB] extensivly,
+link:https://www.postgresql.org/[PostgreSQL],
+link:https://redis.io/[Redis] and
 link:https://sqlite.org[SQLite]. Lately I've taken an interest in graph databases, especailly link:https://dgraph.io[Dgraph].
 
 Other past experice includes:
@@ -68,7 +68,7 @@ link:http://mojolicio.us[(w/ Mojolicious)],
 link:http://php.net[PHP] and
 link:http://ruby-lang.org[Ruby]
 link:http://rubyonrails.org/[(w/ Rails)],
-as well as databases etc. 
+as well as databases etc.
 
 
 == Background
@@ -76,9 +76,9 @@ After finishing my MSc in Informatics in 2010 I worked as a back-end developer, 
 
 For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
-* link:https://www.linkedin.com/in/oskaar/[LinkedIn] 
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English CV (PDF)] 
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian CV (PDF)] 
+* link:https://www.linkedin.com/in/oskaar/[LinkedIn]
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English CV (PDF)]
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian CV (PDF)]
 // After studying computer science and working for a few years, I left my job in 2014 to start my own company and work as a freelancer and independent consultant.
 // I've done quite a few things since then.
 // Primarily, I've worked with startups and other innovative companies that use newer technologies and have a knack for creative, pragmatic solutions.
@@ -91,29 +91,29 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 
-    
+
 
 [[availability]]
 == Availability in 2020
-I'm currently quite busy, but I have time for new projects later in 2020:
+I'm currently quite busy =/
 
 [cols=2]
-|===     
+|===
 |July:
 | Little or no time for new projects
 |August:
 | Little or no time for new projects
 |September:
-| Availible for new projects
+| Little or no time for new projects
 |October:
-| Availible for new projects
+| Little or no time for new projects
 |November:
-| Availible for new projects
+| Little or no time for new projects
 |December:
-| Availible for new projects
+| Little or no time for new projects
 |===
-(last updated: July 10th 2020)
-    
+(last updated: 28th of September 2020)
+
 
 [[contact]]
 == Contact me
