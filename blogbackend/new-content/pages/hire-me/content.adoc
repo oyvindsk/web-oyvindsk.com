@@ -48,7 +48,7 @@ I have experience with many different technologies and programming languages. Es
 link:http://docker.com[Docker],
 link:https://kubernetes.io[Kubernetes],
 link:http://git-scm.com[Git] and CI/CD systems.
-I've worked with severeal databases and datastores, mainly the Google Cloud native ones:
+I've worked with several databases and datastores, mainly the Google Cloud native ones:
 link:https://cloud.google.com/firestore[Datastore / Firestore],
 link:https://cloud.google.com/storage[Storage] and
 link:https://cloud.google.com/sql[Cloud SQL]. Outside of GCP I've used
