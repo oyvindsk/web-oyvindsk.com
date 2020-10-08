@@ -24,6 +24,56 @@ Please don't hesitate to contact me if you are unsure of what kind of developer 
 
 For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
+
+
+
+
+
+
+TODO / FIXME 
+When we’re thinking about software development as software developers, most of our focus
+is placed on the code. Here, we’re thinking about things like object oriented principles, func-
+tional programming principles, classes, interfaces, modules, inversion of control, refactoring,
+automated testing, clean code and the countless other technical practices that help us build
+better software. If your team consists of people who are only thinking about this, then who
+is thinking about the other things such as:
+•
+ Cross-cutting concerns; including logging, exception handling, etc.
+•
+ Security; including authentication, authorisation and confidentiality of sensitive data.
+•
+ Performance, scalability, availability and other quality attributes.
+•
+ Audit and other regulatory requirements.
+•
+ Real-world constraints of the environment.
+•
+ Interoperability/integration with other software systems.
+•
+ Operational, support and maintenance requirements.
+•
+ Structural consistency and integrity.
+•
+ Consistency of approaches to solving problems and implementing features across the
+codebase.
+• Evaluating that the foundations you’re building will allow you to deliver what you set
+out to deliver.
+• Keeping an eye on the future, and changes in the environment.
+In order to think about these things, you need to step back, away from the code and your
+development tools. Working software is ultimately about delivering working code, so the
+detail is crucially important. But software architecture is about having a holistic view across
+your software system, to ensure that your code is working toward your overall vision rather
+than against it.
+
+Simon Brown, 
+
+
+
+
+
+
+
+
 == How I preffer to work
 I strongly prefer simplicity and strive for it whenever possible.
 
