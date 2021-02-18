@@ -11,12 +11,13 @@ image::øyvind.jpg[]
 Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
 
 [role=lead]
-I am currently the CTO of link:http://heipetter.no[HeiPetter] and consulting for Shortcut. See <<availability>> for the details.
+// I am currently the CTO of link:http://heipetter.no[HeiPetter].
+Looking for new consultant opportunities starting soon. See <<availability>> for the details.
 
 == What I can help you with
-Are you working on building something new? Or maybe improving your existing back-end system? Do things move slower than necessary because you don't have enough programmers?
+Are you working on building something new? Or maybe improving your existing back-end system? Is it slow? Or simply more costly than it needs to be?
 
-Or maybe things are slow and you're looking to speed it up with newer technologies and smarter solutions?
+Do you lose customers and revenue because don't have enough programmers?
 
 My specialty is back-end, server-side technology and architecture. I help build scalable and fast cloud-based systems.
 
@@ -26,50 +27,42 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 
+// TODO / FIXME
+// When we’re thinking about software development as software developers, most of our focus
+// is placed on the code. Here, we’re thinking about things like object oriented principles, func-
+// tional programming principles, classes, interfaces, modules, inversion of control, refactoring,
+// automated testing, clean code and the countless other technical practices that help us build
+// better software. If your team consists of people who are only thinking about this, then who
+// is thinking about the other things such as:
+// •
+//  Cross-cutting concerns; including logging, exception handling, etc.
+// •
+//  Security; including authentication, authorisation and confidentiality of sensitive data.
+// •
+//  Performance, scalability, availability and other quality attributes.
+// •
+//  Audit and other regulatory requirements.
+// •
+//  Real-world constraints of the environment.
+// •
+//  Interoperability/integration with other software systems.
+// •
+//  Operational, support and maintenance requirements.
+// •
+//  Structural consistency and integrity.
+// •
+//  Consistency of approaches to solving problems and implementing features across the
+// codebase.
+// • Evaluating that the foundations you’re building will allow you to deliver what you set
+// out to deliver.
+// • Keeping an eye on the future, and changes in the environment.
+// In order to think about these things, you need to step back, away from the code and your
+// development tools. Working software is ultimately about delivering working code, so the
+// detail is crucially important. But software architecture is about having a holistic view across
+// your software system, to ensure that your code is working toward your overall vision rather
+// than against it.
 
-
-
-
-TODO / FIXME 
-When we’re thinking about software development as software developers, most of our focus
-is placed on the code. Here, we’re thinking about things like object oriented principles, func-
-tional programming principles, classes, interfaces, modules, inversion of control, refactoring,
-automated testing, clean code and the countless other technical practices that help us build
-better software. If your team consists of people who are only thinking about this, then who
-is thinking about the other things such as:
-•
- Cross-cutting concerns; including logging, exception handling, etc.
-•
- Security; including authentication, authorisation and confidentiality of sensitive data.
-•
- Performance, scalability, availability and other quality attributes.
-•
- Audit and other regulatory requirements.
-•
- Real-world constraints of the environment.
-•
- Interoperability/integration with other software systems.
-•
- Operational, support and maintenance requirements.
-•
- Structural consistency and integrity.
-•
- Consistency of approaches to solving problems and implementing features across the
-codebase.
-• Evaluating that the foundations you’re building will allow you to deliver what you set
-out to deliver.
-• Keeping an eye on the future, and changes in the environment.
-In order to think about these things, you need to step back, away from the code and your
-development tools. Working software is ultimately about delivering working code, so the
-detail is crucially important. But software architecture is about having a holistic view across
-your software system, to ensure that your code is working toward your overall vision rather
-than against it.
-
-Simon Brown, 
-
-
-
-
+// Simon Brown,
 
 
 
@@ -127,8 +120,8 @@ After finishing my MSc in Informatics in 2010 I worked as a back-end developer, 
 For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
 * link:https://www.linkedin.com/in/oskaar/[LinkedIn]
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English CV (PDF)]
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian CV (PDF)]
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[CV in English, with project descriptions (PDF)]
+* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[CV in Norwegian, summary (PDF)]
 // After studying computer science and working for a few years, I left my job in 2014 to start my own company and work as a freelancer and independent consultant.
 // I've done quite a few things since then.
 // Primarily, I've worked with startups and other innovative companies that use newer technologies and have a knack for creative, pragmatic solutions.
@@ -144,25 +137,25 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 [[availability]]
-== Availability in 2020
-I'm currently quite busy =/
+== Availability in 2021
+I'm currently looking for work starting March or late February.
 
 [cols=2]
 |===
-|July:
-| Little or no time for new projects
-|August:
-| Little or no time for new projects
-|September:
-| Little or no time for new projects
-|October:
-| Little or no time for new projects
-|November:
-| Little or no time for new projects
-|December:
-| Little or no time for new projects
+|February:
+|  Some free time last week of February
+|March:
+|  Time for new projects
+|April:
+|  Time for new projects
+|May:
+|  Time for new projects
+|March:
+|  Time for new projects
+|June:
+|  Time for new projects
 |===
-(last updated: 28th of September 2020)
+(last updated: 17th of February 2021)
 
 
 [[contact]]
