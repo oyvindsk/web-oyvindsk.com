@@ -1,9 +1,11 @@
 {{ define "headerLinks" }}
 
 {{ $borderClasses := "" }}
-{{ if eq .Activepage "writing" }}
-{{ $borderClasses = "bb b--yellow" }}
-{{ end }}    
+{{- /* 
+    {{ if eq .Activepage "writing" }}
+    {{ $borderClasses = "bb b--yellow" }}
+    {{ end }}
+*/ -}}
 
 
 <nav class="db dt-l w-100 border-box pa3 ph5-l bg-gold {{ $borderClasses }}">
