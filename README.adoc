@@ -1,4 +1,4 @@
- 
+
 = web-oyvindsk.com
 
 == About
@@ -17,12 +17,12 @@ Generate blog posts from AsciiDoc, styled using the Tachyons css toolkit.
 
 
 === Content flow
- AsciiDoc + metadata 
+ AsciiDoc + metadata
  => Asciidoc python or asciidoctor, run locally with ./asciidoc-runner
  => generates html and pdf
  => Find and load metadata files for pages and blogposts (.toml)
  => HTML PostProcess: fix some things, like absolute image urls, that are needed for PDFs generation but wrong in the html
- => HTML PostProcess: remove standard css classes and add Tachyons classes 
+ => HTML PostProcess: remove standard css classes and add Tachyons classes
  => Go Templates: Put together a complete page from html, metadata and templates
  => Serve the pdf as well, as an alternative
 
@@ -48,7 +48,7 @@ But Tachyons does not work this way. It expects you to style by putting the clas
 
 
 === Solution?
-The html coming out of AsciiDoctor does not "work" with Tachyons. Therefore we want to change that, remove the stuff we don't want (unneeded classes etc) and add Tachyones clases we want. 
+The html coming out of AsciiDoctor does not "work" with Tachyons. Therefore we want to change that, remove the stuff we don't want (unneeded classes etc) and add Tachyones clases we want.
 
 Processing html is actually not that hard using the _golang.org/x/net/html_ go lib.
 
@@ -58,7 +58,7 @@ See the _blogbackend/internal/tachyons/_ package.
 ==== Pros
 Fun!
 
-Separation of content (the Asciidoc) from the presentations: 1) Go code + Tachyons, 2) PDF 3) Docbook?
+Separation of content (the Asciidoc) from the presentations: 1) Go code + Tachyons, 2) PDF 3) Others, like Docbook?
 
 The asciidoc can later be converted into pdfs, ebooks or alternative html+css with one of the two main  AsciiDoc implementations (Asciidoc and Asciidoctor)
 
@@ -69,9 +69,9 @@ AsciiDoc will be useful for writing longer form as well, like an ebook.
 ==== Cons
 Uncommon and ridiculously complicated.
 
-No complete AsciiDoc implementation for go yet. 
+No complete AsciiDoc implementation for go yet.
 
-Although it's much better than the Markdown universe, there's still 2 implementations that are not 100% compatible. 
+Although it's much better than the Markdown universe, there's still 2 implementations that are not 100% compatible.
 
 
 == Todo

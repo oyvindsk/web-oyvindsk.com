@@ -1,4 +1,4 @@
-rm 1 2 3 4
+rm -f 1 2 3 4
 curl "http://localhost:8080/cv/english.pdf" -o 1
 curl "http://localhost:8080/cv/norwegian.pdf" -o 2
 curl "http://localhost:8080/cv/cv-øyvind_gerrard_skaar-english.pdf" -o 3

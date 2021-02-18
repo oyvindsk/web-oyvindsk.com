@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const baseURL = "http://localhost:8080" // "https://oyvindsk.com"  //
+const baseURL = "https://oyvindsk.com" // "http://localhost:8080"
 
 type linkInfo struct {
 	url                    string
@@ -87,7 +87,7 @@ func TestLinks(t *testing.T) {
 		// GET
 		pdfURL := baseURL + l.url + "/full.pdf"
 		if l.url == "/" {
-			// special case for -  FIXME TODO ?
+			// special case for home  FIXME TODO ?
 			pdfURL = baseURL + "/full.pdf"
 		}
 		res, err = client.Get(pdfURL)
