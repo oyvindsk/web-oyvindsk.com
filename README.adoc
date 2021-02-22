@@ -76,6 +76,10 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 
 == Todo
 
+=== Bugs
+* Bug: Links with "ø" (like cv's.. ) do not work in the PDFs
+
+== Features
 * RSS
 * Tags for blogposts
 * Comments?
@@ -86,7 +90,6 @@ Although it's much better than the Markdown universe, there's still 2 implementa
 ** Image in blogposts: Scale on mobile? midtstill?
 * PDFs:
 ** Better filename when downloading pdfs
-** Link to CVs do not work (beacuse of the ø?)
 ** Can relative links work in pdfs?
 
 == License
