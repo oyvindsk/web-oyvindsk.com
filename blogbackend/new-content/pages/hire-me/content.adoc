@@ -12,7 +12,9 @@ Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norw
 
 [role=lead]
 // I am currently the CTO of link:http://heipetter.no[HeiPetter].
-Looking for new consultant opportunities starting soon. See <<availability>> for the details.
+// Looking for new consultant opportunities starting soon. See <<availability>> for the details.
+I am currenlty fully booked. See <<availability>> for the details.
+
 
 == What I can help you with
 Are you working on building something new? Or maybe improving your existing back-end system? Is it slow? Or simply more costly than it needs to be?
@@ -138,24 +140,24 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 [[availability]]
 == Availability in 2021
-I'm currently looking for work starting March or late February.
+I'm currently working on a project with Shortcut and have no free time.
 
 [cols=2]
 |===
-|February:
-|  Some free time last week of February
 |March:
-|  Time for new projects
+|  Fully booked
 |April:
-|  Time for new projects
+|  Fully booked
 |May:
-|  Time for new projects
+|  Fully booked
 |March:
-|  Time for new projects
+|  Fully booked
 |June:
-|  Time for new projects
+|  Fully booked
+|July:
+|  Fully booked
 |===
-(last updated: 17th of February 2021)
+(last updated: 22nd of March 2021)
 
 
 [[contact]]
