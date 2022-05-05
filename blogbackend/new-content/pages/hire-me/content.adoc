@@ -1,7 +1,7 @@
 
 = Hire Me
 Øyvind Gerrard Skaar
-May 2020
+May 2022
 :imagesdir: ../../../static_files/page-files/
 
 
@@ -11,9 +11,7 @@ image::øyvind.jpg[]
 Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
 
 [role=lead]
-// I am currently the CTO of link:http://heipetter.no[HeiPetter].
-// Looking for new consultant opportunities starting soon. See <<availability>> for the details.
-I am currenlty fully booked. See <<availability>> for the details.
+I am currently fully booked. See <<availability>> for the details.
 
 
 == What I can help you with
@@ -69,7 +67,7 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 
-== How I preffer to work
+== How I prefer to work
 I strongly prefer simplicity and strive for it whenever possible.
 
 
@@ -85,7 +83,7 @@ Other, important are things, are:
 
 * Finding the right balance between simplicity and sophistication in you architectures
 * Understanding the larger picture. What are we making and why?
-* Understanding the priorities of the business. Is 99.99% uptime critical?  Time-to-market? Or maybe giving yourselvs many chances of succeeding by saving money and taking sane shortcuts.
+* Understanding the priorities of the business. Is 99.99% uptime critical?  Time-to-market? Or maybe giving yourselves many chances of succeeding by saving money and taking sane shortcuts.
 
 Having said that, there are reasons I choose to work with Go and the Google Cloud Platform. I like Go, both the simplicity of the language and the culture of pragmatism. It's a language very well suited for building back-end servers. Google Cloud Platform also has its strengths. I've always been a fan of their first platform-as-a-service, App Engine. They also seem to have a even stronger focus on pay-for-what-you-use than other cloud providers.
 
@@ -97,12 +95,12 @@ I've worked with several databases and datastores, mainly the Google Cloud nativ
 link:https://cloud.google.com/firestore[Datastore / Firestore],
 link:https://cloud.google.com/storage[Storage] and
 link:https://cloud.google.com/sql[Cloud SQL]. Outside of GCP I've used
-link:https://www.mysql.com/[MySQL / MariaDB] extensivly,
+link:https://www.mysql.com/[MySQL / MariaDB] extensively,
 link:https://www.postgresql.org/[PostgreSQL],
 link:https://redis.io/[Redis] and
-link:https://sqlite.org[SQLite]. Lately I've taken an interest in graph databases, especailly link:https://dgraph.io[Dgraph].
+link:https://sqlite.org[SQLite]. Lately I've taken an interest in graph databases, especially link:https://dgraph.io[Dgraph].
 
-Other past experice includes:
+Other past experience includes:
 link:http://digitalocean.com[several]
 link:http://zetta.io[cloud]
 link:http://aws.amazon.com[providers] and languages such as
@@ -139,25 +137,33 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 [[availability]]
-== Availability in 2021
-I'm currently working on a project with Shortcut and have no free time.
+== Availability in 2022
+I'm currently working on a project with Shortcut and Rema 1000. No free time at the moment.
 
 [cols=2]
 |===
-|March:
-|  Fully booked
-|April:
-|  Fully booked
 |May:
-|  Fully booked
-|March:
 |  Fully booked
 |June:
 |  Fully booked
 |July:
 |  Fully booked
+|August:
+|  Fully booked
+|September:
+|  Fully booked
+|October:
+|  Fully booked
+|November:
+|  Fully booked
+|December:
+|  Fully booked
+|January 2023:
+|  No commitments yet =)
+|Feburary 2023:
+|  No commitments yet =)
 |===
-(last updated: 22nd of March 2021)
+(last updated: 5th of May 2022)
 
 
 [[contact]]

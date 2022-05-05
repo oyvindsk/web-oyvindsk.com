@@ -13,7 +13,7 @@ import (
 
 func TestDomains(t *testing.T) {
 
-	defNeedle := "After studying computer science and working for a few years,"
+	defNeedle := "I’ve taken contract work since 2014 and worked"
 
 	var domains = []struct {
 		domain  string
