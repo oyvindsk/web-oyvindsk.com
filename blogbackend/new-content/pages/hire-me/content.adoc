@@ -137,33 +137,26 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 [[availability]]
-== Availability in 2022
-I'm currently working on a project with Shortcut and Rema 1000. No free time at the moment.
+== Availability in 2023
+I will be available for new work in March.
+
+I'm starting the year with a vacation :)
+Followed by a month or so to learn everything I need to get control of the company finances and do the taxes. 
+Then I'm taking a step back to look at the strategy for the next few years.
 
 [cols=2]
 |===
-|May:
-|  Fully booked
-|June:
-|  Fully booked
-|July:
-|  Fully booked
-|August:
-|  Fully booked
-|September:
-|  Fully booked
-|October:
-|  Fully booked
-|November:
-|  Fully booked
-|December:
-|  Fully booked
-|January 2023:
+|January  2023:
+| Vacation, mostly
+|February 2023:
+| Company finances, taxes and the like. Strategy.
+|March 2023:
 |  No commitments yet =)
-|Feburary 2023:
+|April 2023:
 |  No commitments yet =)
 |===
-(last updated: 5th of May 2022)
+
+(last updated: 6th of February 2023)
 
 
 [[contact]]
