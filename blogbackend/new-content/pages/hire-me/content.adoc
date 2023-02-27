@@ -1,7 +1,7 @@
 
 = Hire Me
 Øyvind Gerrard Skaar
-May 2022
+February 2023
 :imagesdir: ../../../static_files/page-files/
 
 
@@ -138,25 +138,24 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 [[availability]]
 == Availability in 2023
-I will be available for new work in March.
+I'm curently starting a new project with link:https://en.mimiro.no[Mimiro].
 
-I'm starting the year with a vacation :)
-Followed by a month or so to learn everything I need to get control of the company finances and do the taxes. 
-Then I'm taking a step back to look at the strategy for the next few years.
+// Followed by a month or so to learn everything I need to get control of the company finances and do the taxes. 
+// Then I'm taking a step back to look at the strategy for the next few years.
 
 [cols=2]
 |===
 |January  2023:
-| Vacation, mostly
+| Time off =)
 |February 2023:
 | Company finances, taxes and the like. Strategy.
 |March 2023:
-|  No commitments yet =)
+|  Fully booked
 |April 2023:
-|  No commitments yet =)
+|  (Booked, unconfirmed)
 |===
 
-(last updated: 6th of February 2023)
+(last updated: 27th of February 2023)
 
 
 [[contact]]
