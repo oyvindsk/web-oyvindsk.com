@@ -145,17 +145,23 @@ I'm curently starting a new project with link:https://en.mimiro.no[Mimiro].
 
 [cols=2]
 |===
-|January  2023:
-| Time off =)
-|February 2023:
-| Company finances, taxes and the like. Strategy.
-|March 2023:
-|  Fully booked
 |April 2023:
-|  (Booked, unconfirmed)
+|  Fully booked
+|May 2023:
+|  Fully booked
+|June 2023:
+|  Fully booked
+|July 2023:
+|  Fully booked
+|August 2023:
+|  Fully booked
+|September 2023:
+|  Fully booked
+|October 2023:
+|  No commitments yet
 |===
 
-(last updated: 27th of February 2023)
+(last updated: April 3rd 2023)
 
 
 [[contact]]
