@@ -12,7 +12,7 @@ const (
 	metadataFilename   = "metadata.toml" // input
 	asciidocFilename   = "content.adoc"  // input
 	htmlFilename       = "content.html"  // output
-	docBookFilename    = "full.xml"      // output, removed on success. PDF will be full.pdf
+	pdfFilename        = "full.pdf"      // output
 	hashFilenameSuffix = ".hash"
 )
 

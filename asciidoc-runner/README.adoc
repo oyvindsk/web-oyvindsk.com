@@ -34,11 +34,21 @@ Example output:
 
 == Dependencies: 
 * AsciiDoctor: The newer Ruby implementation for Asciidoc. Used for html generation
+* asciidoctor-pdf ruby gem, to get it to produce pdf's
+    ** On Arch, at least, this installs a new program called `asciidoctor-pdf` that genereates pdf 
+    when ran without any extra options.
+
+=== On Arch Linux
+    pacman -S asciidoctor
+    yay asciidoctor-pdf # or something else to install the AUR package `aur/asciidoctor-pdf`
+
+== Dependencies (old): 
+* AsciiDoctor: The newer Ruby implementation for Asciidoc. Used for html generation
 * Asciidoc:    The original python implementation, used for pdf creation
 * dblatex:     DocBook to PDF (and others) converter using latex.
 ** So also Latex and some DocBook stuff =/
 
-==== On Arch Linux
+=== On Arch Linux
     pacman -S asciidoc
     pacman -S asciidoctor
     pacman -S dblatex       # somewhat heavy =/
