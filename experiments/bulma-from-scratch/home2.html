@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.7.45">
+  <title>Øyvind Gerrard Skaar || oyvindsk.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+<body>
+  <article>
+    <header class="sans-serif">
+      <nav class="db dt-l w-100 border-box pa3 ph5-l bg-gold">
+        <a class="link dim black b f6 f5-ns dib mr3 dtc-l v-mid w-100 w-25-l tc tl-l mb2 mb0-l" href="/" title="Home">Øyvind G. Skaar</a>
+        <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+          <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/writing" title="Articles">Articles</a> <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/hire-me" title="Hire Me">Hire Me</a> <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/projects" title="Projects &amp; Clients">Projects & Clients</a> <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="/contact" title="Contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+    <div class="pa4 ph7-l georgia mw9-l center">
+      <div class="imageblock">
+        <div class="content"><img src="/page-files/%C3%B8yvind.jpg" alt="øyvind" class=""></div>
+      </div>
+      <div class="paragraph lead f5 f3-ns lh-copy measure georgia">
+        <p class="">Hi, I’m Øyvind. I’m an independent consultant, developer and architect, based in Oslo, Norway.</p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class=""><a href="/contact" class="">Contact information</a></p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class="">I’ve taken contract work since 2014 and worked on quite a few projects for different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.</p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class="">More about my previous clients can be found under <a href="/projects" class="">Projects & Clients</a> and in my full <a href="/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf" class="">CV in English (PDF)</a></p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class="">These days I usually work on projects using Go and/or Google Cloud Platform. I feel I can focuse more on business objectives and actually building things by not switching technologies too often.</p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class=""><a href="/hire-me" class="">More about what I do and how</a></p>
+      </div>
+      <div class="paragraph f5 f4-ns lh-copy measure mb4 georgia">
+        <p class="">I also write about backend architecture, Go, Google Cloud Platform and related topics:</p>
+      </div>
+      <div class="ulist f5 f4-ns lh-copy measure mb4 georgia">
+        <ul class="">
+          <li class="">
+            <p class=""><a href="/writing/how-to-use-google-cloud-storage-with-golang" class="">How to use Google Cloud Storage with Golang (with a Google Cloud rant thrown in)</a> (October 2016)</p>
+          </li>
+          <li class="">
+            <p class=""><a href="/writing/common-golang-mistakes-1" class="">Learn from my Go mistakes, Part 1: Closing over loop variables</a> (May 2016)</p>
+          </li>
+          <li class="">
+            <p class=""><a href="/writing/go-remote-jobs" class="">A few places you can find Golang remote jobs</a> (April 2016)</p>
+          </li>
+          <li class="">
+            <p class=""><a href="/writing/docker-build-from-source" class="">How-to build Docker from source</a> (July 2015)</p>
+          </li>
+          <li class="">
+            <p class=""><a href="/writing/reasons-redis-is-awesome" class="">A few (more than one and less than ten) reasons Redis is awesome!</a> (December 2014)</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </article>
+  <script src="/html-related/jquery.js"></script> 
+  <script type="text/javascript">
+
+
+                        $(document).ready(function() {
+
+                          
+                          
+                          
+                          var url = "/contact-form"; 
+                          
+                          
+                          $('#messages').hide();
+
+                          $('form#contactForm button').click( function(e) {
+                                          
+                                          e.preventDefault();
+                                          $.post( 
+                                                  url, 
+                                                  $('form#contactForm').serialize(), 
+                                                  function(data) {
+                                                          
+                                                          console.log("Server returned:");
+                                                          console.log(data);
+                                                  }
+                                                 
+                                          );
+
+                                          
+                                          $('#contactForm').fadeOut(1000).delay(800).slideUp(2000);
+                                          $('#messages').html("<h3>Thank you!</h3><h3>I will read and respond to your message promptly</h3>")
+                                          $('#messages').delay(500).fadeIn(1000);                    
+                          });
+
+                        });
+
+  </script>
+  <footer class="mt5-ns black-80 db w-100 pa3 ph5-l bg-gold">
+    <p><a href="/full.pdf"><img class="mw1" src="/html-related/Pdf_by_mimooh.svg" alt="PDF icon"></a> <a href="/full.pdf">This page as PDF</a></p>
+    <p><a href="/">Home</a> // <a href="/contact">Contact information</a> // <a href="/cv/cv-%C3%B8yvind_gerrard_skaar-english.pdf">CV</a> // <a href="https://www.linkedin.com/in/oskaar/">LinkedIn</a></p>
+    <p>This page was generated by <a href="https://github.com/oyvindsk/web-oyvindsk.com">my own weird "CMS"</a>. Since I'm a backend programmer the layout and design based on <a href="http://tachyons.io/components/articles/title-highlight-header-cover/index.html">this Tachyon component</a> // PDF icon: <a href="https://commons.wikimedia.org/wiki/File:Pdf_by_mimooh.svg" title="via Wikimedia Commons">Mimooh</a> <a href="https://creativecommons.org/licenses/by-sa/3.0">(CC BY-SA)</a></p>
+  </footer>
+</body>
+</html>
