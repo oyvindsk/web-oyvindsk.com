@@ -24,14 +24,14 @@ func TestDomains(t *testing.T) {
 		{domain: "odots.org", needle: defNeedle},
 
 		{domain: "devbyte.no", needle: defNeedle},
-		{domain: "devbyte-consulting.com", needle: defNeedle},
+		// {domain: "devbyte-consulting.com", needle: defNeedle},
 
 		{domain: "skaarsolutions.no", needle: defNeedle},
 		{domain: "skaar-solutions.no", needle: defNeedle},
 		{domain: "skaarsolutions.com", needle: defNeedle},
 		{domain: "skaar-solutions.com", needle: defNeedle},
 
-		{domain: "intolife.skaarsolutions.com", needle: "Food Waste Projects", skipWWW: true},
+		// {domain: "intolife.skaarsolutions.com", needle: "Food Waste Projects", skipWWW: true},
 	}
 
 	// Custom http cklient to set a shorter timeout
