@@ -1,0 +1,296 @@
+= Prototyping with Nocode and AI tools
+Øyvind Gerrard Skaar
+v1, 2024-04-10
+:imagesdir: ../../../static_files/blogpost-files/
+
+:toc:
+
+[role=lead]
+I'm currently trying out lots of different No-code and AI tools to create mobile
+and web apps. The goal is to be able to make prototypes and MVP's much faster
+and cheaper.
+
+Startups and others who want to create something new are often faced with a
+dilemma: They would like to create an app of some sort to test their idea and to
+have something to show off. +
+But, unless you are a developer and designer, it can
+quickly cost a at least a few hundrede thousand dollars. And even if you can do
+it yourself, it takes a long time to create things "from scratch".
+
+All these tools have disadvantages. But given that the advantages are so great,
+I think it can be a good solution for many.
+
+*Advantages*: Create something quick and cheap. Do it yourself.
+
+*Cons*: There's still a lot to learn. The result _could_ be worse. Many different
+tools, with their own advantages and disadvantages.
+
+As a developer, I enjoy programming. But I also like to make things, with or without coding.
+
+So I'm testing many of these tools and platforms and will share my experiences here
+
+== Criteria
+
+I look for tools that are useful for me and my clients. That is, they can help create apps of various kinds, for startups and the like.
+
+More specialized tools are interesting if they help create things that
+entrepreneurs often want to create. E.g. with Sharetribe you can create a
+marketplaces, where some sell and others buy, and that is something many people
+want to do.
+
+Several things disqualify many tools at straight away:
+
+* Price: Either too expensive for a typical startup project or high price per end user.
+* Designed for large companies and their needs. Often related to price, but also what these tools are good and bad at.
+* Specialized in the "wrong" niche. E.g. there are many tools for creating web forms and glorified spreadsheets (A la Airtable).
+* Too difficult to test out or to get started with.
+* Made for developers, for faster development, but requires programming.
+
+While things that are a pluss, and the generalist tools should have:
+
+* Storage of data (some kind of database)
+* Logic required to create apps (If A then B..)
+* Many users: Support for creating a user, logging in etc (authentication)
+* Many users: Not everyone has access to the same things (authorization)
+* Support for creating apps for mobile (native iOS / Android, and/or progressive web apps)
+
+Here is the list of the ones I will test. Did I forget any? Anyone have experience with one or more of these?
+
+== On the "to try out" list
+
+=== Generalist, "all purpose" platforms 
+
+
+==== link:https://www.adalo.com/[Adalo]
+
+Platform for creating web apps and mobile apps. I used Adalo about 4 years ago to make a prototype. Quite liked it.
+
+Price: From 0$ to 200$ per month. The most relevant plan costs 30$ per month, lets you use your own domain etc.
+ 
+
+==== link:https://www.bravostudio.app[Bravo Studio]  
+From Figma design to a native mobile app.
+
+Price: From 0$ per to 118$ per month. The 2 most relevant plans costs 21$ and
+118$ per month. The expensive one is required to remove the Bravo logo/branding.
+
+==== link:https://bubble.io/[Bubble]
+One of the oldest and best-known platforms for creating web apps. I tried it out
+about 4 years ago, with somewhat mixed results.
+
+Price: From 0$ to 399$ per month. The most relevant plan costs 32$ per month, lets you use your own domain etc..
+
+==== link:https://budibase.com[Budibase]
+Price: 5$ per user per month?
+
+Open source?
+
+==== link:https://flutterflow.io/[FlutterFlow]
+Price: 0 - 70$ per month.
+
+==== link:https://glideapps.com/[Glide]
+Possibly a bit too "enterprisy" for my use.
+
+Price: 2 price models: "For Makers" and "For companies". Maker is probably the
+most relevant and costs 60$ per month (?). Although it seems like it has fewer
+data sources than the "for companies" one.
+
+==== link:https://about.appsheet.com/home/[Google Appsheet]
+Looks pretty versatile. Probably good integration with the rest of Google Workspace (Google Docs etc). Maybe a little limited?
+
+Price: A bit unclear. 10$ per user per month? More if you want AI integration? Some of it included a Google Workspace subscription?
+
+==== link:https://www.jetadmin.io/[jetAdmin]
+Price: From 49$ per month, 349$ to use your own domain.
+
+==== link:https://www.plasmic.app/[Plasmic]
+Open source. Mostly focused on design and visuals. Maybe a little too simple?
+
+Price: From 0$ to 499$. The most relevant plan, to remove the Plasmic logo, costs $49 per month.
+
+Open source, so you can use it for free, with all functionality etc?
+
+==== link:https://toddle.dev[toddle.dev]
+Quite new. Norwegian? Danish?
+
+Price: Actually looks quite cheap, but what does 20$ per user mean?
+
+==== link:https://weweb.io[WeWeb]
+WeWeb is a "front end builder" that is used with another back-end solution of
+some kind. For me it would perhaps be appropriate to code a back-end myself. But
+there are also pure no-code back-end solutions such as Xano. Maybe link:https://pocketbase.io/[Pocketbase] could work as well.
+
+Price: From 0$ to 179$ per month. 49$ per month to use your own domain. 179$ for more advanced functionality.
+
+Plus the price of a back-end system.
+
+==== link:https://www.wized.com[Wized]
+Wized works together with Webflow to let you make more advanced websites and web
+apps than you can with Webflow alone. Looks good. Perhaps most relevant if you
+already know Webflow?
+
+Price: From 0$ to 169$ per month. 12$ per month to use your own domain.
+
+Plus you have to pay for Webflow in addition?
+
+==== link:https://www.xano.com[Xano]
+Xano is a little different because it is only a backend system. Most no-code
+tools have both a "front end" and a "back end" that work together. This means
+that Xano alone is not enough, and must be used together with e.g. WeWeb.
+
+Personally, I would have tested link:https://pocketbase.io/[Pocketbase]
+at the same time as Xano, since it is open source and setting up a small server is something I'm comfortable with.
+
+Price: From 0$ to 225$ per month. The most relevant plan costs $99, but I think you can go a long way with the free plan.
+
+Plus the price of a front-end system.
+
+
+
+
+=== Specialized
+
+==== link:https://www.sharetribe.com/[Sharetribe]
+A platform for creating marketplaces, that is, a place where someone sells
+something and someone buys. Such as Craigslist and Airbnb. But you can also sell
+for example something by the hour.
+
+Price: From 29$ to 249$ per month.
+
+
+==== link:https://www.figma.com/community/plugin/842128343887142055/figma-to-code-html-tailwind-flutter-swiftui[Figma plugin for generating code]
+"Figma to Code" is a plugin for the design tool Figma. It is one of many such
+tools for creating code from designs in Figma. Supports html and css (with
+Tailwind), Flutter and SwiftUI.
+
+Alone, this is not a "no-code" tool. But there are several AI tools that support creating designs in Figma for you (see below).
+
+Price: Appears to be free to use and link:https://github.com/bernaferrari/FigmaToCode[Open source]
+
+
+=== Generative AI 
+
+These are a little different. With the exception of Buzzy, they typically only
+create a design (UI) and perhaps code to implement the design (html and css).
+
+You cannot create a full web app or mobile app in most of these tools.
+
+But using generative AI can save us so much time that it's worth testing.
+
+I'm guessing the UI's most of these create are pretty generic, and not as good
+as a good designer could have made. So they may not be good enough if your app
+is to stand out from the crowd with especially good design and UI.
+
+
+==== link:https://www.buzzy.buzz/[Buzzy]
+Looks good, certainly one of the most promising on this list. When using chat (a
+text description), it creates a UI for you. After giving you a change to change
+the UI in Figma, Buzzy should in theory be able to create a working web or
+mobile app.
+
+Buzzy is one of the few AI/AI tools that does more than create a design and/or html and css.
+
+Price: Not entirely obvious, but it seems that you can now pay 50$ per month to
+generate UI (and code?). Whereas if you want them to "host" the web app (make it
+available to users) it costs $600 for a year.
+
+No free trial.
+
+See link:https://www.buzzy.buzz/special-offers["Special offers"].
+
+==== link:https://www.usegalileo.ai[Galileo]
+When using chat (a text description), it creates a UI for you. The result is a
+design in Figma. Unsure if it can also create code to implement the design. If
+not, you can probably use the Figma plugin mentioned above.
+
+Price: 19$ per month, but everyone can see what you create. 39$ for "private mode".
+
+==== link:https://tryrendition.com[Rendition]
+Rendition is actually two different things:
+
+* link:https://renditioncreate.com/[Rendition Create]: Create a design based on chat and either export it to Figma or create code to implement it (html and css with Tailwind).
+* link:https://www.figma.com/community/plugin/1031998871372194709/Rendition%3A-Figma-%3EReact-in-one-click[Rendition from Figma]:
+Take a design in Figma and create code to implement it (html and css with Tailwind). (Could not get this work last time I tried).
+
+You can test it for free.
+
+Price:
+
+* Renedition Create: Not sure, 10$ per month?
+* Rendition form Figma: Free to use a bit, then 10$ per month for more use.
+
+==== link:https://uizard.io[Uizard]
+Generate design and UI with chat or from a screenshot or wireframe.
+
+Can also create some code (html, css and React code).
+
+Seems to have a lot of functionality for creating and editing UIs. So it's also a simpler alternative to Figma.
+
+Price: From 0$ to 49$ per month.
+
+
+==== link:https://v0.dev/[Vercel v0]
+Vercel v0 is similar to Galileo. When using chat (a text description), it
+creates a UI for you. v0 creates code to implement the design (html, css with
+Tailwind and React).
+
+v0 cannot export to Figma and is perhaps more "tied" to React than the other similar tools?
+
+Price: From 0$ per month, but everyone can see what you create. For $20 per
+month you get to enjoy what it makes and also "High Quality", whatever that
+means.
+
+
+== Discared
+
+link:https://Appfarm.io[Appfarm] +
+Very curious about Appfarm and want to check it out.
+
+But in general it is probably too expensive for my use, typically 1000-2000$ per month, if I understood it correctly.
+
+link:https://genus.co/[Genus] +
+Too "enterprisy". Norwegian, large customers, have been doing this for a while.
+
+link:https://hadron.app[Hadron] +
+Design. Creates html and css for you?
+
+link:https://interplayapp.com[Interplay] +
+Design heavy: React components and design tokens.
+
+link:https://kombai.com[Kombai] +
+Design for React, html and css. Requires coding?
+
+link:https://www.getmotoradmin.com/[Motor Admin.com] +
+Similar to Airtable (spreadsheet style)
+
+link:https://nocodb.com/[nocodb.com] +
+Similar to Airtable (spreadsheet style)
+
+link:https://www.outsystems.com/[OutSystems] +
+Too expensive, starting at $1,513 (USD) per month.
+
+Looks good, logic, mobile apps etc
+
+link:https://createwithplay.com[Play] +
+Looks good, but only for ios apps
+
+link:https://retool.com/[Retool] +
+For "business applications", pay per customer
+
+link:https://rnbw.company[RNBW] +
+Design. Creates html and css for you?
+
+link:https://www.stackerhq.com/[Stacker] +
+For "business applications"
+
+link:https://news.ycombinator.com/item?id=39666865[Teable] +
+Similar to Airtable (spreadsheet style). Open source.
+
+link:https://utopia.app/[Utopia] +
+For React, requires coding?
+
+link:https://vizro.readthedocs.io/en/stable/[Vizro] +
+"Python enabled data visualization"
+
+link:https://webstudio.is/[Webstudio] +
+Similar to Webflow, i.e. lacks "app" functionality. Open Source.
