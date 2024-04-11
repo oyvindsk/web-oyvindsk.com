@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go/datastore v1.15.0
 	github.com/labstack/echo/v4 v4.11.4
 	github.com/oyvindsk/post2mail v0.0.0-20200211105247-7f0321994b7a
-	github.com/pelletier/go-toml v1.9.5
+	github.com/pelletier/go-toml/v2 v2.2.0
 	golang.org/x/net v0.24.0
 )
 
