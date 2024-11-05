@@ -1,17 +1,17 @@
 
 = Hire Me
 Øyvind Gerrard Skaar
-February 2023
+November 2024
 :imagesdir: ../../../static_files/page-files/
 
 
 image::øyvind.jpg[]
 
 [role=lead]
-Hi, I'm Øyvind. I'm a freelance developer and IT consultant based in Oslo, Norway.
+Hi, I'm Øyvind. *I build fast, scalable and secure backend systems for startups and scaleups*. I work as an independent consultant, developer and architect, and I'm based in Oslo, Norway.
 
 [role=lead]
-I am currently fully booked. See <<availability>> for the details.
+I am currently looking for new projects. See <<availability>> for the details.
 
 
 == What I can help you with
@@ -19,7 +19,7 @@ Are you working on building something new? Or maybe improving your existing back
 
 Do you lose customers and revenue because don't have enough programmers?
 
-My specialty is back-end, server-side technology and architecture. I help build scalable and fast cloud-based systems.
+My specialty is back-end, server-side technology and architecture. I help startups and scaleups build and scale cloud-based systems.
 
 Please don't hesitate to contact me if you are unsure of what kind of developer you need for your project. If I can't help you myself I can at least steer you in the right direction. I've also gotten to know may other freelancers, independent consultants and designers. link:https://oyvindsk.com/contact[Just give me a call or fill out this form].
 
@@ -68,7 +68,7 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 == How I prefer to work
-I strongly prefer simplicity and strive for it whenever possible.
+I strongly prefer simplicity and strive for it whenever possible. Especially when working with startups, where speed of development and change is very important.
 
 
 === Technology
@@ -85,20 +85,20 @@ Other, important are things, are:
 * Understanding the larger picture. What are we making and why?
 * Understanding the priorities of the business. Is 99.99% uptime critical?  Time-to-market? Or maybe giving yourselves many chances of succeeding by saving money and taking sane shortcuts.
 
-Having said that, there are reasons I choose to work with Go and the Google Cloud Platform. I like Go, both the simplicity of the language and the culture of pragmatism. It's a language very well suited for building back-end servers. Google Cloud Platform also has its strengths. I've always been a fan of their first platform-as-a-service, App Engine. They also seem to have a even stronger focus on pay-for-what-you-use than other cloud providers.
+Having said that, there are reasons I choose to work with Go and the Google Cloud Platform. I like Go, both the simplicity of the language and the culture of pragmatism. It's a language very well suited for building back-end servers. Google Cloud Platform also has its strengths. I've always been a fan of their first platform-as-a-service, App Engine, and Cloud Run They also seem to have a even stronger focus on pay-for-what-you-use than other cloud providers.
 
 I have experience with many different technologies and programming languages. Especially on the back-end. And, of course, I also know "adjacent" tools used by modern cloud-native deployments, such as:
 link:http://docker.com[Docker],
 link:https://kubernetes.io[Kubernetes],
 link:http://git-scm.com[Git] and CI/CD systems.
-I've worked with several databases and datastores, mainly the Google Cloud native ones:
+I've worked with several databases and datastores, both the Google Cloud native ones:
 link:https://cloud.google.com/firestore[Datastore / Firestore],
 link:https://cloud.google.com/storage[Storage] and
 link:https://cloud.google.com/sql[Cloud SQL]. Outside of GCP I've used
-link:https://www.mysql.com/[MySQL / MariaDB] extensively,
-link:https://www.postgresql.org/[PostgreSQL],
-link:https://redis.io/[Redis] and
-link:https://sqlite.org[SQLite]. Lately I've taken an interest in graph databases, especially link:https://dgraph.io[Dgraph].
+link:https://www.mysql.com/[MySQL / MariaDB] and
+link:https://www.postgresql.org/[PostgreSQL] extensively, as well as others such as
+link:https://redis.io/[Redis],
+link:https://sqlite.org[SQLite] and link:https://arangodb.com/[ArangoDB].
 
 Other past experience includes:
 link:http://digitalocean.com[several]
@@ -115,13 +115,13 @@ as well as databases etc.
 
 
 == Background
-After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014. Since then I’ve taken contract work and worked on 10 projects for 7 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
+After finishing my MSc in Informatics in 2010 I worked as a back-end developer, and "devops" guy for almost 4 years before I started my own company in 2014. Since then I’ve taken contract work and worked on many projects for different clients. 
 
-For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
+For examples of what I've done for my past clients, see link:https://oyvindsk.com/projects[past clients and projects].
 
 * link:https://www.linkedin.com/in/oskaar/[LinkedIn]
 * link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[CV in English, with project descriptions (PDF)]
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[CV in Norwegian, summary (PDF)]
+// * link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[CV in Norwegian, summary (PDF)]
 // After studying computer science and working for a few years, I left my job in 2014 to start my own company and work as a freelancer and independent consultant.
 // I've done quite a few things since then.
 // Primarily, I've worked with startups and other innovative companies that use newer technologies and have a knack for creative, pragmatic solutions.
@@ -131,37 +131,31 @@ For examples of what I've done my clients in the past, see link:https://oyvindsk
 
 
 
-
-
-
-
-
 [[availability]]
-== Availability in 2023
-I'm curently starting a new project with link:https://en.mimiro.no[Mimiro].
+== Availability in 2024 and 2025
+I'm curently advising an early stage startup. I'm also looking for more work since this project only takes a few hours a week.
+
 
 // Followed by a month or so to learn everything I need to get control of the company finances and do the taxes. 
 // Then I'm taking a step back to look at the strategy for the next few years.
 
 [cols=2]
 |===
-|April 2023:
-|  Fully booked
-|May 2023:
-|  Fully booked
-|June 2023:
-|  Fully booked
-|July 2023:
-|  Fully booked
-|August 2023:
-|  Fully booked
-|September 2023:
-|  Fully booked
-|October 2023:
-|  No commitments yet
+|November 2024:
+|  Available
+|December 2024:
+|  Available
+|January 2025:
+|  Available
+|February 2025:
+|  Available
+|March 2025:
+|  Potentially available
+|April 2025:
+|  Potentially available
 |===
 
-(last updated: April 3rd 2023)
+(last updated: November 5th 2024)
 
 
 [[contact]]
