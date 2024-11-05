@@ -1,7 +1,7 @@
 
 = Projects & Clients
 Øyvind Gerrard Skaar
-June 2020
+November 2024
 :imagesdir: ../../../static_files/page-files/
 // :toc: macro
 // ^^ Asciidoctor, in asciidoc it's :toc-placement: manual
@@ -12,39 +12,61 @@ June 2020
 
 == Overview
 
-I’ve taken contract work since 2014 and worked on 11 projects for 9 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects. See link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[my full CV in English] for something a little more formal =)
+I’ve taken contract work since 2014 and worked on 13 projects for 11 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects. 
 
-[[top]]
+Most of my customers are startups or scaleups.
 
 link:https://oyvindsk.com/hire-me[Interested in working together? See this page].
 
-image::client-logos/heipetter.png["HeiPetter logo",align="left",scaledwidth="20%"]
-* <<heipetter2, 2020-2021: Built backend for functional prototype>>
-* <<heipetter1, 2020: Prototype using No-Code tools>>
+See link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[my full CV in English] for something a little more formal =)
 
-image::client-logos/shortcut.png["Shortcut logo",align="left",scaledwidth="20%"]
-* <<shortcut1, 2020: Research and prototyping for green-field projects>>
+[[top]]
 
 image::client-logos/remarkable.png["reMarkable logo",align="left",scaledwidth="20%"]
-* <<reMarkable1,2016-2020: Built cloud-based backend system>>
-* <<reMarkable2,2018-2019: Document Synchronization prototype>>
+* <<reMarkable1,Built the first cloud-based backend system>>
+* <<reMarkable2,Document Synchronization prototype>>
 
 image::client-logos/intolife.png["IntoLife logo",align="left",scaledwidth="20%""]
-* <<intolife1,2014-2017: Built IntoFood, a food management system>>
-* <<intolife2,2016: Built a REST API for IntoFood>>
-* 2014-Present: Run and support the IntoFood SaaS Google Cloud (no project description)
+* <<intolife1,Built IntoFood, a food management system>>
+* <<intolife2,Built a REST API backend for IntoFood>>
 
-image::client-logos/schlumberger.png["Schlumberger logo",align="left",scaledwidth="20%"]
-* <<schlumberger,2016: Consultant on Google Cloud Platform, Golang and web technologies>>
+image::client-logos/heipetter.png["HeiPetter logo",align="left",scaledwidth="20%"]
+* <<heipetter2,CTO, Technical leadership>>
+* <<heipetter1,Built prototypes and an MVP>>
+
+image::client-logos/shortcut.png["Shortcut logo",align="left",scaledwidth="20%"]
+* <<shortcut1,Prototyping a new secure payment solution>>
+* <<shortcut2,Fantasy Football League - Built cloud backend system>>
+
+image::client-logos/mvpmonkey.png["MVP Monkey logo",align="left",scaledwidth="20%"]
+* <<mvpmonkey,MVP Monkey - Nocode MVPs for early-stage startups>>
 
 image::client-logos/villoid.png["Villoid logo",align="left",scaledwidth="20%"]
-* <<villoid,2015: Backend Developer>>
+* <<villoid,Backend Developer>>
+
+image::client-logos/mimiro.jpg["Mimiro logo",align="left",scaledwidth="20%"]
+* <<mimiro,Mimiro - Backend development>>
 
 image::client-logos/picterus.png["Picterus logo",align="left",scaledwidth="20%"]
-* <<picturus,2015: REST API design and implementation>>
+* <<picturus,REST API design and implementation>>
+
+image::client-logos/srsly.png["SRSLY logo",align="left",scaledwidth="20%"]
+* <<srsly,SRSLY - Prototype CMS and teach Go >>
 
 image::client-logos/shoutoutreferral.png["Shout Out Referral logo",align="left",scaledwidth="20%"]
-* <<shoutoutreferral,2015: Prototyping new e-commerce system>>
+* <<shoutoutreferral,Prototyping new e-commerce system>>
+
+
+image::client-logos/rema.png["Rema 1000 logo",align="left",scaledwidth="20%"]
+* <<shortcut3,REMA 1000 - Æ - IDP backend development and operations>>
+
+image::client-logos/schlumberger.png["Schlumberger logo",align="left",scaledwidth="20%"]
+* <<schlumberger,Consultant on Google Cloud Platform, Golang and web technologies>>
+
+
+
+
+
 
 === Other Projects
 * <<blog,CMS / Blog engine, oyvindsk.com>>
@@ -63,60 +85,215 @@ image::client-logos/shoutoutreferral.png["Shout Out Referral logo",align="left",
 
 == Project descriptions
 
+[[mvpmonkey]]
+=== MVP Monkey - Nocode MVPs for early-stage startups 
+2024
+
+**Skills:** No-Code Development Platforms · No-Code Development · Customer validation   Web Applications · Mobile Applications
+
+MVP Monkey was my foray into a different customer segment and a new business modell. 
+
+The idea was to help founders and early stage startups to get "unstuck" from the situation where they need a product but can't get funding without a product. 
+
+Spending a month or two to build a quick, but working, app is also a better way to validate ideas.
+
+By using NoCode and AI tools, I could create web and mobile apps much quicker and cheaper. 
+
+To speed up development I did a few things very differently:
+
+. Use all the new No-Code and AI tools
+. Work with the founder to get to the core idea and Value Proposition. 
+. Instead of building all imaginable features, we built only what was needed to get traction and test the idea (underlying hypothesis).
+
+==== Results
+MVP Monkey never got enough traction, so I shut it down. Basically, it was too hard to find anyone who wanted to buy the services. 
+
+==== What I learned
+- Validating ideas without selling something is very hard (well, I already knew that, but still)
+- No-code tools - I researched around 30 different No-code and AI tools. They are no longer my main focus, but they're nice to have in my tool-box.
+
+Technologies: Multiple AI and No-code tools for rapid development, Webflow
+
+<<top, back to the top>>
+
+
+
+[[mimiro]]
+=== Mimiro - Backend development
+2023
+
+**Skills:**  Software Development · Database design
+
+Mimiro supports Norwegian agriculture and food production. Farmers are both their customer and partners. 
+
+I worked with Mimiro for 10 months and helped develop their new Eana360 product.  As a part of a team, the work was straight up backednd development in Go. Little to no architecture or Devops work.
+
+**Technoligies:** ArangoDB · Go (Programming Language) · PostgreSQL ·  Graph Databases  · AWS · Git · SQL
+
+<<top, back to the top>>
+
+
 
 [[heipetter2]]
-=== HeiPetter - Built backend for functional prototype
+=== HeiPetter - CTO, Technical leadership
+2020 - 2021
+
+**Skills:** Technical Leadership 
+
 HeiPetter is a Norwegian startup connecting with a purpose of getting people in difficult situations back to work. They do that through a digital platform, focusing on the talent and building on individual strengths.
 
-I'm both a part of the team of HeiPetter and a contractor, implementing specific parts of the platform. I worked with a freelance designer to build a prototype of the web-based platform. She did design, html and css. I wrote the backend, converted her HTML into templates, created data models and deployed the application.
+I have been involved both as a part of the team and as a contractor doing development work. 
 
-Functionality: User signup and login, job registration and listing. Automatic matching (sorting) of jobs based on the user preferences.
-
-Technologies: Go, Google Cloud Appengine and Datastore. Standard web technologies.
+As the technical leader my job was to translate the goals and strategy into tangible technical deliveries. I also vetted potential partners, freelancers and contractors. My main contribution was technical know-how and a laser-focus on what we needed to get to the next milestone.
 
 <<top, back to the top>>
 
 
 
 [[heipetter1]]
-=== HeiPetter - Prototype using No-Code tools
-Preceding <<heipetter2, the more complete prototype>> I also created one and a half prototypes using No-Code tools. The first take was to use Bubble to create a semi-working web app, mostly to explore user signup and job creation. After hitting some problems, I switched to Adalo and created a more mobile-friendly prototype.
+=== HeiPetter - Built prototypes and an MVP
+2020 - 2021
+
+**Skills**: Nocode  ·  Software Development  · DevOps  · Cloud 
+
+==== Nocode prototypes
+Preceding the more complete MVP I created a couple of prototypes using No-Code tools. The first take was to use Bubble to create a semi-working web app, mostly to explore user signup and job creation. After hitting some problems, I switched to Adalo and created a more mobile-friendly prototype.
+
+Technologies:
+Nocode, Bubble.io, Adalo
+
+==== Backend for functional MVP
+I worked with a freelance designer to build a prototype of the web-based platform. She did design, html and css. I wrote the backend, converted her HTML into templates, created data models and deployed the application.
+
+Functionality: 
+User signup and login, job registration and listing. Automatic matching (sorting) of jobs based on the user preferences.
+
+Technologies:
+Go, Google Cloud Appengine and Datastore. Standard web technologies.
+
+==== Results
+Both the prototype and the MVP gave us something to test with potential users. It's vital to get user feedback as early as possible. They also gave us something to show to investors and other potential partners. 
+
+<<top, back to the top>>
+
+[[shortcut3]]
+=== REMA 1000 - Æ - IDP backend development and operations 
+2022
+
+**Skills:** Cloud Computing · IDP · Firebase · Firestore · Go · Google Cloud Platform (GCP) · Digital Authentication · Multi-factor Authentication · Authentication Systems
+
+Operation and development of the idp (login/authentication) part of the Æ app. 
+
+(On this project I was a subcontractor though Shortcut and 7n)
+
 
 <<top, back to the top>>
 
 
+[[shortcut2]]
+=== Fantasy Football League - Built cloud backend system
+2021
+
+**Skills**:  · Technical Leadership · Software Development · DevOps · Backend Architecture 
+
+Fantasy Football League (FFL) was a fantasy-football (soccer) mobile app. It had several new features and innovative game-play to set it apart from its competitors. 
+
+We worked in a small team of 3 people. The 2 others were the customer who set the overall direction and was the domain expert, and one developer who made the iPhone app
+
+I made the backend system, which contained:
+
+- A Go program that contained the game logic and exposed an API to the iOS client.
+- Integrations with third parties, mostly real-time information about football matches, players, goals, subsittues etc.
+- Database for storing simple things like customer information, but also complex schema's for making a real-time "view" of the real world. 
+- Servers to run the integrations, game logic and REST API. In this case a manged PaaS (Google Cloud Run), so there was little "devops".
+
+This was a fun project with fast development, great teamwork and exiting technical challenges. Unfortunately, we developers were needed on other projects after finishing the beta. The development continued, but it never gained enough traction, and the app was later discontinued.   
+
+==== Challenges
+
+- Real time synchronization: Unlike the competitors, FFL allowed substitutions while the game was in play.
+- Complicated logic and rules for the game-play
+- Anti cheats
+- Novel and innovative game-play meant a lot of trial-and-error development
+- Pre Product-Market-Fit
+- Very fast development of new features
+- 3rd party integrations
+
+==== Results
+The development and technical aspects was a great success.  We created a fast, easy-to-use app, with novel game-play and real-time attributes, in record time. 
+
+However, FFL never found product-market-fit. My opinion, and I belive the customer would agree, is that not enough effort was put into marketing and customer research.
+
+(On this project I was a subcontractor though Shortcut and 7n)
 
 [[shortcut1]]
-=== Shortcut - Research and prototyping for green-field projects
-Shortcut is one of the leading app makers in Norway.
+=== Prototyping a new secure payment solution
+September 2020 - December 2020
 
-This project was a 3 months contract to help kick-start greenfield projects and strengthen their backend. Mostly Google Cloud technologies.
+**Skills:** R&D · Problem Solving · Secure development
+
+This unnamed project was one of three greenfield projects I worked on for Shortcut customers in 2020. 
+
+Millions are lost every year because of fraudulent b2b payments. The banking infrastructure itself is secure, but money can still be sent to the wrong account number. This project would solve that by guaranteeing correct and unforgeable information.
+
+This was an interesting project for me because it combined many of my interests:
+
+- Security
+- Research and prototyping
+- Technical problems solving
+
+We were a team of 2-3 people. Among other things, I created a Certificate Authority and helped the other developers with strong, on-device encryption and signing. 
+
+(On this project I was a subcontractor though Shortcut and 7n)
+
 
 <<top, back to the top>>
 
 
 
 [[reMarkable1]]
-=== reMarkable - Built cloud-based backend system
-reMarkable is a very successful Norwegian startup. They have created a new type of device, a "paper tablet" to read, write and sketch on.
-I started working with them early on, when they were just eight people.
+=== reMarkable - Built the first cloud-based backend system
+2016 - 2020
 
-The company has grown to almost 150 people and is valued at 1 billion NOK.
+**Skills:** Open-Source Software · Technical Leadership · Software Development · DevOps · Backend Architecture 
 
-I was the only person working on the backend for the first few years and built a cloud based backend from scratch. In the last few years the system has
-expanded and more people have joined the cloud team.
+reMarkable is a very successful Norwegian startup. They have created a new type of device, a "paper tablet" to read, write and sketch on. I started working with them early on, when they were just eight people.
 
-The main feature of the cloud service is syncing notes, drawings and documents from the users reMarkable device to other devices such as phones, tablets and
-computers. The backend also handles Authentication, Authorization and integration with third party services.
+The company has grown to around 500 people and have been valued at 1 billion USD .
+
+I was the only person working on the backend for the first few years and built a cloud based backend from scratch. Since then the system have expanded and more people joined  the cloud team.
+
+The main feature of the cloud service is syncing notes, drawings and documents from the users reMarkable device to other devices such as phones, tablets and computers. The backend also handles Authentication, Authorization and integration with third party services.
 
 ==== Challenges
-* Real-time: Parts of the system require soft real time attributes.
+- Real-time: Parts of the system require soft real time attributes.
+- Novel: Parts of this system are quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices".
+- Scale: Potentially large amount of concurrent users
 
-* Novel: Parts of this system are quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices".
+==== Results
+The bakend system got reMarkable from 0 to 1 and handled the very successful launch and the first few years of operations with only minor improvements.
 
-* Scale: Potentially large amount of concurrent users.
+____
+Even though he worked as a consultant he immediately took responsibility for and drove the development of our entire cloud solution from the ground up.
+When Øyvind came in there wasn’t a single line of code written, nor any architecture planned. He took on the responsibility for planning and executing what was necessary to go from high-level ideas about what our cloud solution should and could be, to what we have today.
+____
 
- link:https://remarkable.com/[reMarkable Website]
+____
+Øyvind not only single-handedly wrote all the code for all parts of the cloud solution, he also designed the high-level architecture and drove the design of the interfaces and protocols between our devices, applications and servers.
+____
+
+____
+After we launched and shipped Øyvind decided to keep working for us to ensure a smooth transition while we recruited more in-house talent. (..) the fact that Øyvind chose to stick around from 2016, through our pre-order campaign in 2017, the crunch time before shipping in 2018 and continually maintaining, improving and on-boarding new developers into 2020 shows real dedication, integrity and ability to take ownership of what he creates.
+____
+
+==== Press
+- link:https://techcrunch.com/2022/05/10/remarkable-maker-of-a-focus-friendly-e-paper-tablet-says-it-closed-funding-at-a-1b-valuation-after-selling-1m-devices/[reMarkable sells 1M devices, closes funding at $1B valuation]
+- link:https://www.shifter.no/nyheter/ny-enhjorning-slik-solgte-remarkable-skrivebrett-for-27-milliarder-mens-hele-verden-slet-med-a-levere-varene/248052[Ny enhjørning: Slik solgte Remarkable skrivebrett for 2,7 milliarder mens hele verden slet med å levere varene]
+- link:https://e24.no/teknologi/i/8wdAWG/grundersuksess-solgte-papirnettbrett-for-3-millioner-kroner-paa-under-to-doegn[Gründersuksess: Solgte «papirnettbrett» for 3 millioner kroner – på under to døgn – E24]
+- link:https://www.dn.no/teknologi/milliardhopp-for-norskdesignede-skrivebrett-innforer-zen-dag-for-at-ansatte-skal-reflektere/2-1-1598976[Milliardhopp for norskdesignede skrivebrett: Innfører zen-dag for at ansatte skal reflektere | DN]
+
+==== Other links
+- link:https://remarkable.com/[reMarkable Website]
 
 <<top, back to the top>>
 
@@ -124,11 +301,18 @@ computers. The backend also handles Authentication, Authorization and integratio
 
 [[reMarkable2]]
 === reMarkable - Document Synchronization prototype
+2018 - 2019
+
+**Skills:** Research and Development · Technical Leadership
+
 I was part of a small team of 3 developers who prototyped a novel way of synchronizing files across devices (reMarkables, phones, computers etc).
 
-Goals: Achieve fast and correct document synchronization while using as little bandwidth as possible.
+**Goals:** 
+Achieve fast and correct document synchronization while using as little bandwidth as possible.
 
 We achieved this with known, but somewhat niche methods like Content-Addressable Storage and Merkle Trees.
+
+(For a description of who reMarkable are and what they do, see above)
 
 // Distributed software architecture
 // Content-addressable storage
@@ -142,23 +326,21 @@ We achieved this with known, but somewhat niche methods like Content-Addressable
 
 [[intolife1]]
 === Intolife - Built custom SaaS platform, IntoFood
+
+Active development: 2014 - 2017
+
+Hosting, support and operations: 2014 - 2023
+
+**Skills:** Open-Source Software · Technical Leadership · Software Development · DevOps · Backend Architecture 
+
+Role: Sole developer, architect and devops person.
+
 I built, support and host a "a sustainable food management system" for Intolife. The web-based application, called IntoFood, helps with data-input and report generation. It also exposes a HTTP API for data exchange with partners.
 
 This webapp was built over several years. We started with basic data import and report generation and gradually added a few needed features. It is used by customers, but is no longer actively developed. I maintain and run it in Google Cloud.
 
-Active development: June  2014 - Oct.  2017
-
-Hosting and maintenance: 2015 - Present
-
 
 Backend, frontend, architecture
-
-==== Press
-link:http://tv.nrk.no/serie/dagsrevyen/NNFA02050915/09-05-2015#t=17m32s[TV - NRK Lørdagsrevyen 9. mai 2015 (Norwegian)]
-
-==== Links
-* http://intolife.no/
-* link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood]
 
 ==== About Intolife
 ____
@@ -183,6 +365,14 @@ The software also laid the groundwork for future expansions, and was later expan
 
 * Remember to account for hosting expenses.  We host the service on a Norwegian cloud provider (2020 update: It's now in Google Cloud Platform). Since the number of users is low (it's not a product for the general public) this is not too expensive. Running the service requires operational  work. These are things like database backups and software upgrades and maintenance. This adds to the costs. In technical terms it might make sense to move from Infrastructure as a Service (IaaS) to a Platform as a Service (PaaS) solution. This is to move more of the operational challenges to a third party.
 
+
+==== Press
+link:http://tv.nrk.no/serie/dagsrevyen/NNFA02050915/09-05-2015#t=17m32s[TV - NRK Lørdagsrevyen 9. mai 2015 (Norwegian)]
+
+==== Other links
+* link:http://intolife.no/[Homepage]
+* link:https://www.facebook.com/IntoFood-605776169526486/[Facebook page for Intofood]
+
 ==== Technologies
 * Perl 5
 * Nginx
@@ -197,11 +387,13 @@ The software also laid the groundwork for future expansions, and was later expan
 
 
 [[intolife2]]
-=== Intolife - Backend REST API for IntoFood
+=== Intolife - Built a REST API backend for IntoFood
 
 Active development: 2016
 
-Hosting and maintenance: 2016 - Present
+Hosting and maintenance: 2016 - 2023
+
+**Skills:** Open-Source Software · Technical Leadership · Software Development · DevOps
 
 REST API design and implementation (Perl5). API client example (php)
 
@@ -258,16 +450,16 @@ Goals: Avoid the most common mistakes and get up and running quicker.
 
 
 [[villoid]]
-=== Villoid - Backend Servers and API
-2015
+=== Villoid (Sobazaar) - Backend development
+May 2015 - Aug 2015
 
-Backend programming (Python and Django), freelance
+**Skills:** Software Development · Database management and problem solving
 
 Villoid (previously Sobazaar) was a social fashion and shopping app for Apple devices. They had a fairly large user-base in Norway and expanded to the US autumn 2015. Villoid later changed their business-model to focus on their web-shop.
 
-I freelanced for them during the summer of 2015. The work revolved around the backend: implementing new features, speeding up database queries and making things more scalable. The expanding user-base created some unique technical challenges. Rapid development, with short cycles,  made it an interesting place to work.
+At the time, Villoid was a startup and things moved fast. They needed someone with backend skills to join their team, but did not have the time to complete a normal hiring process.  One of the advantages of using consultants and freelancers is the short start-up time. 
 
-Being a startup means things move fast. One of the advantages of using freelancers is the short start-up time. Villoid needed someone with backend skills to join their team, and they did not have time to wait for a normal hiring process.
+I implemented new features and fixed bugs in their backend. I also worked on scaling the backend and speeding up database queries. The expanding user-base and technical debt created some unique technical challenges.
 
 
 ==== Press
@@ -277,8 +469,8 @@ Being a startup means things move fast. One of the advantages of using freelance
 
 * link:http://www.dn.no/etterBors/2015/10/18/1934/Medier/fotomodell-lfter-norsk-app-til-topps[Dagens Næringsliv (Norwegian)]
 
-==== Links
-https://www.villoid.com
+==== Other links
+* link:https://www.villoid.com/[Homepage]
 
 ==== Technologies
 * Python
@@ -292,53 +484,55 @@ https://www.villoid.com
 
 
 [[picturus]]
-=== Picterus - REST API design and implementation (Subcontractor)
-2015
+=== Picterus - REST API design and implementation
+Feb 2015 - Mar 2015
+
+**Skills:** Software Development · Prototyping · API design 
 
 REST API design and implementation. Backend (php)
 
-Picturus  is a medical app designed to diagnose Jaundice in newborns.
-Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
+Picturus is a medical app designed to diagnose Jaundice in newborns. Untreated jaundice in newborns is responsible for 114,000 deaths and 65,000 permanent brain damages each year. More than three quarters of these deaths occur in the poorest regions of the world, in sub-Saharan Africa and south Asia. Cheap treatment is available through e.g. sunlight, but the diagnostic devices in use today cost around 10,000 dollars, making them practically unavailable in low-resource settings.
 
 Picturus therefore developed a smartphone app capable of diagnosing this condition.
 
-As a sub-contractor I developed a small part of this app. Within my speciality in back-end systems I created a REST API to support features in the app that relies on something outside the device (phone) itself.
+As a sub-contractor I developed a small part of the MVP for this app. With my specialty in back-end systems I created a REST API to support features in the app that relies on something outside the device (phone) itself.
 
 ==== Links
-http://www.picterus.com
+- link:https://cordis.europa.eu/article/id/442848-smartphone-app-monitors-jaundice-in-newborns[Smartphone-based monitoring of jaundice in newborns]
+- link:https://picterus.com/[Homepage]
+- link:https://www.linkedin.com/company/picterus-as/[LinkedIN]
 
-==== Technologies
-* PHP
-* PostgreSQL
-* Sqlite (development environment)
-* Standard Norwegian webhost
+**Technologies:** php, PostgreSQL, SQLite
 
 <<top, back to the top>>
 
 
 
 [[shoutoutreferral]]
-=== Shout Out Referral - Prototype design and implementation
-2015
+=== Shout Out Referral - Prototype design and implementation of  a new social media engagement platform for e-merchants
+January 2015 - March 2015
 
-Backend (App Engine), technical architecture
+**Skills:**  Research and Development · Software Development · Backend Architecture 
 
 ==== Project background
 `A social media engagement platform for e-merchants`
 
-Shout out Referral is a referral system for web-shops that merges  e-commerce with social media. It's a new project from individuals with success from other e-commerce ventures. The project is still in the prototype MVP / phase.
-They had a good idea and e-commerce experience. What they needed was someone with technical know-how and developer background to help them move forward from the idea phase.
+Shout out Referral is a referral system for web-shops that merges e-commerce with social media. It was a new project from individuals with success from other e-commerce ventures. They had a good idea and e-commerce experience. What they needed was someone with technical know-how and developer background to help them move forward from the idea phase.
+
 
 ==== Results
-I helped draw up the technical architecture and the rest of the technology stack. After figuring out what the core features are, I implemented a simple prototype. The purpose was twofold: to  explore the possibilities and limitations of  different social media providers, and secondly to show off the idea.
+I helped draw up the technical architecture and the rest of the technology stack. After figuring out the core features, I implemented a simple prototype.
+The purpose was twofold: 1) to explore the possibilities and limitations of different social media providers, and 2) to show off the idea. 
+
 We ended up with a simple, but working prototype. It shows off a typical use-case for the product. Developing the prototype taught us much. We explored the different social media providers. The merging of different technologies unveiled some unexpected results. Also, we learned that authenticating with many social media providers makes identity handling challenging.
 
-Developing a prototype was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it's important to check these assumptions as early as possible.
+Developing a prototype was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it’s important to check these assumptions as early as possible.
 
 ==== What we learned
 This project depends heavily on social media integrations. We soon discovered that not all the providers have equally good APIs. Also, the different providers have different policies and guidelines. Since these factors are outside our control, these limitations can not be "fixed". We must work around them. The advantage of following lean practices are clear here. We discovered these limitations early in the process, before wasting time on creating the wrong plans and unneeded code.
 
-Using new technology can be unpredictable. There can be hidden advantages and disadvantages. Hidden disadvantages are likely more common, the advantages are often well promoted.  In making the prototype we used somewhat new and unknown technology.  In particular, the open source OAuth / Oauth2 library for Golang did not support App Engine. I therefore had to modify it. This was unexpected and made developing the social media log-ins ten times as time-consuming  as expected. However, more often than not, the advantages new technologies bring will be worth the effort.
+Using new technology can be unpredictable. There can be hidden advantages and disadvantages. Hidden disadvantages are likely more common, the advantages are often well promoted. In making the prototype we used somewhat new and unknown technology. In particular, the open source OAuth / Oauth2 library for Golang did not support App Engine. I therefore had to modify it. This was unexpected and made developing the social media log-ins ten times as time-consuming as expected. However, more often than not, the advantages new technologies bring will be worth the effort.
+
 
 ==== Implementation details
 
@@ -357,7 +551,7 @@ I wrote it in Go and ran it on Googles App Engine Platform as a service (PaaS).
 
 I really like the idea of PaaS, especially for projects that are going to grow big. I did feel the pain on working with App Engine though:
 
-* Code must be written for especially for App Engine
+* Code must be written for especially for App Engine (note: No longer true for App Engine and Cloud Run)
 
 * This, coupled with all the custom infrastructure really lock you in to App Engine, you can't easily quit
 
@@ -374,14 +568,22 @@ But let's not forget the positives:
 
 * Google cloud has so many cool tools to play with. Some of them give you the power of thousands of servers and can thus take a heavy task from 10 minutes to 10 seconds.
 
-No code to show as this was payed work for a client.
+**Technologies:** Google Cloud Platform, App Engine (PaaS), Go
 
 <<top, back to the top>>
 
 
-[[swissblog]]
-=== Blog engine for a Swiss media company
-Architecture and implement the new blog engine for a Swiss media company. Help with onboarding Go as a new language.
+[[srsly]]
+=== Srsly - Prototype CMS and teach Go 
+2016
+
+**Skills:** Go (Golang) · Prototyping ·  Instruction
+
+Srsly is a Swiss media company and technology firm. 
+I helped them get going with Go, as well as architecture and implementation of a new Content Management System / blog engine. 
+
+https://www.srsly.ch/
+
 
 <<top, back to the top>>
 
