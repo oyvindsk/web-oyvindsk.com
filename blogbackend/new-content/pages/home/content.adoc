@@ -1,22 +1,26 @@
 
 = Øyvind Gerrard Skaar
 Øyvind Gerrard Skaar
-June 2020
+November 2024
 :imagesdir: ../../../static_files/page-files/
 
 image::øyvind.jpg[]
 
 [role=lead]
-Hi, I'm Øyvind. I'm an independent consultant, developer and architect, based in Oslo, Norway.
+Hi, I'm Øyvind. 
+
+*I build fast, scalable and secure backend systems for startups and scaleups*.
+
+I work as an independent consultant, developer and architect, and I'm based in Oslo, Norway.
 
 // link:https://oyvindsk.com/about[More about me] // link:https://oyvindsk.com/now[now: What I'm up to these days]
 link:https://oyvindsk.com/contact[Contact information]
 
-I've taken contract work since 2014 and worked on quite a few projects for different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects.
+I've taken contract work since 2014 and worked on 13 projects for 11 different clients. Some of these have been multi-year, full time contracts while others have been advisory roles or short-time projects. Most of my customers are startups or scaleups.
 
 More about my previous clients can be found under link:https://oyvindsk.com/projects[Projects & Clients] and in my full link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[CV in English (PDF)]
 
-These days I usually work on projects using Go and/or Google Cloud Platform. I feel I can focuse more on business objectives and actually building things by not switching technologies too often.
+I adjust my approach to each project based on the client and the project itself. When building backend systems from scratch I usually do it with Go and Google Cloud Platform. I feel I can focuse more on business objectives and actually building things by not switching technologies too often.
 
 link:https://oyvindsk.com/hire-me[More about what I do and how]
 
