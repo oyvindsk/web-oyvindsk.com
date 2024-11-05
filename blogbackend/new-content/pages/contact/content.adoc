@@ -1,7 +1,7 @@
 
 = Contact
 Øyvind Gerrard Skaar
-June 2020
+November 2024
 
 
 == Contact me
@@ -11,14 +11,14 @@ You can email me at hello@oyvindsk.com or use https://oyvindsk.com/contact
 
 === Offline
  * Phone: +47 482 78 480
- * Company: Devbyte AS, Org nr 920 646 417, Dannevigsveien 8, 0463 Oslo, Norway.
- * Offices: Working from home at the moment
+ * Company: Devbyte AS, Org nr 920 646 417, Stockflethsgate 60a, 0461 Oslo, Norway.
+ * Offices: link:https://www.cruciblehub.no/[Crucible Hub] (previously 657)
 
 === Online
 * link:http://www.linkedin.com/in/oskaar[LinkedIn]
-* link:http://twitter.com/oyvindsk[Twitter] (inactive)
-* link:http://github.com/oyvindsk[Github]
+* link:https://github.com/oyvindsk[Github]
+* link:https://git.sr.ht/~oyvindsk/[Source Hut (Code, alternative to Github)]
 
 === CV
 * link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[English, with project descriptions (PDF)]
-* link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian, summary (PDF)]
+// * link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-norwegian.pdf[Norwegian, summary (PDF)]
