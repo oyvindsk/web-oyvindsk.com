@@ -126,9 +126,9 @@ Technologies: Multiple AI and No-code tools for rapid development, Webflow
 
 Mimiro supports Norwegian agriculture and food production. Farmers are both their customer and partners. 
 
-I worked with Mimiro for 10 months and helped develop their new Eana360 product.  As a part of a team, the work was straight up backednd development in Go. Little to no architecture or Devops work.
+I worked with Mimiro for 10 months and helped develop their new Eana360 product.  As a part of a team, the work was straight up backend development in Go. Little to no architecture or Devops work.
 
-**Technoligies:** ArangoDB · Go (Programming Language) · PostgreSQL ·  Graph Databases  · AWS · Git · SQL
+**Technologies:** ArangoDB · Go (Programming Language) · PostgreSQL ·  Graph Databases  · AWS · Git · SQL
 
 <<top, back to the top>>
 
@@ -521,12 +521,12 @@ Shout out Referral is a referral system for web-shops that merges e-commerce wit
 
 
 ==== Results
-I helped draw up the technical architecture and the rest of the technology stack. After figuring out the core features, I implemented a simple prototype.
+I helped draw up the technical architecture and the rest of the technology stack. After we figured out the core features, I implemented a simple prototype.
 The purpose was twofold: 1) to explore the possibilities and limitations of different social media providers, and 2) to show off the idea. 
 
-We ended up with a simple, but working prototype. It shows off a typical use-case for the product. Developing the prototype taught us much. We explored the different social media providers. The merging of different technologies unveiled some unexpected results. Also, we learned that authenticating with many social media providers makes identity handling challenging.
+We ended up with a simple, but working prototype. It shows off a typical use-case for the product. We explored the different social media providers. The merging of different technologies unveiled some unexpected results. Also, we learned that authenticating with many social media providers makes identity handling challenging.
 
-Developing a prototype was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it’s important to check these assumptions as early as possible.
+Developing a prototype taught us much and was worth the time and effort. It raised questions that should be raised sooner rather than later. There are also many assumptions made early on. These assumptions do not always hold when theory meets real life. So it’s important to check these assumptions as early as possible.
 
 ==== What we learned
 This project depends heavily on social media integrations. We soon discovered that not all the providers have equally good APIs. Also, the different providers have different policies and guidelines. Since these factors are outside our control, these limitations can not be "fixed". We must work around them. The advantage of following lean practices are clear here. We discovered these limitations early in the process, before wasting time on creating the wrong plans and unneeded code.
