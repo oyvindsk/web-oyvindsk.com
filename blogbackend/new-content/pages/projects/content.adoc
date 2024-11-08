@@ -24,7 +24,7 @@ See link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[my full CV
 
 image::client-logos/remarkable.png["reMarkable logo",align="left",scaledwidth="20%"]
 * <<reMarkable1,Built the first cloud-based backend system>>
-* <<reMarkable2,Document Synchronization prototype>>
+* <<reMarkable2,Researched and developed a new document Synchronization prototype>>
 
 image::client-logos/intolife.png["IntoLife logo",align="left",scaledwidth="20%""]
 * <<intolife1,Built IntoFood, a food management system>>
@@ -271,7 +271,7 @@ The main feature of the cloud service is syncing notes, drawings and documents f
 - Scale: Potentially large amount of concurrent users
 
 ==== Results
-The bakend system got reMarkable from 0 to 1 and handled the very successful launch and the first few years of operations with only minor improvements.
+The bakend system got reMarkable from 0 to 1 and handled the very successful launch and the first few years of operations with relatively minor improvements.
 
 ____
 Even though he worked as a consultant he immediately took responsibility for and drove the development of our entire cloud solution from the ground up.
@@ -300,7 +300,7 @@ ____
 
 
 [[reMarkable2]]
-=== reMarkable - Document Synchronization prototype
+=== reMarkable - Researched and developed a new document Synchronization prototype
 2018 - 2019
 
 **Skills:** Research and Development · Technical Leadership
@@ -363,7 +363,7 @@ The software also laid the groundwork for future expansions, and was later expan
 
 * Prioritizing features and keeping things simple also creates a better product.
 
-* Remember to account for hosting expenses.  We host the service on a Norwegian cloud provider (2020 update: It's now in Google Cloud Platform). Since the number of users is low (it's not a product for the general public) this is not too expensive. Running the service requires operational  work. These are things like database backups and software upgrades and maintenance. This adds to the costs. In technical terms it might make sense to move from Infrastructure as a Service (IaaS) to a Platform as a Service (PaaS) solution. This is to move more of the operational challenges to a third party.
+* Remember to account for hosting expenses and operations work. Today, using a Platform as a Service (PaaS) solution such as Google Cloud Run might have been a better option. There are tradeoffs here, but it should offload some of the operational work.
 
 
 ==== Press
