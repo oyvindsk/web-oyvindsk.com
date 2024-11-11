@@ -91,7 +91,7 @@ image::client-logos/schlumberger.png["Schlumberger logo",align="left",scaledwidt
 
 **Skills:** No-Code Development Platforms · No-Code Development · Customer validation   Web Applications · Mobile Applications
 
-MVP Monkey was my foray into a different customer segment and a new business modell. 
+MVP Monkey was my foray into a different customer segment and a new business model. 
 
 The idea was to help founders and early stage startups to get "unstuck" from the situation where they need a product but can't get funding without a product. 
 
@@ -222,7 +222,7 @@ This was a fun project with fast development, great teamwork and exiting technic
 ==== Results
 The development and technical aspects was a great success.  We created a fast, easy-to-use app, with novel game-play and real-time attributes, in record time. 
 
-However, FFL never found product-market-fit. My opinion, and I belive the customer would agree, is that not enough effort was put into marketing and customer research.
+However, FFL never found product-market-fit. My opinion, and I believe the customer would agree, is that not enough effort was put into marketing and customer research.
 
 (On this project I was a subcontractor though Shortcut and 7n)
 
@@ -268,7 +268,7 @@ The main feature of the cloud service is syncing notes, drawings and documents f
 ==== Challenges
 - Real-time: Parts of the system require soft real time attributes.
 - Novel: Parts of this system are quite novel. This, combined with the typical restricted resources of a startup, means we can not blindly follow "best practices".
-- Scale: Potentially large amount of concurrent users
+- Scale: Large amount of concurrent users
 
 ==== Results
 The bakend system got reMarkable from 0 to 1 and handled the very successful launch and the first few years of operations with relatively minor improvements.
@@ -408,9 +408,10 @@ ____
 We launched this project to make it possible to integrate the _Intolife web application_ with third parties. These third parties are typically customers and partners. They can use the API to include  waste and emission data (GHG) in their own software and appliances. Using the API they can get this data automatically, without human interaction.
 
 ==== Results
-The API is up and running and is used by IntoLife customers. Documentation was written to make it easier to implement the API.
+The API was completed and deployed to production on Google Cloud. 
+For years It was used by IntoLife customers daily and opened up for many new possibilities. 
+Use-cases that would otherwise involve too much human labor was made quick and easy.
 
-The API opens up a whole lot of new possibilities. Use-cases that would otherwise involve too much human labor are now quick and easy.
 
 ==== What we learned
 
