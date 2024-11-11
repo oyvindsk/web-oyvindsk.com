@@ -83,7 +83,7 @@ func main() {
 	// Serve static CV pdfs, english and norwegian, under 2 urls each
 	cvEn := func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("serving english cv")
-		http.ServeFile(w, r, "static_files/curricula-vitae/cv-øyvind_gerrard_skaar-2021_2-english.pdf")
+		http.ServeFile(w, r, "static_files/curricula-vitae/cv-øyvind_gerrard_skaar-2024_1-english.pdf")
 	}
 	http.HandleFunc("/cv/english.pdf", cvEn)
 	http.HandleFunc("/cv/cv-øyvind_gerrard_skaar-english.pdf", cvEn)
