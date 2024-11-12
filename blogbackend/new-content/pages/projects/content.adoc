@@ -191,7 +191,7 @@ Operation and development of the idp (login/authentication) part of the Æ app.
 
 
 [[shortcut2]]
-=== Fantasy Football League - Built cloud backend system
+=== Fantasy Football League - Built cloud backend system for startup
 2021
 
 **Skills**:  · Technical Leadership · Software Development · DevOps · Backend Architecture 
@@ -203,8 +203,8 @@ We worked in a small team of 3 people. The 2 others were the customer who set th
 I made the backend system, which contained:
 
 - A Go program that contained the game logic and exposed an API to the iOS client.
-- Integrations with third parties, mostly real-time information about football matches, players, goals, subsittues etc.
-- Database for storing simple things like customer information, but also complex schema's for making a real-time "view" of the real world. 
+- Integrations with third parties, mostly real-time information about football matches, players, goals, substitutes etc.
+- Database for storing simple things like customer information, but also complex schema's for making a real-time "view" of the real world (PostgreSQL).
 - Servers to run the integrations, game logic and REST API. In this case a manged PaaS (Google Cloud Run), so there was little "devops".
 
 This was a fun project with fast development, great teamwork and exiting technical challenges. Unfortunately, we developers were needed on other projects after finishing the beta. The development continued, but it never gained enough traction, and the app was later discontinued.   
@@ -233,6 +233,7 @@ September 2020 - December 2020
 **Skills:** R&D · Problem Solving · Secure development
 
 This unnamed project was one of three greenfield projects I worked on for Shortcut customers in 2020. 
+Shortcut is one of the leading app makers in Norway.
 
 Millions are lost every year because of fraudulent b2b payments. The banking infrastructure itself is secure, but money can still be sent to the wrong account number. This project would solve that by guaranteeing correct and unforgeable information.
 
