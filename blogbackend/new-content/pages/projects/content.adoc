@@ -23,7 +23,7 @@ See link:https://oyvindsk.com/cv/cv-øyvind_gerrard_skaar-english.pdf[my full CV
 [[top]]
 
 image::client-logos/remarkable.png["reMarkable logo",align="left",scaledwidth="20%"]
-* <<reMarkable1,Built the first cloud-based backend system>>
+* <<reMarkable1,Built the first cloud-based backend system from scratch>>
 * <<reMarkable2,Researched and developed a new document Synchronization prototype>>
 
 image::client-logos/intolife.png["IntoLife logo",align="left",scaledwidth="20%""]
@@ -252,7 +252,7 @@ We were a team of 2-3 people. Among other things, I created a Certificate Author
 
 
 [[reMarkable1]]
-=== reMarkable - Built the first cloud-based backend system
+=== reMarkable - Built the first cloud-based backend system from scratch
 2016 - 2020
 
 **Skills:** Open-Source Software · Technical Leadership · Software Development · DevOps · Backend Architecture 
@@ -261,7 +261,7 @@ reMarkable is a very successful Norwegian startup. They have created a new type 
 
 The company has grown to around 500 people and have been valued at 1 billion USD .
 
-I was the only person working on the backend for the first few years and built a cloud based backend from scratch. Since then the system have expanded and more people joined  the cloud team.
+I was the only person working on the backend for the first few years and built a cloud based backend system. Since then the system have expanded and more people joined  the cloud team.
 
 The main feature of the cloud service is syncing notes, drawings and documents from the users reMarkable device to other devices such as phones, tablets and computers. The backend also handles Authentication, Authorization and integration with third party services.
 
