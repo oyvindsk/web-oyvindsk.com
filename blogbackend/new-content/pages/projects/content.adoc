@@ -93,7 +93,7 @@ image::client-logos/schlumberger.png["Schlumberger logo",align="left",scaledwidt
 
 MVP Monkey was my foray into a different customer segment and a new business model. 
 
-The idea was to help founders and early stage startups to get "unstuck" from the situation where they need a product but can't get funding without a product. 
+The idea was to help founders and early stage startups to get "unstuck" from the situation where they need to build a product to get funding, but can't afford to without funding.
 
 Spending a month or two to build a quick, but working, app is also a better way to validate ideas.
 
