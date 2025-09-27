@@ -1,0 +1,24 @@
+package main
+
+//import "fmt"
+
+templ hello(name string) {
+	<div>Hello, { name }</div>
+   <h1>{foo()}</h1>
+}
+
+func foo() (string, error) {
+    return "hello", nil
+}
+
+script withParameters(a string, b string, c int) {
+	console.log(a, b, c);
+}
+
+script withoutParameters() {
+	// alert("hello");
+}
+
+templ Button(text string) {
+	<button onClick={ withParameters("test", text, 123) } onMouseover={ withoutParameters() } type="button">{ text }</button>
+}

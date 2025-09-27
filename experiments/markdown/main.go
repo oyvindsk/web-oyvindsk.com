@@ -6,6 +6,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/a-h/templ"
 	"github.com/gomarkdown/markdown"
 	mdHTML "github.com/gomarkdown/markdown/html"
 	g "maragu.dev/gomponents"
@@ -57,6 +58,28 @@ func renderHTML5Page(innerHTML []byte) string {
 }
 
 func main() {
+	// Read the contents of input.md
+	// md, err := os.ReadFile("input.md")
+	// if err != nil {
+	// 	fmt.Fprintf(os.Stderr, "Error reading input.md: %v\n", err)
+	// 	os.Exit(1)
+	// }
+
+	// html := convertMarkdownToHTML(md)
+	// fmt.Printf("\n%s\n", html)
+
+	component := Button("John")
+
+	http.Handle("/", templ.Handler(component))
+
+	fmt.Println("Listening on :8080")
+	http.ListenAndServe(":8080", nil)
+
+	// hello("world").Render(context.Background(), os.Stdout)
+
+}
+
+func convertMarkdownToHTML(md []byte) string {
 
 	// parsed := markdown.Parse(md)
 
@@ -91,4 +114,6 @@ func main() {
 
 	fmt.Println("Listening on http://localhost:8080 ...")
 	http.ListenAndServe(":8080", nil)
+	html := markdown.ToHTML(md, nil, renderer)
+	return string(html)
 }
