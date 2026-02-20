@@ -1,11 +1,11 @@
 
 = Hire Me
 Øyvind Gerrard Skaar
-November 2024
+Februar 2026
 :imagesdir: ../../../static_files/page-files/
 
 
-image::øyvind.jpg[]
+image::øyvind.png[]
 
 [role=lead]
 Hi, I'm Øyvind. *I build fast, scalable and secure backend systems for startups and scaleups*. I work as an independent consultant, developer and architect, and I'm based in Oslo, Norway.
@@ -17,11 +17,14 @@ I am currently looking for new projects. See <<availability>> for the details.
 == What I can help you with
 Are you working on building something new? Or maybe improving your existing back-end system? Is it slow? Or simply more costly than it needs to be?
 
-Do you lose customers and revenue because don't have enough programmers?
+Or are you worried it's not secure enough? Maybe it was vibecoded? Or built by frontend and fullstack people whose expertise mainly lie elsewhere.
 
-My specialty is back-end, server-side technology and architecture. I help startups and scaleups build and scale cloud-based systems.
+My specialty is back-end, server-side technology and architecture. I help build, scale and fix back-end systems in the cloud or on "bare metal".
 
-Please don't hesitate to contact me if you are unsure of what kind of developer you need for your project. If I can't help you myself I can at least steer you in the right direction. I've also gotten to know may other freelancers, independent consultants and designers. link:https://oyvindsk.com/contact[Just give me a call or fill out this form].
+*Please don't hesitate to contact me*.
+
+link:https://oyvindsk.com/contact[Just give me a call, fill out this form] or message me on LinkedIn.
+I am very friendly and I can steer you in the right direction if I'm too busy to help, or not the right kind of developer you need. I've also gotten to know many other freelancers, independent contractors and designers.
 
 For examples of what I've done my clients in the past, see link:https://oyvindsk.com/projects[past clients and projects].
 
@@ -73,7 +76,7 @@ I strongly prefer simplicity and strive for it whenever possible. Especially whe
 
 === Technology
 
-My current language of choice is link:http://golang.org[Go (golang)] and I build systems on the link:http://cloud.google.com[Google Cloud Platform].
+My current language of choice is link:http://golang.org[Go (golang)] and I build systems on the link:http://cloud.google.com[Google Cloud Platform]. In 2026 there is also a lot of talk of moving away from US cloud companies. I curently run my new personal projects on in link:https://freebsd.org[FreeBSD jails] on link:https://hetzner.com[Hetzner] (a German cloud and server provider).
 
 To be honest, I do not think choosing the "right" technology is very important. Usually, there are many that will do the trick and there are many ways to get the job done. There are, of course, exceptions. But for most projects choosing one technology over another does not give any great advantages.
 
@@ -132,30 +135,30 @@ For examples of what I've done for my past clients, see link:https://oyvindsk.co
 
 
 [[availability]]
-== Availability in 2024 and 2025
-I'm curently advising an early stage startup. I'm also looking for more work since this project only takes a few hours a week.
+== Availability
+I'm curently stepping back from Fractional CTO work and looking for new oppertunities.
 
 
 // Followed by a month or so to learn everything I need to get control of the company finances and do the taxes. 
 // Then I'm taking a step back to look at the strategy for the next few years.
 
-[cols=2]
-|===
-|November 2024:
-|  Available
-|December 2024:
-|  Available
-|January 2025:
-|  Available
-|February 2025:
-|  Available
-|March 2025:
-|  Potentially available
-|April 2025:
-|  Potentially available
-|===
-
-(last updated: November 5th 2024)
+// [cols=2]
+// |===
+// |November 2024:
+// |  Available
+// |December 2024:
+// |  Available
+// |January 2025:
+// |  Available
+// |February 2025:
+// |  Available
+// |March 2025:
+// |  Potentially available
+// |April 2025:
+// |  Potentially available
+// |===
+ 
+(last updated: February 2026)
 
 
 [[contact]]
