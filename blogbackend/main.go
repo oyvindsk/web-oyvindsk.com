@@ -80,6 +80,9 @@ func main() {
 	// TODO: merge these into the page directories (if just in one page) ??
 	http.Handle("/page-files/", http.StripPrefix("/page-files/", http.FileServer(http.Dir("static_files/page-files/"))))
 
+	// Serve static files for altinn3
+	http.Handle("/altinn3/", http.StripPrefix("/altinn3/", http.FileServer(http.Dir("static_files/altinn3/"))))
+
 	// Serve static CV pdfs, english and norwegian, under 2 urls each
 	cvEn := func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("serving english cv")
