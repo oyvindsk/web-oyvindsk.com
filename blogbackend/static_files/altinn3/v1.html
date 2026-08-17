@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problemer med Altinn 3 integrasjonen?</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i,600,600i,700&family=space-grotesk:400,500,600,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:  #F7F3E8;
+    --dark:   #0F0D04;
+    --red:    #E30016;
+    --gold:   #B09438;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 2.5rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .issue {
+    font-size: 0.7rem;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 5rem 0 6rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-text h1 span {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .hero-text p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    max-width: 52ch;
+    opacity: 0.65;
+  }
+
+  .hero-meta { text-align: right; }
+
+  .big-number {
+    font-size: 7rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--red);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .big-number-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    margin-top: 0.4rem;
+    opacity: 0.4;
+  }
+
+  /* ── Large paragraphs ── */
+  .large-paras {
+    padding: 2rem 0 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    max-width: 72ch;
+  }
+
+  .large-paras p {
+    font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ── Swatches — circles ── */
+  .swatches {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 3rem 0 4rem;
+  }
+
+  .swatch-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .swatch-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+  }
+
+  .swatch-hex {
+    font-size: 0.6rem;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.05em;
+    opacity: 0.4;
+    text-align: center;
+  }
+
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.35;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="logo">Øyvind Gerrard Skaar</div>
+    <div class="issue">IT-konsulent</div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Problemer med<br>overgangen til<br><span>Altinn 3 ?</span></h1>
+    </div>
+    <div class="hero-meta">
+      <div class="big-number">A3</div>
+      <div class="big-number-label">Altinn / Norge</div>
+    </div>
+  </section>
+
+  <div class="large-paras">
+    <p>Er du en daglig leder som bruker alt for mye tid på å spørre Chat GTP om hvilke sertifikat som skal hvor i sammarbeidsportalen?</p>
+    <p>Eller en utvikler som prøver å forstå forskjellen på Maskinporten, ID-porten og Annsattpoten? </p>
+    <p>Eller kanskje dere har begynt å få tvangsmulkt for manglende innrapportering til staten?</p>
+    <p>Ta kontakt for en uforpliktende prat.</p>
+    <p>
+Jeg heter Øyvind og er selvstendig IT-konsulent. Jeg har hjulpet firma-er med å integrerer mot Altinn 3: 
+<ol>
+  <li>Hvilke systemer og APIer er relevante </li>
+  <li>
+Hvilke nøkler og id-er skal hvor
+  </li>
+  <li>
+Hvilke .. må godkjennes av noen i styret
+  </li>
+  <li>
+Hvilke avtaler må signeres
+  </li>
+  <li>
+  </li>
+</ol>
+
+etc. 
+</p>
+
+    <p>
+Så hvis du er lei av at dette ikke går fremover, ring, mail eller sms meg så tar vi en kjapp og uforpliktende prat.  Kanskje dette kan fikses på et par uker? 
+    </p>
+    <p>
+
+Øyvind Gerrard Skaar 
+[[ Image comes here, square, float right ]]
+
+Mail: altinn3@oyvindsk.com
+Mobil: 482 78 480 (Ring eller send en SMS). 
+
+Til daglig finner du meg på Mesh i Oslo. </p>
+    <br>
+    <p></p>
+    <p></p>
+  </div>
+
+  <div class="swatches">
+    <div class="swatch-item">
+      <div class="swatch-circle" style="background:#F7F3E8; box-shadow: inset 0 0 0 1px rgba(15,13,4,0.15)"></div>
+    </div>
+    <div class="swatch-item">
+      <div class="swatch-circle" style="background:#0F0D04"></div>
+    </div>
+    <div class="swatch-item">
+      <div class="swatch-circle" style="background:#E30016"></div>
+    </div>
+    <div class="swatch-item">
+      <div class="swatch-circle" style="background:#B09438"></div>
+    </div>
+  </div>
+
+
+  <footer>
+    <span>© 2026 Øyvind Gerrard Skaar</span>
+    <span>IT-konsulent</span>
+    <span>Mesh, Oslo</span>
+  </footer>
+
+</div>
+</body>
+</html>

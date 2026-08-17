@@ -1,1 +1,272 @@
-foo
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Problemer med overgangen til Altinn 3?</title>
+<link rel="preconnect" href="https://fonts.bunny.net">
+<link href="https://fonts.bunny.net/css?family=cormorant-garamond:400,400i,600,600i,700&family=space-grotesk:400,500,600,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3E8;
+    --dark:  #0F0D04;
+    --red:   #E30016;
+    --gold:  #B09438;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 2.5rem 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid rgba(15,13,4,0.15);
+  }
+
+  .name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 6rem 0 5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    max-width: 18ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  /* ── Section divider ── */
+  hr {
+    border: none;
+    border-top: 1px solid rgba(15,13,4,0.2);
+  }
+
+  /* ── Questions ── */
+  .questions {
+    padding: 4rem 0 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .questions p {
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    line-height: 1.45;
+    max-width: 66ch;
+  }
+
+  /* ── CTA ── */
+  .cta {
+    padding: 1rem 0 4rem;
+  }
+
+  .cta p {
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-style: italic;
+    color: var(--red);
+  }
+
+  /* ── Body ── */
+  .body-section {
+    padding: 3.5rem 0 3rem;
+    border-top: 1px solid rgba(15,13,4,0.2);
+  }
+
+  .body-section p {
+    font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+    line-height: 1.65;
+    max-width: 64ch;
+    margin-bottom: 2rem;
+  }
+
+  .body-section ul {
+    list-style: none;
+    margin: 0.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .body-section ul li {
+    font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+    line-height: 1.5;
+    padding-left: 1.75rem;
+    position: relative;
+    max-width: 60ch;
+  }
+
+  .body-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+  }
+
+  /* ── Contact ── */
+  .contact {
+    padding: 3.5rem 0 5rem;
+    border-top: 1px solid rgba(15,13,4,0.2);
+  }
+
+  .contact-inner {
+    display: flex;
+    gap: 3.5rem;
+    align-items: flex-start;
+  }
+
+  .contact-text {
+    flex: 1;
+  }
+
+  .contact-text .contact-name {
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-text p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    line-height: 2;
+    opacity: 0.75;
+  }
+
+  .contact-text a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+  }
+
+  .image-placeholder {
+    width: 200px;
+    height: 200px;
+    opacity: 0.85;
+    border: 1px dashed rgba(15,13,4,0.25);
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    flex-shrink: 0;
+    */
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 0 3rem;
+    border-top: 1px solid rgba(15,13,4,0.1);
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.35;
+  }
+
+  @media (max-width: 600px) {
+    .contact-inner { flex-direction: column-reverse; }
+    /* .image-placeholder { width: 100%; height: 200px; } */
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="name">Øyvind Gerrard Skaar</div>
+    <div class="role">Selvstendig IT-konsulent</div>
+  </header>
+
+  <section class="hero">
+    <h1>Problemer med overgangen til<br><em>Altinn 3?</em></h1>
+  </section>
+
+  <hr>
+
+  <div class="questions">
+    <p><strong>Skal dere integrere mot de nye Altinn 3 systemene og API-ene, men ser at det er mye nytt å sette seg inn i?</strong></p>
+    <p></p>
+    <p>Kanskje du er en daglig leder som bruker alt for mye tid å prøve å forstå <i>hvor</i> du skal registrer <i>hva</i>, <i>hvilke</i> vilkår du må godkjenne og <i>hva</i> egentlig utvikleren trenger fra deg?</p>
+    <p>Eller en utvikler som prøver å forstå forskjellen på <i>Systemregisteret</i> og <i>Systembruker</i>? Eller hvilke av alle de forskjellige systemene og API-ene du egentlig trenger å forholde deg til? </p>
+    <p>Eller kanskje dere til og med har begynt å få tvangsmulkt for manglende innrapportering til staten?</p>
+  </div>
+
+  <div class="cta">
+    <p>Ta kontakt for en uforpliktende prat.</p>
+  </div>
+
+  <div class="body-section">
+    <p>Jeg heter Øyvind og er selvstendig IT-konsulent. Jeg har hjulpet firma-er med å integrerer mot Altinn 3:</p>
+    <ul>
+      <li>Hvilke skjemaer som må sendes inn av ledelsen</li>
+      <li>Hvilke avtaler og brukervilkår må signeres</li>
+      <li>Hvilke systemer og API-er som er relevante</li>
+      <li>Hvilke nøkler og id-er skal hvor</li>
+      <li>Hvordan API kallene skal lages, i hvilken rekkefølge og med hvilke nøkler og tokens</li>
+    </ul>
+    <p>mm.</p>
+    <p>Så hvis du er lei av at dette ikke går fremover, ring, mail eller sms meg så tar vi en kjapp og uforpliktende prat. Kanskje dette kan fikses på et par uker?</p>
+  </div>
+
+  <div class="contact">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <div class="contact-name">Øyvind Gerrard Skaar</div>
+        <p>
+          Mail: <a href="mailto:altinn3@oyvindsk.com">altinn3@oyvindsk.com</a><br>
+          Mobil: 482 78 480 (Ring eller send en SMS).<br>
+          Til daglig finner du meg på Mesh i Oslo.
+        </p>
+      </div>
+      <img class="image-placeholder" src="DSCF5778-web.png" alt="bilde av Øyvind" title="">
+       <!-- <div class="image-placeholder">Image<br>square<br>float right</div> -->
+    </div>
+  </div>
+
+  <footer>
+    <span>Øyvind Gerrard Skaar</span>
+    <span>Selvstendig IT-konsulent</span>
+    <span>Mesh, Oslo</span>
+    <span>Oppdatert: 17.08.2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
