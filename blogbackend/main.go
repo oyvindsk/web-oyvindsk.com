@@ -72,6 +72,12 @@ func main() {
 		http.ServeFile(w, r, "static_files/html-related/favicon.ico")
 	})
 
+	// robots.txt: allow everything, no restrictions
+	http.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		fmt.Fprint(w, "User-agent: *\nDisallow:\n")
+	})
+
 	// Serve static files for blogposts
 	// TODO: merge these into the blog-post directories (if just in one post) ??
 	http.Handle("/blogpost-files/", http.StripPrefix("/blogpost-files/", http.FileServer(http.Dir("static_files/blogpost-files/"))))
